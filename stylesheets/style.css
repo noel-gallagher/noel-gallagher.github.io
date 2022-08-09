@@ -7,3 +7,8 @@ body { background: #fff; color: black; }
 @media (prefers-color-scheme: light) {
     body   { background: white; color:  #000; }
   }
+
+.center {
+    display: flex;
+    justify-content: center;
+}
