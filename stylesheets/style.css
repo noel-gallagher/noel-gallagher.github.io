@@ -66,6 +66,14 @@ nav a {
   text-decoration: none;
 }
 
+p {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  margin: 2rem 0;
+  padding: 0 2rem;
+  text-align: justify;
+}
+
 
 footer {
   text-align: center;
