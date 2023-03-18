@@ -1,0 +1,19 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section {
+    max-width: 800px;
+    text-align: center;
+    padding: 2rem;
+}
+
+footer {
+    text-align: center;
+    position: relative;
+    padding: 10px;
+    bottom: 0;
+    width: 100%;
+}
