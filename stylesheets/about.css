@@ -8,7 +8,16 @@ section {
     max-width: 800px;
     text-align: center;
     padding: 2rem;
+    text-align: justify;
 }
+
+@media screen and (max-width: 768px) {
+    section {
+        max-width: 100%;
+        text-align: left;
+        padding: 0;
+    }
+  }
 
 footer {
     text-align: center;
