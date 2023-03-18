@@ -11,15 +11,24 @@
   --main-dark-text-colour: #bbbbbb;
 }
 
-body { background: var(--main-bright-bg-colour); color: var(--main-bright-text-colour); }
+body {
+  background: var(--main-bright-bg-colour);
+  color: var(--main-bright-text-colour);
+}
 
 @media (prefers-color-scheme: dark) {
-    body   { background:  var(--main-dark-bg-colour); color: var(--main-dark-text-colour); }
+  body {
+    background: var(--main-dark-bg-colour);
+    color: var(--main-dark-text-colour);
   }
-  
+}
+
 @media (prefers-color-scheme: light) {
-    body   { background:var(--main-bright-bg-colour); color: var(--main-bright-text-colour);}
+  body {
+    background: var(--main-bright-bg-colour);
+    color: var(--main-bright-text-colour);
   }
+}
 
 .center {
   background-position: center;
@@ -44,8 +53,9 @@ header h1 {
   margin: 0;
 }
 
-/* Style the navigation links */
 nav ul {
+  background-color: #333;
+  width: 100%;
   position: fixed;
   list-style: none;
   margin: 0;
@@ -62,8 +72,24 @@ nav li {
 nav a {
   display: block;
   text-align: center;
-  padding: 14px 16px;
   text-decoration: none;
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+nav a:hover {
+  background-color: #555;
+}
+
+nav a:hover:not(.active) {
+  background-color: #555;
+}
+
+nav a.active {
+  background-color: #555;
+  pointer-events: none;
+  /* Disable clicking */
 }
 
 p {
@@ -77,8 +103,10 @@ p {
 
 footer {
   text-align: center;
-  padding: 10px;
   position: absolute;
   bottom: 0;
   width: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 0.25rem;
 }
