@@ -22,7 +22,7 @@
   </header>
 
   <main>
-    <div class="center">
+    <section>
       <h2>Variance in Scala</h2>
       <p>"Variance" describes the subtyping relationship between types. In scala, the possiblities are: covariance, contravariance and invariance.</p>
       <p>Covariance allows the type to be more specific. For example, if A is a substype of B -> then F[A] is also a subtype of F[B]. A more concrete example:</p>
@@ -41,7 +41,7 @@
         val dogPrinter: Printer[Dog] = new Printer[Animal]
       </code>
       <p>Invariant is neither covariant OR contravariant</p>
-    </div>
+    </section>
   </main>
   <footer>
   </footer>
