@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallaghern</title>
   <link rel="stylesheet" href="../stylesheets/style.css">
-  <link rel="stylesheet" href="../stylesheets/about.css">
+  <link rel="stylesheet" href="../stylesheets/blog.css">
 </head>
 
 <body>
@@ -23,24 +23,9 @@
 
   <main>
     <section>
-      <h2>Variance in Scala</h2>
-      <p>"Variance" describes the subtyping relationship between types. In scala, the possiblities are: covariance, contravariance and invariance.</p>
-      <p>Covariance allows the type to be more specific. For example, if A is a substype of B -> then F[A] is also a subtype of F[B]. A more concrete example:</p>
-      <pre><code>
-        class Animal
-        class Dog extends Animal
-  
-        class Container[+T](value: T){ getValue: T = valule }
-  
-        val animalContainer: Container[Animal] = new Container(new Dog) // this is valid!
-      </code></pre>
-      <p>contravariance allows a subtype to be more general. For example: if A is a subtype of B -> F[B] is also a subtype of F[A]</p>
-      <pre><code>
-        class Printer[-T] { def print(value: T): Unit = println(value) }
-  
-        val dogPrinter: Printer[Dog] = new Printer[Animal]
-      </code></pre>
-      <p>Invariant is neither covariant OR contravariant</p>
+      <ul class="blog-list">
+        <li class="blog-list-item"><a href="./variance-in-scala.html">Variance in scala</a></li>
+      </ul>
     </section>
   </main>
   <footer>
