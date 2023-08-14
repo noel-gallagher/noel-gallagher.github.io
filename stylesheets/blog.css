@@ -11,6 +11,29 @@ section {
     text-align: justify;
 }
 
+ol {
+    list-style-type: decimal;
+    margin-left: 40px;
+    padding: 10px;
+    background-color: #333;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+        
+li {
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+        
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+        
+a:hover {
+    text-decoration: underline;
+}
+
 @media screen and (max-width: 768px) {
     section {
         max-width: 100%;

@@ -92,15 +92,8 @@ nav a.active {
   /* Disable clicking */
 }
 
-p {
-  font-size: 1.5rem;
-  line-height: 1.5;
-  margin: 2rem 0;
-  padding: 0 2rem;
-}
 
-code {
-  p {
+p {
   font-size: 1.5rem;
   line-height: 1.5;
   margin: 2rem 0;
@@ -117,3 +110,4 @@ footer {
   color: #fff;
   padding: 0.25rem;
 }
+
