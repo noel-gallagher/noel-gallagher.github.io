@@ -61,6 +61,11 @@ h2 {
   color: #333;
 }
 
+.blog-back-button a {
+	text-decoration: none;
+	color: inherit;
+	cursor: pointer;
+}
 
 footer {
     text-align: center;
