@@ -10,8 +10,8 @@ section {
     text-align: center;
     margin-top: 2rem;
     text-align: justify;
-	min-height: 80vh;
-	min-width: 80vw;
+    min-height: 80vh;
+    min-width: 80vw;
 }
 
 h2 {
@@ -23,7 +23,11 @@ h2 {
     background-color: #333;
     padding: 10px 10px 10px 10px;
 }
-        
+
+.blog-list-item {
+    padding: 10px;
+}
+
 .blog-list-item a {
 	color: #fff;
     text-decoration: none;
