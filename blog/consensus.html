@@ -27,8 +27,9 @@
       <h2>Consensus - Something we can agree on</h2>
           <p>In the realm of distributed systems, a crucial objective is the capability to withstand faults, particularly in managing node failures. In such scenarios, the systems must sustain their functionality. Achieving this goal is facilitated by consensus algorithms.</p>
           <p>
-          Usually, these algorithms are implemented through a replicated state machine mechanism, which involves duplicating data across nodes and maybe utilizing a write-ahead log. To achieve consensus, a specific value must be replicated across nodes a predefined number of times before it can be collectively accepted.
-          </p>
+          Usually, these algorithms are implemented through a replicated state machine mechanism, which involves duplicating data across nodes and maybe utilizing a write-ahead log. </p> 
+		  <p>A write-ahead log is a robust append-only data structure employed to persist each state change as a command. This guarantees that in the event of a machine failure, the system can reestablish its state by replaying the write-ahead log.</p> 
+          <p>To achieve consensus, a specific value must be replicated across nodes a predefined number of times before it can be collectively accepted.</p>
           <h2>Raft</h2>
             <a href="./raft.html">Raft is one such consensus algorithm </a>     
           <button class="blog-back-button"><a href="..">Back</a></button>
