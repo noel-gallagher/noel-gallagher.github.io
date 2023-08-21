@@ -26,7 +26,7 @@
       <h2>Variance in Scala</h2>
       <p>"Variance" describes the subtyping relationship between types. In scala, the possiblities are: covariance, contravariance and invariance.</p>
       <p>Covariance allows the type to be more specific. For example, if A is a substype of B -> then F[A] is also a subtype of F[B]. A more concrete example:</p>
-      <pre><code>
+      <pre class="code-block"><code>
         class Animal
         class Dog extends Animal
   
@@ -35,7 +35,7 @@
         val animalContainer: Container[Animal] = new Container(new Dog) // this is valid!
       </code></pre>
       <p>contravariance allows a subtype to be more general. For example: if A is a subtype of B -> F[B] is also a subtype of F[A]</p>
-      <pre><code>
+      <pre class="code-block"><code>
         class Printer[-T] { def print(value: T): Unit = println(value) }
   
         val dogPrinter: Printer[Dog] = new Printer[Animal]
