@@ -28,7 +28,7 @@
       <p>Main files concerning tomcat configuration</p>
       <p>On a deployed tomcat instance, these files can be found at <code>/opt/tomcat/conf</code>
       <p>references: <a href="https://tomcat.apache.org/tomcat-8.5-doc/appdev/deployment.html">tomcat docs</a></p>
-      <pre>conf/
+      <pre class="code-block">conf/
    - catalina.policy
    - catalina.properties
    - logging.properties
@@ -40,7 +40,7 @@
       <hr>
       <p>
       this is the main config file. located in the <code>conf</code> dir of installed tomcat configure <code>Resources</code> such as jdbc, messge brokers etc within <code>GlobalNamingResources</code>:
-      <pre><code>conf/
+      <pre class="code-block"><code>conf/
    -<span class="ruby"> catalina.policy
 </span>   -<span class="ruby"> catalina.properties
 </span>   -<span class="ruby"> logging.properties
@@ -51,7 +51,7 @@
 </code></pre><h2 id="server-xml">server.xml</h2>
 <p>this is the main config file. located in the <code>conf</code> dir of installed tomcat
 configure <code>Resource</code>s such as jdbc, messge brokers etc within <code>GlobalNamingResources</code>:</p>
-<pre><code class="lang-xml">&lt;Server <span class="hljs-params">...</span>
+<pre class="code-block"><code class="lang-xml">&lt;Server <span class="hljs-params">...</span>
   <span class="hljs-params">...</span>
   &lt;GlobalNamingResources&gt;
     &lt;Resource name=<span class="hljs-string">"jdbc/db"</span> auth=<span class="hljs-string">"Container"</span> <span class="hljs-keyword">type</span>=<span class="hljs-string">"javax.sql.DataSource"</span>
@@ -65,7 +65,7 @@ configure <code>Resource</code>s such as jdbc, messge brokers etc within <code>G
 </code></pre>
 <h2 id="web-xml">web.xml</h2>
 <p>deployment descriptor for a web application. Defines servlets, filters and other components.  during development typically located in <code>WEB-INF</code> dir</p>
-<pre><code class="lang-xml"><span class="hljs-attribute">&lt;web-app ...
+<pre class="code-block"><code class="lang-xml"><span class="hljs-attribute">&lt;web-app ...
   &lt;display-name&gt;</span>my web app<span class="hljs-attribute">&lt;/display-name&gt;</span>
 
   <span class="hljs-attribute">&lt;welcome-file-list&gt;</span>
@@ -95,7 +95,7 @@ configure <code>Resource</code>s such as jdbc, messge brokers etc within <code>G
 <p>defines database connections, JNDI resources and other configurations</p>
 <p>There exists a server context and a context for each web application. The server context is found in the <code>conf</code> dir and is used to define global resources shared across many web applications.</p>
 <p>An application context is located in the <code>META-INF</code> dir and is used to define resources specific to that application.</p>
-<pre><code class="lang-xml">&lt;<span class="hljs-keyword">Context</span>&gt;
+<pre class="code-block"><code class="lang-xml">&lt;<span class="hljs-keyword">Context</span>&gt;
   &lt;Resouce name<span class="hljs-string">"jdbc/db"</span>
     auth=<span class="hljs-string">"Container"</span>
     <span class="hljs-keyword">type</span>=<span class="hljs-string">"javax.sql.DataSource"</span>
@@ -109,7 +109,7 @@ configure <code>Resource</code>s such as jdbc, messge brokers etc within <code>G
 </code></pre>
 <p>The above <code>context.xml</code> contains a <code>Resource</code> element which specifies connection parameters for a mqsql database including jdbc driver class name, url, username, password and connection pooling settings. </p>
 <p>A <code>context.xml</code> file might also detail a <code>ResourceLink</code> element:</p>
-<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Context</span>&gt;</span>
+<pre class="code-block"><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Context</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">ResourceLink</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"jdbc/db"</span>
                 <span class="hljs-attr">global</span>=<span class="hljs-string">"jdbdc/db"</span>
                 <span class="hljs-attr">type</span>=<span class="hljs-string">"javax.sql.DataSource"</span>
@@ -121,7 +121,7 @@ configure <code>Resource</code>s such as jdbc, messge brokers etc within <code>G
 <p>contains the global config settings located in <code>conf</code> dir</p>
 <h2 id="setenv-sh">setenv.sh</h2>
 <p>set environment variables for tomcat. typically java options. located in <code>bin</code> dir</p>
-<pre><code class="lang-bash"><span class="hljs-meta">#!/bin/sh
+<pre class="code-block"><code class="lang-bash"><span class="hljs-meta">#!/bin/sh
 </span>
 <span class="hljs-built_in">export</span> JAVA_OPTS=<span class="hljs-string">"-xms512m -Xmx1024"</span>
 
