@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Two-phase commit</title>
+  <link rel="stylesheet" href="../stylesheets/style.css">
+  <link rel="stylesheet" href="../stylesheets/blog.css">
+</head>
+
+<body>
+  <header role="banner">
+    <nav>
+      <ul>
+        <li><a href="../">Home</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="#" class="active">Blog</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Two-phase commit</h2>
+      <p>Two phase commit is a method of guarnteeing all participants of a distributed system perform a transaction. The action should not be performed until all memebers of a cluster have successfully sent acknowledgement.</p>
+      <p>The process is performed, unsurprisingly, in two phases: Prepare &#38 Commit</p>
+      <p>In the prepare phase, the coordinator asks each node to PREPARE to perform the action. Each node then informs the coordinator if it has the capability to perform the transaction. If a node is unable to perform the action, it will send the coordinator an ABORT. The coordinator then tells all other nodes not to perform the action. Otherwise, the node will repspond with a READY response.</p>
+      <p>For the commit phase, the coordinator will send a COMMIT message to each member of the cluster. On receipt of this COMMIT message, each node will perform the transaction and send an acknowledgement. If there is an issue, the participant will send an ABORT message to the coordinator. The coordinator will then rely this ABORT message to the remaining clients. Each client will then each rollback the previous transaction. Otherwise, if all nodes have succesfully performed the action, the coordinator will send a COMMIT message to each member so that the transcation can be marked complete.</p>
+      <button class="blog-back-button"><a href=".">Back</a></button>
+    </section>
+  </main>
+  <footer>
+  </footer>
+</body>
+
+</html>
