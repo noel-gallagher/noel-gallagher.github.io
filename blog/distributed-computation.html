@@ -25,21 +25,20 @@
 		<h1>Brief look at some distributed computation frameworks</h1>
 		<p>MapReduce, Hadoop, Spark and Storm are all significant frameworks and paradigms in the realm of distributed computation. These approaches facilitate the processing of vast amounts of data by harnessing the power of multiple computing resources.
 		</p>
-		<p>MapReduce
+		<h2>MapReduce</h2>
 
-		MapReduce, consisting of two core functions - "map" and "reduce," is a fundamental model in distributed computing. It aims to keep data primarily localized and move computation to the data. The process involves transforming data through a Mapper, shuffling to consolidate common keys, and then passing through a Reducer to achieve the desired output format.</p>
-		<p>Hadoop
+		<p>MapReduce, consisting of two core functions - "map" and "reduce," is a fundamental model in distributed computing. It aims to keep data primarily localized and move computation to the data. The process involves transforming data through a Mapper, shuffling to consolidate common keys, and then passing through a Reducer to achieve the desired output format.</p>
+		<h2>Hadoop</h2>
 
-		Hadoop, built upon the MapReduce concept, provides an ecosystem for distributed computing. It encompasses the MapReduce API, job management, and the Hadoop Distributed File System (HDFS). HDFS manages files and directories, with metadata overseen by a replicated master. Files are stored in large, immutable, and replicated blocks across a network of data nodes. A Job Tracker divides jobs into mappers, which are distributed to data nodes, where the map function operates. The reduce function is managed similarly. Hadoop's design focuses on moving computation to where the data resides.</p>
-		<p>
-		Spark
+		<p>Hadoop, built upon the MapReduce concept, provides an ecosystem for distributed computing. It encompasses the MapReduce API, job management, and the Hadoop Distributed File System (HDFS). HDFS manages files and directories, with metadata overseen by a replicated master. Files are stored in large, immutable, and replicated blocks across a network of data nodes. A Job Tracker divides jobs into mappers, which are distributed to data nodes, where the map function operates. The reduce function is managed similarly. Hadoop's design focuses on moving computation to where the data resides.</p>
+		
+		<h2>Spark</h2>
 
-Spark follows the scatter/gather pattern and introduces the concept of Resilient Distributed Datasets (RDDs), allowing for more versatile data models. Spark also offers a broader programming model with transformations and actions. Its storage-agnostic nature enables compatibility with various data sources. A Spark client establishes a Spark context (driver) to create and dispatch jobs to a cluster manager, which further divides them into tasks and distributes them to worker nodes. RDDs encapsulate data transformations and retain immutability, functional attributes, typing, ordering, and lazy evaluation. Transformations convert one RDD into another, while actions trigger computation and return results.
+		<p>Spark follows the scatter/gather pattern and introduces the concept of Resilient Distributed Datasets (RDDs), allowing for more versatile data models. Spark also offers a broader programming model with transformations and actions. Its storage-agnostic nature enables compatibility with various data sources. A Spark client establishes a Spark context (driver) to create and dispatch jobs to a cluster manager, which further divides them into tasks and distributes them to worker nodes. RDDs encapsulate data transformations and retain immutability, functional attributes, typing, ordering, and lazy evaluation. Transformations convert one RDD into another, while actions trigger computation and return results.
 		</p>
-		<p>
-		Storm
+		<h2>Storm</h2>
 
-Storm addresses real-time streaming data processing with at-least-once processing semantics. It emphasizes scalability, fault tolerance, and low latency. The programming model involves streams (sequences of tuples), spouts (stream sources), bolts (functions applied to streams), and topologies (computation graphs). A control node, nimbus, communicates with ZooKeeper, while supervisors handle the actual computation. Tasks are threads or bolt spouts executed within workers - JVM processes on supervisors.
+		<p>Storm addresses real-time streaming data processing with at-least-once processing semantics. It emphasizes scalability, fault tolerance, and low latency. The programming model involves streams (sequences of tuples), spouts (stream sources), bolts (functions applied to streams), and topologies (computation graphs). A control node, nimbus, communicates with ZooKeeper, while supervisors handle the actual computation. Tasks are threads or bolt spouts executed within workers - JVM processes on supervisors.
 		</p>
 		<p>These diverse paradigms and frameworks within distributed computation offer effective strategies for managing and processing extensive datasets, each with distinct strengths in terms of data processing, storage management, fault tolerance, and programming models.</p>
      <button class="blog-back-button"><a href=".">Back</a></button>
