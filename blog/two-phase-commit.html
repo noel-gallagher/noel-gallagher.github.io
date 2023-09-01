@@ -28,7 +28,7 @@
       <p>Unsurprisingly, this protocol is carried out in two distinct phases: Prepare and Commit.</p>
       <p>During the Preparation phase, the coordinator initiates a request for each individual node to prepare for the intended action. Each node then communicates its readiness to execute the transaction to the coordinator. If a node is incapable of executing the action, it signals an ABORT to the coordinator. Subsequently, the coordinator informs all other nodes to refrain from executing the action. Conversely, nodes responding with a READY signify their capability to proceed.</p>
       <p>In the Commitment phase, the coordinator dispatches a COMMIT message to every cluster member. Upon receiving this COMMIT message, each node executes the transaction and dispatches an acknowledgment. Should any participant encounter an issue, it communicates an ABORT message to the coordinator. The coordinator then communicates this ABORT directive to the remaining clients, prompting each to rollback the preceding transaction. Conversely, if all nodes execute the action successfully, the coordinator transmits a COMMIT message to each member, officially marking the transaction as complete.</p>
-      <button class="blog-back-button"><a href=".">Back</a></button>
+      <button class="blog-back-button"><a href="..">Back</a></button>
     </section>
   </main>
   <footer>
