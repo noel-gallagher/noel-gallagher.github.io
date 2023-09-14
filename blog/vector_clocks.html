@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vector Clocks</title>
+  <link rel="stylesheet" href="../stylesheets/style.css">
+  <link rel="stylesheet" href="../stylesheets/blog.css">
+</head>
+
+
+<body>
+  <header role="banner">
+    <nav>
+      <ul>
+        <li><a href="../">Home</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="#" class="active">Blog</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+	  <h1>Vector Clocks</h1>
+	  <p>
+	 Vector clocks are a data structure used in distributed systems to track the sequence of events or updates. They allow you to determine the relative ordering of events in a distributed system, helping to establish causality and resolve conflicts in distributed data storage. 
+	  </p>
+<p>
+Unlike traditional clocks, vector clocks do not provide a real-time representation of the current time. Instead, they focus on ordering events or updates based on their logical sequence.
+</p>
+<p>
+Vector clocks are particularly useful in scenarios where multiple actors (nodes or processes) can concurrently modify the same data value. They help ensure that updates are applied in the correct order, preventing conflicts and inconsistencies.
+</p>
+<p>
+In a distributed system using vector clocks, each actor (node or process) is assigned a unique identifier (ID). This ID helps in tracking which actor performed which operation.
+</p>
+<p>
+Alongside the actor's ID, a vector clock assigns a sequence number to each actor. This sequence number represents the order in which the actor performed its operations.
+</p>
+<p>
+Riak, a distributed NoSQL database, popularized the use of vector clocks in its system. Riak used vector clocks to manage and resolve conflicts, ensuring data consistency.
+</p>
+<p>
+Vector clocks are designed to guarantee correctness in distributed systems. They prevent the "last write wins" strategy, which can lead to incorrect results, by ensuring that updates are ordered correctly based on causality.
+</p>
+<p>
+One drawback of vector clocks is that they shift the complexity of handling conflicts and ordering updates from the database or server to the client or application. This means that clients need to be aware of vector clocks and handle conflicts appropriately.
+</p>
+<p>
+Some distributed databases, like Apache Cassandra, use the "last write wins" strategy instead of vector clocks. In Cassandra, the focus is on achieving high availability and performance, and it accepts that in some cases, conflicts might occur. Cassandra resolves conflicts by timestamping writes, and clients may need to implement additional logic to handle them.
+</p>
+      <button class="blog-back-button"><a href="..">Back</a></button>
+    </section>
+  </main>
+  <footer>
+  </footer>
+</body>
+
+</html>
