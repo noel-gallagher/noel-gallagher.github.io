@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Space</title>
+  <link rel="stylesheet" href="../stylesheets/style.css">
+  <link rel="stylesheet" href="../stylesheets/blog.css">
+</head>
+
+<body>
+  <header role="banner">
+    <nav>
+      <ul>
+        <li><a href="../">Home</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="#" class="active">Blog</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+	  <h1>View space</h1>
+<p>is a fundamental concept in graphics programming. It is the coordinate system that provides a perspective on a 3D scene from the viewpoint of a camera. 
+</p>
+<p>
+In view space, each vertex is defined relative to the camera's position and orientation and not the world space. This means that the camera becomes the new origin, and all objects in the scene are positioned with respect to the camera. Achieving this transformation from the world space (where objects exist in their absolute positions) to view space involves the use of a view matrix.</p>
+
+<p>
+The view matrix encapsulates the camera's position, direction, right vector (defining the x-axis), and up vector.
+</p>
+<ul>
+<li>Camera Position: the location of the camera in world space. The view matrix needs this information to position the view space correctly.
+</li>
+<li>Direction: The direction vector specifies where the camera is looking in world space. It defines the center of the view and is used to calculate the view matrix.
+</li>
+<li>Right Vector: vector pointing to the right side of the camera, defining the positive x-axis in view space. It is determined by taking the cross product of the camera's direction and the up vector.
+</li>
+<li>
+Up Vector: the up vector points upward relative to the camera.  is calculated using the cross product of the camera's direction and the right vector.
+</li>
+<ul>
+<p>
+The transformation process from world space to view space can be summarized in the following:
+</p>
+<pre class="code-block"><code>
+projection * view * model * vec4(pos, 1.0)
+</code></pre>
+<ul>
+<li>pos is the position of a vertex in world space.</li>
+<li>model: the model matrix that transforms the vertex from model space to world space.</li>
+<li>view: the view matrix that transforms the vertex from world space to view space.</li>
+<li>projection: the projection matrix responsible for mapping 3D coordinates to 2D screen space.</li>
+</ul>
+<p>By combining these matrices and applying them to the vertex position, you effectively move the vertex into view space. This process allows the renderer to produce a scene from the camera's perspective.
+</p>
+      <button class="blog-back-button"><a href="..">Back</a></button>
+    </section>
+  </main>
+  <footer>
+  </footer>
+</body>
+
+</html>
