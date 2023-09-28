@@ -138,6 +138,26 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     `;
 
+var mouse = {
+    lastX: canvas.width / 2,
+    lastY: canvas.height / 2,
+    offsetX: 0,
+    offsetY: 0,
+};
+
+canvas.addEventListener('mousemove', function (e) {
+    var x = e.clientX;
+    var y = e.clientY;
+
+    mouse.offsetX = x - mouse.lastX;
+    mouse.offsetY = mouse.lastY - y; 
+
+    mouse.lastX = x;
+    mouse.lastY = y;
+
+    camera.processMouseMovement(mouse.offsetX, mouse.offsetY);
+});
+
   var vertexShader = gl.createShader(gl.VERTEX_SHADER);
   gl.shaderSource(vertexShader, verSource);
   gl.compileShader(vertexShader);
