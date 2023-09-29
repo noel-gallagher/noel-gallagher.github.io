@@ -1,7 +1,6 @@
 var camera = {
    position: vec3.fromValues(0.0, 0.0, 0.0),
    front: vec3.fromValues(0.0, 0.0, -1.0),
-   up: vec3.fromValues(0.0, 1.0, 0.0),
    right: vec3.create(),
    worldUp: vec3.fromValues(0.0, 1.0, 0.0),
    yaw: -90.0,
@@ -20,14 +19,14 @@ var camera = {
        vec3.normalize(this.front, this.front);
        vec3.cross(this.right, this.front, this.worldUp);
        vec3.normalize(this.right, this.right);
-       vec3.cross(this.up, this.right, this.front);
-       vec3.normalize(this.up, this.up);
+       vec3.cross(this.worldUp, this.right, this.front);
+       vec3.normalize(this.worldUp, this.worldUp);
    },
    
    getViewMatrix: function () {
        var lookAt = vec3.create();
        vec3.add(lookAt, this.position, this.front);
-       return mat4.lookAt(mat4.create(), this.position, lookAt, this.up);
+       return mat4.lookAt(mat4.create(), this.position, lookAt, this.worldUp);
     },
 
    processKeyboard: function (direction, deltaTime) {
@@ -68,7 +67,6 @@ var camera = {
   }
 };
 
-camera.update();
 
 var keys = {
    forward: false,
@@ -94,6 +92,7 @@ window.addEventListener("keydown", function (e) {
   }
 });
 
+
 window.addEventListener("keyup", function (e) {
    switch (e.code) {
        case "KeyW":
@@ -114,6 +113,8 @@ window.addEventListener("keyup", function (e) {
 document.addEventListener("DOMContentLoaded", function () {
    var canvas = document.getElementById("c");
    var gl = canvas.getContext("webgl");
+   
+   camera.update();
 
    if (!gl) {
        return;
