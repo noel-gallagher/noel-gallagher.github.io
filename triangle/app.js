@@ -110,10 +110,39 @@ window.addEventListener("keyup", function (e) {
   }
 });
 
+
+
+
+
+// Function to update the camera view based on mouse movements
+function updateCameraView(e) {
+    var movementX = e.movementX || e.mozMovementX || 0;
+    var movementY = e.movementY || e.mozMovementY || 0;
+    camera.processMouseMovement(movementX, -movementY);
+}
+
+// Listen for the pointer lock change event
+
 document.addEventListener("DOMContentLoaded", function () {
    var canvas = document.getElementById("c");
    var gl = canvas.getContext("webgl");
-   
+   // Request pointer lock when the user clicks the canvas
+   canvas.addEventListener('click', function () {
+       canvas.requestPointerLock = canvas.requestPointerLock || canvas.mozRequestPointerLock;
+       canvas.requestPointerLock();
+   });
+   function lockChangeAlert() {
+       if (document.pointerLockElement === canvas || document.mozPointerLockElement === canvas) {
+        // Pointer was just locked
+        document.addEventListener("mousemove", updateCameraView, false);
+       } else {
+           document.removeEventListener("mousemove", updateCameraView, false);
+    }
+       
+   }
+
+   document.addEventListener('pointerlockchange', lockChangeAlert, false);
+   document.addEventListener('mozpointerlockchange', lockChangeAlert, false);
    camera.update();
 
    if (!gl) {
