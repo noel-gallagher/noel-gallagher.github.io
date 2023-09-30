@@ -1,3 +1,23 @@
+var verSource = `
+           attribute vec3 pos;
+           varying vec4 vCol;
+           uniform mat4 model;
+           uniform mat4 projection;
+           uniform mat4 view;
+           void main() {
+               gl_Position = projection * view * model * vec4(pos, 1.0);
+               vCol = vec4(clamp(pos, 0.0, 1.0), 1.0);
+           }
+       `;
+
+   var fragSource = `
+           precision mediump float;
+           varying vec4 vCol;
+           void main() {
+               gl_FragColor = vCol;
+           }
+       `;
+
 var camera = {
    position: vec3.fromValues(0.0, 0.0, 0.0),
    front: vec3.fromValues(0.0, 0.0, -1.0),
@@ -110,35 +130,29 @@ window.addEventListener("keyup", function (e) {
   }
 });
 
-
-
-
-
-// Function to update the camera view based on mouse movements
 function updateCameraView(e) {
     var movementX = e.movementX || e.mozMovementX || 0;
     var movementY = e.movementY || e.mozMovementY || 0;
     camera.processMouseMovement(movementX, -movementY);
 }
 
-// Listen for the pointer lock change event
-
 document.addEventListener("DOMContentLoaded", function () {
    var canvas = document.getElementById("c");
    var gl = canvas.getContext("webgl");
-   // Request pointer lock when the user clicks the canvas
+   
+
    canvas.addEventListener('click', function () {
        canvas.requestPointerLock = canvas.requestPointerLock || canvas.mozRequestPointerLock;
        canvas.requestPointerLock();
    });
+ 
    function lockChangeAlert() {
        if (document.pointerLockElement === canvas || document.mozPointerLockElement === canvas) {
         // Pointer was just locked
         document.addEventListener("mousemove", updateCameraView, false);
        } else {
            document.removeEventListener("mousemove", updateCameraView, false);
-    }
-       
+       } 
    }
 
    document.addEventListener('pointerlockchange', lockChangeAlert, false);
@@ -153,27 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
    canvas.height = window.innerHeight;
    gl.viewport(0, 0, canvas.width, canvas.height);
 
-   var verSource = `
-           attribute vec3 pos;
-           varying vec4 vCol;
-           uniform mat4 model;
-           uniform mat4 projection;
-           uniform mat4 view;
-           void main() {
-               gl_Position = projection * view * model * vec4(pos, 1.0);
-               vCol = vec4(clamp(pos, 0.0, 1.0), 1.0);
-           }
-       `;
-
-   var fragSource = `
-           precision mediump float;
-           varying vec4 vCol;
-           void main() {
-               gl_FragColor = vCol;
-           }
-       `;
-
-var mouse = {
+   var mouse = {
    lastX: canvas.width / 2,
    lastY: canvas.height / 2,
    offsetX: 0,
