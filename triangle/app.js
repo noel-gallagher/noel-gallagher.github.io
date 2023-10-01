@@ -10,7 +10,7 @@ var verSource = `
            }
        `;
 
-   var fragSource = `
+var fragSource = `
            precision mediump float;
            varying vec4 vCol;
            void main() {
@@ -41,6 +41,7 @@ var camera = {
        vec3.normalize(this.right, this.right);
        vec3.cross(this.worldUp, this.right, this.front);
        vec3.normalize(this.worldUp, this.worldUp);
+       this.box.update();
    },
    
    getViewMatrix: function () {
@@ -79,12 +80,21 @@ var camera = {
    },
 
    processMouseMovement: function (deltaX, deltaY) {
-    this.yaw += this.turnSpeed * deltaX;
-    this.pitch += this.turnSpeed * deltaY;
-    if (this.pitch > 89.0) this.pitch = 89.0;
-    if (this.pitch < -89.0) this.pitch = -89.0;
-    this.update();
-  }
+       this.yaw += this.turnSpeed * deltaX;
+       this.pitch += this.turnSpeed * deltaY;
+       if (this.pitch > 89.0) this.pitch = 89.0;
+       if (this.pitch < -89.0) this.pitch = -89.0;
+       this.update();
+   },
+
+   box: {
+       min: vec3.create(),
+       max: vec3.create(),
+       update: () => {
+           this.min = vec3.fromValues(camera.position[0] - 0.1, camera.position[1] - 0.1, camera.position[2] - 0.1);
+           this.max = vec3.fromValues(camera.position[0] + 0.1, camera.position[1] + 0.1, camera.position[2] + 0.1);
+       }
+   }
 };
 
 
