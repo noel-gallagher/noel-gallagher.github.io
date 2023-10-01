@@ -146,6 +146,12 @@ function updateCameraView(e) {
     camera.processMouseMovement(movementX, -movementY);
 }
 
+function isColliding(box1, box2) {
+    return (box1.min[0] <= box2.max[0] && box1.max[0] >= box2.min[0]) &&
+           (box1.min[1] <= box2.max[1] && box1.max[1] >= box2.min[1]) &&
+           (box1.min[2] <= box2.max[2] && box1.max[2] >= box2.min[2]);
+}
+
 document.addEventListener("DOMContentLoaded", function () {
    var canvas = document.getElementById("c");
    var gl = canvas.getContext("webgl");
