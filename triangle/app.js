@@ -90,7 +90,7 @@ var camera = {
    box: {
        min: vec3.create(),
        max: vec3.create(),
-       update: () => {
+       update: function() {
            this.min = vec3.fromValues(camera.position[0] - 0.1, camera.position[1] - 0.1, camera.position[2] - 0.1);
            this.max = vec3.fromValues(camera.position[0] + 0.1, camera.position[1] + 0.1, camera.position[2] + 0.1);
        }
@@ -223,7 +223,10 @@ canvas.addEventListener('mousemove', function (e) {
        1.0, -1.0, 0.0,
        0.0, 1.0, 0.0
   ]);
-
+   var pyramidBox = {
+       min: vec3.fromValues(-1.0, -1.0, -2.5),
+       max: vec3.fromValues(1.0, 1.0, -2.5)
+   };
    var indices = new Uint16Array([0, 3, 1, 1, 3, 2, 2, 3, 0, 0, 1, 2]);
    var vertexBuffer = gl.createBuffer();
    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
@@ -271,6 +274,7 @@ canvas.addEventListener('mousemove', function (e) {
    if (keys.left) camera.processKeyboard("left", 0.1);
    if (keys.right) camera.processKeyboard("right", 0.1);
 
+   camera.box.update();
    gl.clearColor(0.0, 0.0, 0.0, 1.0);
    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
    gl.enable(gl.DEPTH_TEST);
@@ -280,6 +284,10 @@ canvas.addEventListener('mousemove', function (e) {
    viewMatrix = camera.getViewMatrix();
    gl.uniformMatrix4fv(viewUniform, false, viewMatrix);
 
+   if(isColliding(camera.box, pyramidBox)) {
+        console.log('Collision Detected!');
+    }
+   
    requestAnimationFrame(animate);
 }
    animate();
