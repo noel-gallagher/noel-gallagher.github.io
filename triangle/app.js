@@ -1,3 +1,4 @@
+const SCALING_FACTOR = 0.4;
 var verSource = `
            attribute vec3 pos;
            varying vec4 vCol;
@@ -164,8 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
  
    function lockChangeAlert() {
        if (document.pointerLockElement === canvas || document.mozPointerLockElement === canvas) {
-        // Pointer was just locked
-        document.addEventListener("mousemove", updateCameraView, false);
+           document.addEventListener("mousemove", updateCameraView, false);
        } else {
            document.removeEventListener("mousemove", updateCameraView, false);
        } 
@@ -224,8 +224,8 @@ canvas.addEventListener('mousemove', function (e) {
        0.0, 1.0, 0.0
   ]);
    var pyramidBox = {
-       min: vec3.fromValues(-1.0, -1.0, -2.5),
-       max: vec3.fromValues(1.0, 1.0, -2.5)
+       min: vec3.fromValues(-0.4, -0.4, -3.1),
+       max: vec3.fromValues(0.4, 0.4, -2.1)
    };
    var indices = new Uint16Array([0, 3, 1, 1, 3, 2, 2, 3, 0, 0, 1, 2]);
    var vertexBuffer = gl.createBuffer();
@@ -247,11 +247,8 @@ canvas.addEventListener('mousemove', function (e) {
    var viewUniform = gl.getUniformLocation(program, "view");
    gl.uniformMatrix4fv(viewUniform, false, viewMatrix);
 
-   var angle = 0.0;
 
    function animate() {
-       angle += 0.01;
-       if (angle > 2 * Math.PI) angle = 0.0;
 
        var modelMatrix = mat4.create();
        mat4.translate(modelMatrix, modelMatrix, [0.0, 0.0, -2.5]);
