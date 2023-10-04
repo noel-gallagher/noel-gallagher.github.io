@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python config</title>
+  <link rel="stylesheet" href="../stylesheets/style.css">
+  <link rel="stylesheet" href="../stylesheets/blog.css">
+</head>
+
+<body>
+  <header role="banner">
+    <nav>
+      <ul>
+        <li><a href="../">Home</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="#" class="active">Blog</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+	  <h1>DI in python</h1>
+	  <p> Handling DI in python<p> 
+	  <p> Let's write a simple writing of two services, A and B. first we can capture the behaviour of the service via two abstract base classes (ABCs), `ServiceA` and `ServiceB`, and then create multiple concrete implementations for each of these services.</p>
+<pre class="code-block"><code>
+from abc import ABC, abstractmethod
+
+class ServiceA(ABC):
+    @abstractmethod
+    def execute(self):
+        pass
+
+class ServiceAImpl1(ServiceA):
+    def execute(self):
+        return "Executing Service A Impl 1"
+
+class ServiceAImpl2(ServiceA):
+    def execute(self):
+        return "Executing Service A Impl 2"
+
+class ServiceB(ABC):
+    @abstractmethod
+    def run(self):
+        pass
+
+class ServiceBImpl1(ServiceB):
+    def run(self):
+        return "Running Service B Impl 1"
+
+class ServiceBImpl2(ServiceB):
+    def run(self):
+        return "Running Service B Impl 2"
+</code></pre>
+<p>
+Now, we can define a configuration file which will specify which implementation to be used for ServiceA and ServiceB
+</p>
+
+<pre class="code-block"><code>
+[SERVICES]
+ServiceA = ServiceAImpl1
+ServiceB = ServiceBImpl2
+</code></pre>
+
+<p>This file specifies ServiceA, should use ServiceAImpl1 and for ServiceB, it should use ServiceBImpl2.</p>
+
+<p>Then, to use the configuration, we can use python's configparser to get the correct class implementations:</p>
+<pre class="code-block"><code>
+# assumes that the services and the main loading script are in the same module. 
+import configparser
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+def get_service_implementation(service_name, default=None):
+    try:
+        class_name = config['SERVICES'].get(service_name, default)
+        module = __import__(__name__)
+        class_ = getattr(module, class_name)
+        return class_()
+    except (AttributeError, ImportError):
+        return None # do something more appropriate... 
+
+service_a_instance = get_service_implementation('ServiceA')
+service_b_instance = get_service_implementation('ServiceB')
+
+print(service_a_instance.execute())
+print(service_b_instance.run())
+</code></pre>
+
+<p>this would print:</p>
+<pre class="code-block"><code>
+Executing Service A Impl 1
+Running Service B Impl 2
+</code></pre>
+      <button class="blog-back-button"><a href="..">Back</a></button>
+    </section>
+  </main>
+  <footer>
+  </footer>
+</body>
+
+</html>
