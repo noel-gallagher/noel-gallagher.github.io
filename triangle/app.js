@@ -266,6 +266,8 @@ canvas.addEventListener('mousemove', function (e) {
    gl.uniformMatrix4fv(modelUniform, false, modelMatrix);
    gl.uniformMatrix4fv(projectionUniform, false, projectionMatrix);
 
+   let previousPosition = vec3.clone(camera.position);
+
    if (keys.forward) camera.processKeyboard("forward", 0.1);
    if (keys.backward) camera.processKeyboard("backward", 0.1);
    if (keys.left) camera.processKeyboard("left", 0.1);
@@ -282,7 +284,7 @@ canvas.addEventListener('mousemove', function (e) {
    gl.uniformMatrix4fv(viewUniform, false, viewMatrix);
 
    if(isColliding(camera.box, pyramidBox)) {
-        console.log('Collision Detected!');
+       camera.position = previousPosition;
     }
    
    requestAnimationFrame(animate);
