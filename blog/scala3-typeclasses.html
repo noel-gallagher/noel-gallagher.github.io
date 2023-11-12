@@ -29,30 +29,30 @@
 	  <p>First start by defining the trait</p>
 	  <pre class="code-block"><code>
 	  trait Monoid[M]:
-  extension (m: M) def mempty: M
-  extension (m: M) def combine(m2: M): M
+  		extension (m: M) def mempty: M
+  		extension (m: M) def combine(m2: M): M
 	  </code></pre>
 	  <p>We define two methods: mempty and combine. "mempty" represents identity. "combine" acts as our binary operation which combines two types M and produces a combined type M</p>
 	  <p>Creating an instance for type String</p>
 	  <pre class="code-block"><code>
 	  given Monoid[String] with
-	extension (s: String) def mempty: String = ""
-	extension (s: String) def combine(str2: String): String = s ++ str2
+		extension (s: String) def mempty: String = ""
+		extension (s: String) def combine(str2: String): String = s ++ str2
 	  </code></pre>
 	  <p>Here, we define an instance of monoid for the type String. It satisfies the monoid laws as mempty is simply an empty string "" and combine for type String is defined as concatenation.</p>
 	  <p>Previously in scala 2, one would implement the above as:</p>
 	  <pre class="code-block"><code>
-	  trait Monoid[M] {
-  def combine(m: M, m2: M): M
-  def mempty: M
-}
+		trait Monoid[M] {
+  			def combine(m: M, m2: M): M
+  			def mempty: M
+		}
 
-object Monoid {
-  implicit val stringMonoid: Monoid[String] = new Monoid[String] {
-    def combine(m: String, m2: String): String = m ++ m2
-    def mempty: String = ""
-  }
-}
+		object Monoid {
+  			implicit val stringMonoid: Monoid[String] = new Monoid[String] {
+    				def combine(m: String, m2: String): String = m ++ m2
+    				def mempty: String = ""
+  			}
+		}
 	  </code></pre>
 	  <p>Comparing this to the Scala 2 approach, the definition becomes more concise and cleaner in Scala 3. This is thanks to the use of extension methods and the "given" syntax to declare instances of typeclasses compared to Scala 2's implicits</p>
       <button class="blog-back-button"><a href="..">Back</a></button>
