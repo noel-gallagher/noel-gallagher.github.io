@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ansible</title>
+  <link rel="stylesheet" href="../stylesheets/style.css">
+  <link rel="stylesheet" href="../stylesheets/blog.css">
+</head>
+
+<body>
+  <header role="banner">
+    <nav>
+      <ul>
+        <li><a href="../">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="#" class="active">Blog</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+	    <h1>Ansible notes</h1>
+	    <p>dumping some notes on ansible for future reference</p>
+	   <h2>Modules</h2>
+  <p>Modules are small units of work in Ansible.</p>
+  <p>Example: <code>ansible -m ping localhost</code></p>
+
+  <h2>File Module</h2>
+  <p>The file module is used for manipulating files.</p>
+  <p>Create a file: <code>ansible -m file -a "dest=hello state=touch" localhost</code></p>
+
+  <h2>State in Ansible</h2>
+  <p>Ansible is concerned with the state of the system.</p>
+  <p>Achieve the desired state: <code>CHANGED</code> or <code>SUCCESS</code></p>
+
+  <h2>Check Mode</h2>
+  <p>Check mode helps analyze potential outcomes without making changes.</p>
+  <p>Example: <code>ansible -m copy -a "dest='hello' content='world'" localhost"</code></p>
+  <p>Outcomes:
+    <ul>
+      <li><code>SUCCESS</code>: File and contents already exist.</li>
+      <li><code>CHANGED</code>: File did not exist or contents were changed.</li>
+      <li><code>FAILED</code>: The operation failed.</li>
+    </ul>
+  </p>
+  <p>Use <code>--check</code> to reveal the state without performing the operation.</p>
+
+  <h2>Diff Flag</h2>
+  <p>Use the <code>--diff</code> flag to show the difference between the current state and the new state.</p>
+
+  <h2>Handling Remote Nodes</h2>
+  <p>Ansible manages remote nodes via a control node.</p>
+  <p>Define nodes in an inventory:
+      <p>Command line: <code>ansible -i 'node1, node2' -m ping node2</code></p>
+      <p>Inventory file:
+        <pre>
+          node1
+          node[2:n]
+        </pre>
+      </p>
+  </p>
+  <p>Configuration options:
+    <p>
+      <p>Command line: <code>ansible -i inventory_file -m command -a 'cowsay "hello"' all</code></p>
+      <p><code>ansible.cfg</code>:
+        <pre>
+          [defaults]
+          inventory=inventory_file
+        </pre>
+      <p/>
+      <p>Environment variable</p>
+    </p>
+  </p>
+
+  <h2>Command Module</h2>
+  <p>Execute arbitrary commands.</p>
+  <p>Example: <code>ansible -m command -a 'cowsay "hello"' localhost</code></p>
+
+  <h2>Configuration Options</h2>
+  <p>Show current config: <code>ansible-config dump</code></p>
+  <p>Display inventory details: <code>ansible-inventory --list [--yaml]</code></p>
+
+  <h2>SSH Connection</h2>
+  <p>Ansible uses SSH by default to connect to remote nodes.</p>
+  <p>Modules are copied from the control node to the managed node and then executed.</p>
+
+  <h2>Privilege Elevation</h2>
+  <p>Use <code>--become</code> to elevate privileges.</p>
+
+  <h2>Playbook</h2>
+  <p>Playbooks are Ansible's configuration, deployment, and orchestration language.</p>
+  <p>Example playbook (<code>playbook.yml</code>):
+    <pre>
+      - name: copy module test
+        hosts: localhost
+        tasks:
+          - copy:
+              dest: hello
+              content: world
+          - command: cowsay "hello"
+            when: ansible_distribution == "MacOSX"
+    </pre>
+  </p>
+
+  <h2>Conditionals</h2>
+  <p>Use conditionals in tasks.</p>
+  <pre>
+    <code>
+    ansible -m setup localhost -a "filter=ansible_distribution"
+    - name: my task
+      var: ansible_distribution
+      when: ansible_distribution == "MacOSX"
+    </code>
+  </pre>
+
+  <h2>Running Playbooks</h2>
+  <pre>
+    <code>
+    - name: Example Playbook
+      hosts: localhost
+      tasks:
+        - name: Task 1
+          debug:
+            msg: "Running Task 1"
+
+        - name: Task 2
+          debug:
+            msg: "Running Task 2"
+
+        - name: Task 3
+          debug:
+            msg: "Running Task 3"
+    </code>
+  </pre>
+  <p>Execute playbook: <code>ansible-playbook playbook.yml [-v]</code></p>
+  <p>Use <code>-v</code> for more verbose output.</p>
+
+  <h2>Tags</h2>
+  <p>Use <code>--tags</code> to execute specific tasks within a playbook.</p>
+  <p><code>ansible-playbook playbook.yml --tags task1</code></p> 
+      <button class="blog-back-button"><a href="..">Back</a></button>
+    </section>
+  </main>
+  <footer>
+  </footer>
+</body>
+
+</html>

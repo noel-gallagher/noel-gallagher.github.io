@@ -25,7 +25,7 @@
     <section>
 	  <h1>Typeclasses in scala 3</h1>
 	  <p>Scala 3 introduces a number of quality of life improvements, among which is a refined syntax for typeclasses. Today, we will take a quick look at much improved syntax for typeclasses.</p>
-	  <p>Type classes can be thought of as a way of abstracting over different types that share a common behaviour. let's focus on a simple example: monoid. A monoid is an object which satisfies: associativity & identity. We will look at an instance of monoid for a String. A string satisfiesthe monoid laws by being associative: "a" ++ ("b" ++ "c") is the same as ("a" ++ "b") ++ "c". and also identity via the empty string "".</p>
+	  <p>Type classes can be thought of as a way of abstracting over different types that share a common behaviour. let's focus on a simple example: monoid. A monoid is an object which satisfies: associativity & identity. We will look at an instance of monoid for a String. A string satisfies the monoid laws by being associative: "a" ++ ("b" ++ "c") is the same as ("a" ++ "b") ++ "c". and also identity via the empty string "".</p>
 	  <p>First start by defining the trait</p>
 	  <pre class="code-block"><code>
 	  trait Monoid[M]:
