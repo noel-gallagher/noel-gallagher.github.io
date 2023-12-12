@@ -33,6 +33,7 @@
 	  <p>
 	  Leader election is triggered by timers. There is an election timeout which determines the amount of time a follower should wait before becoming a candidate. After this timeout, an election term is started by the node which has enetered the candidate state. During this term, the candidate votes for itself and then issues requests to other nodes for voting. On receipt of these requests, if the node has not voted in this term, it will vote for the candidate which issued the request. After voting, the node resets its own election timer. 
 	  </p>
+	  <p>In the event of a network parition and two or more leaders are elected, when the parition is healed, the node with highest election term will become the leader. The previous leaders will rollback their log and accept the new leader's log</p>
       <button class="blog-back-button"><a href="..">Back</a></button>
     </section>
   </main>
