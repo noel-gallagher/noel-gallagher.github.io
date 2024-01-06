@@ -15,6 +15,7 @@
 body {
   background: var(--main-bright-bg-colour);
   color: var(--main-bright-text-colour);
+  font-family: Arial, Helvetica, Sans-Serif; 
 }
 
 @media (prefers-color-scheme: dark) {
