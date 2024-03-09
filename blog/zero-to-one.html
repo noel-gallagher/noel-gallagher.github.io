@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From Zero to One</title>
+  <link rel="stylesheet" href="../stylesheets/style.css">
+  <link rel="stylesheet" href="../stylesheets/blog.css">
+</head>
+
+<body>
+  <header role="banner">
+    <nav>
+      <ul>
+        <li><a href="../">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="#" class="active">Blog</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>What happens when we start our computers?</h2>
+      <p>Firstly, after powering up, the computer executes BIOS/UEFI - this is essentially a mini program which lives on the motherboard's ROM(UEFI is a bit different). It is responsible for performing POST checks and intialising hardware.</p>
+      <p>Next, depending on boot order, a program is loaded and executed from the master boot record; the first 512 bytes of storage.</p>
+      <p>The code in this 512 bytes is typically the bootloader, used to load the OS.</p>
+      <p>UEFI does not rely on the master boot record to load the bootloader, it can for compatibility, but rather it can load a much larger and sophisticated program stored on EFI system partition.</p>
+      <button class="blog-back-button"><a href="..">Back</a></button>
+    </section>
+  </main>
+  <footer>
+  </footer>
+</body>
+
+</html>
