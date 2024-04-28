@@ -93,8 +93,6 @@ nav a:hover:not(.active) {
 
 nav a.active {
   background-color: #555;
-  pointer-events: none;
-  /* Disable clicking */
 }
 
 

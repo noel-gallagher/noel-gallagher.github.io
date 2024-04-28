@@ -16,7 +16,7 @@
       <ul>
         <li><a href="../">Home</a></li>
         <li><a href="/about">About</a></li>
-        <li><a href="#" class="active">Blog</a></li>
+        <li><a href="index.html" class="active">Blog</a></li>
       </ul>
     </nav>
   </header>
@@ -24,12 +24,12 @@
   <main>
     <section>
       <h2>Two-phase commit</h2>
-      <p>Two-phase commit is a method of executing distributed transactions. That is, a sequence of actions which either all succeed or fail entirely. Another approach is with <a href="../saga.html">sagas</a></p>
+      <p>Two-phase commit is a method of executing distributed transactions. That is, a sequence of actions which either all succeed or fail entirely. Another approach is with <a href="./saga.html">sagas</a></p>
       <p>The Two-Phase Commit protocol is a reliable method for ensuring the successful execution of transactions across all participants in a distributed system. This approach guarantees that actions are taken only when unanimous acknowledgment is received from all members within the distributed cluster.</p>
       <p>Unsurprisingly, this protocol is carried out in two distinct phases: Prepare and Commit.</p>
       <p>During the Preparation phase, the coordinator initiates a request for each individual node to prepare for the intended action. Each node then communicates its readiness to execute the transaction to the coordinator. If a node is incapable of executing the action, it signals an ABORT to the coordinator. Subsequently, the coordinator informs all other nodes to refrain from executing the action. Conversely, nodes responding with a READY signify their capability to proceed.</p>
       <p>In the Commitment phase, the coordinator dispatches a COMMIT message to every cluster member. Upon receiving this COMMIT message, each node executes the transaction and dispatches an acknowledgment. Should any participant encounter an issue, it communicates an ABORT message to the coordinator. The coordinator then communicates this ABORT directive to the remaining clients, prompting each to rollback the preceding transaction. Conversely, if all nodes execute the action successfully, the coordinator transmits a COMMIT message to each member, officially marking the transaction as complete.</p>
-      <button class="blog-back-button"><a href="..">Back</a></button>
+      <button class="blog-back-button"><a href="index.html">Back</a></button>
     </section>
   </main>
   <footer>
