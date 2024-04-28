@@ -24,6 +24,7 @@
   <main>
     <section>
       <h2>Two-phase commit</h2>
+      <p>Two-phase commit is a method of executing distributed transactions. That is, a sequence of actions which either all succeed or fail entirely. Another approach is with <a href="../saga.html">sagas</a></p>
       <p>The Two-Phase Commit protocol is a reliable method for ensuring the successful execution of transactions across all participants in a distributed system. This approach guarantees that actions are taken only when unanimous acknowledgment is received from all members within the distributed cluster.</p>
       <p>Unsurprisingly, this protocol is carried out in two distinct phases: Prepare and Commit.</p>
       <p>During the Preparation phase, the coordinator initiates a request for each individual node to prepare for the intended action. Each node then communicates its readiness to execute the transaction to the coordinator. If a node is incapable of executing the action, it signals an ABORT to the coordinator. Subsequently, the coordinator informs all other nodes to refrain from executing the action. Conversely, nodes responding with a READY signify their capability to proceed.</p>
