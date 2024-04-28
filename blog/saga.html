@@ -23,7 +23,7 @@
 
   <main>
     <section>
-	  <p>One of the difficulties of working on distributed systems is losing the ability to easily execute a "unit of work" - a set of atomic operations which either all happen or none happen at all. such an operation can be abstracted from the developer by relying on a database. however in a distributed system, each service can have its own database, losing the luxery of a single database for atomicity.
+	  <p>One of the difficulties of working on distributed systems is losing the ability to easily execute a "unit of work" - a set of atomic operations which either all happen or none happen at all. Such an operation can be abstracted from the developer by relying on a database. however in a distributed system, each service can have its own database, losing the luxury of a single database for atomicity.
 	  </p>
 	<p>
 	  Sagas are a way to implement distributed transactions while preventing locking (such as <a href="../two-phase-commit.html">2-phase commit</a>). Relying on locks will hinder performance and scalability. A saga allows for atomic operations to complete by executing a compensating action in the event of failure.
@@ -34,9 +34,9 @@
 	  <li>Payment is processed via the payment service</li>
 	  <li>the order is processed by the Kitchen service</li>
 	</ol>
-	<p>Any of these steps could result in a failure. For each faliure possibility, a compenstating transaction must exist for rollback to be possible. Let's explore some posibilities:</p>
+	<p>Any of these steps could result in a failure. For each failure possibility, a compensating transaction must exist for rollback to be possible. Let's explore some possibilities:</p>
 	<p>The payment is rejected - Set the order to failed</p>
-	<p>The kitchen is unavailble - Refund the user, set the order to failed</p>
+	<p>The kitchen is unavailable - Refund the user, set the order to failed</p>
       <button class="blog-back-button"><a href="..">Back</a></button>
     </section>
   </main>
