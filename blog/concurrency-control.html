@@ -1,37 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Concurrency Control</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Concurrency Control</title>
-  <link rel="stylesheet" href="../stylesheets/style.css">
-  <link rel="stylesheet" href="../stylesheets/blog.css">
-</head>
+  <body>
+    <header role="banner">
+      <nav>
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="index.html" class="active">Blog</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<body>
-  <header role="banner">
-    <nav>
-      <ul>
-        <li><a href="../">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="index.html" class="active">Blog</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section>
-	<p>When dealing with many processes interacting with a database, it is common to encounter scenarios where process A is writing to some record x while process B is reading from that same record x. In such occurances, what should be correct or expected behaviour?</p>
-	<p>Pessimistic locking is one approach. This will effectively allow process A OR process B exclusive access to record x. During this time the other process which does not have access to X must wait until it is available.</p>
-	<p>Optimistic concurrency control. With this method, processes are free to read record x as they please - once ready to perform an action however, they will check if the value located at the memory region accessed during the initial read was changed. If is was, the process can then discard or rollback its current action and try again. This could be implemented using compare and swap instruction</p>
-	<p>Multi-version concurrency control - this is a form of optimistic locking. A process takes the current version of the record x, performs some action and then compares the version it acquired during initial read with the current version.</p>
-      <button class="blog-back-button"><a href="index.html">Back</a></button>
-    </section>
-  </main>
-  <footer>
-  </footer>
-</body>
-
+    <main>
+      <section>
+        <p>
+          When dealing with many processes interacting with a database, it is
+          common to encounter scenarios where process A is writing to some
+          record x while process B is reading from that same record x. In such
+          occurances, what should be correct or expected behaviour?
+        </p>
+        <p>
+          Pessimistic locking is one approach. This will effectively allow
+          process A OR process B exclusive access to record x. During this time
+          the other process which does not have access to X must wait until it
+          is available.
+        </p>
+        <p>
+          Optimistic concurrency control. With this method, processes are free
+          to read record x as they please - once ready to perform an action
+          however, they will check if the value located at the memory region
+          accessed during the initial read was changed. If is was, the process
+          can then discard or rollback its current action and try again. This
+          could be implemented using compare and swap instruction
+        </p>
+        <p>
+          Multi-version concurrency control - this is a form of optimistic
+          locking. A process takes the current version of the record x, performs
+          some action and then compares the version it acquired during initial
+          read with the current version.
+        </p>
+        <button class="blog-back-button"><a href="index.html">Back</a></button>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
 </html>

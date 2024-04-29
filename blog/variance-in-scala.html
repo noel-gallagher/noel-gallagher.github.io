@@ -1,32 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Variance in Scala</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Variance in Scala</title>
-  <link rel="stylesheet" href="../stylesheets/style.css">
-  <link rel="stylesheet" href="../stylesheets/blog.css">
-</head>
+  <body>
+    <header role="banner">
+      <nav>
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="index.html" class="active">Blog</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<body>
-  <header role="banner">
-    <nav>
-      <ul>
-        <li><a href="../">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="index.html" class="active">Blog</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section>
-      <h2>Variance in Scala</h2>
-      <p>"Variance" describes the subtyping relationship between types. In scala, the possiblities are: covariance, contravariance and invariance.</p>
-      <p>Covariance allows the type to be more specific. For example, if A is a substype of B -> then F[A] is also a subtype of F[B]. A more concrete example:</p>
-      <pre class="code-block"><code>
+    <main>
+      <section>
+        <h2>Variance in Scala</h2>
+        <p>
+          "Variance" describes the subtyping relationship between types. In
+          scala, the possiblities are: covariance, contravariance and
+          invariance.
+        </p>
+        <p>
+          Covariance allows the type to be more specific. For example, if A is a
+          substype of B -> then F[A] is also a subtype of F[B]. A more concrete
+          example:
+        </p>
+        <pre class="code-block"><code>
         class Animal
         class Dog extends Animal
   
@@ -34,18 +41,19 @@
   
         val animalContainer: Container[Animal] = new Container(new Dog) // this is valid!
       </code></pre>
-      <p>contravariance allows a subtype to be more general. For example: if A is a subtype of B -> F[B] is also a subtype of F[A]</p>
-      <pre class="code-block"><code>
+        <p>
+          contravariance allows a subtype to be more general. For example: if A
+          is a subtype of B -> F[B] is also a subtype of F[A]
+        </p>
+        <pre class="code-block"><code>
         class Printer[-T] { def print(value: T): Unit = println(value) }
   
         val dogPrinter: Printer[Dog] = new Printer[Animal]
       </code></pre>
-      <p>Invariant is neither covariant OR contravariant</p>
-	  <button class="blog-back-button"><a href="index.html">Back</a></button>
-    </section>
-  </main>
-  <footer>
-  </footer>
-</body>
-
+        <p>Invariant is neither covariant OR contravariant</p>
+        <button class="blog-back-button"><a href="index.html">Back</a></button>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
 </html>

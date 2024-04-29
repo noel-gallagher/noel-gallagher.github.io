@@ -1,47 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dockerise Tomcat</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dockerise Tomcat</title>
-  <link rel="stylesheet" href="../stylesheets/style.css">
-  <link rel="stylesheet" href="../stylesheets/blog.css">
-</head>
+  <body>
+    <header role="banner">
+      <nav>
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="index.html" class="active">Blog</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<body>
-  <header role="banner">
-    <nav>
-      <ul>
-        <li><a href="../">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="index.html" class="active">Blog</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section>
-	  <h1 id="dockerise-a-tomcat-application">Dockerise a Tomcat application</h1>
-<h2 id="create-a-dockerfile-">Create a Dockerfile.</h2>
-<p>This file describes how to build an image for your application. 
-Here is an example of a basic Dockerfile that can be used for a Tomcat application:</p>
-<pre class="code-block"><code class="lang-dockerfile">FROM tomcat:<span class="hljs-number">9.0</span>
+    <main>
+      <section>
+        <h1 id="dockerise-a-tomcat-application">
+          Dockerise a Tomcat application
+        </h1>
+        <h2 id="create-a-dockerfile-">Create a Dockerfile.</h2>
+        <p>
+          This file describes how to build an image for your application. Here
+          is an example of a basic Dockerfile that can be used for a Tomcat
+          application:
+        </p>
+        <pre
+          class="code-block"
+        ><code class="lang-dockerfile">FROM tomcat:<span class="hljs-number">9.0</span>
 COPY [path-<span class="hljs-keyword">to</span>-war-<span class="hljs-built_in">file</span>] /usr/<span class="hljs-keyword">local</span>/tomcat/webapps/[<span class="hljs-built_in">application</span>-<span class="hljs-built_in">name</span>].war
 </code></pre>
-<p>This Dockerfile uses the official <a href="https://hub.docker.com/_/tomcat">Tomcat 9.0 image</a> as the base image and copies the WAR file for your application to the webapps directory in the Tomcat container.</p>
-<h2 id="building-the-image">Building the image</h2>
-<p>Run the following command in the same directory as the Dockerfile:</p>
-<p><code>docker build -t [image-name] .</code></p>
-<h2 id="starting-the-container">Starting the container</h2>
-<p>Run the following command:
-<code>docker run -p 8080:8080 [image-name]</code></p>
-<p>This command maps port 8080 on the host to port 8080 in the container and starts the [image-name] container.</p>
-<p>Your application is now accessible here: <a href="http://localhost:8080/[application-name]">http://localhost:8080/[application-name]</a></p>
-<h1 id="docker-compose">Docker compose</h1>
-<p>An example <code>docker-compose.yml</code> file that includes the above Tomcat application as well as a MySQL database and RabbitMQ:</p>
-<pre class="code-block"><code class="lang-yaml">version: '3'
+        <p>
+          This Dockerfile uses the official
+          <a href="https://hub.docker.com/_/tomcat">Tomcat 9.0 image</a> as the
+          base image and copies the WAR file for your application to the webapps
+          directory in the Tomcat container.
+        </p>
+        <h2 id="building-the-image">Building the image</h2>
+        <p>
+          Run the following command in the same directory as the Dockerfile:
+        </p>
+        <p><code>docker build -t [image-name] .</code></p>
+        <h2 id="starting-the-container">Starting the container</h2>
+        <p>
+          Run the following command:
+          <code>docker run -p 8080:8080 [image-name]</code>
+        </p>
+        <p>
+          This command maps port 8080 on the host to port 8080 in the container
+          and starts the [image-name] container.
+        </p>
+        <p>
+          Your application is now accessible here:
+          <a href="http://localhost:8080/[application-name]"
+            >http://localhost:8080/[application-name]</a
+          >
+        </p>
+        <h1 id="docker-compose">Docker compose</h1>
+        <p>
+          An example <code>docker-compose.yml</code> file that includes the
+          above Tomcat application as well as a MySQL database and RabbitMQ:
+        </p>
+        <pre class="code-block"><code class="lang-yaml">version: '3'
 services:
   db:
     image: mysql:8.0
@@ -79,24 +105,65 @@ services:
       -<span class="ruby"> db
 </span>      -<span class="ruby"> rabbitmq</span>
 </code></pre>
-<p>This <code>docker-compose.yml</code> file includes three services:</p>
-<ul>
-<li><strong>db</strong>: This service uses the official <a href="https://hub.docker.com/_/mysql">MySQL 8.0 image</a> to run a MySQL database. The <code>environment</code> key sets the root password, database name, and user credentials.</li>
-<li><strong>rabbitmq</strong>: <a href="https://hub.docker.com/_/rabbitmq">RabbitMQ 3 image</a> runs a RabbitMQ broker with the management plugin enabled. The <code>environment</code> key sets the default <code>username</code> and <code>password</code> for the management console. A full list of supported environment variables can be <a href="https://www.rabbitmq.com/configure.html#supported-environment-variables">found here</a>. Mangement console is accessible via: <a href="http://localhost:15672/#/">http://localhost:15672/</a> </li>
-<li><strong>yourtomcat</strong>: This service builds an image of your tomcat application using the dockerfile. The <code>environment</code> key sets several example environment variables which might be used by a typical spring application to supply database and RabbitMQ connectivity info. The <code>depends_on</code> key ensures that the database and RabbitMQ services are started before the Tomcat application <strong>WARNING: This does not guarentee that the services have reached a healthy state, only that the containers are running.</strong></li>
-</ul>
-<h1 id="building-the-services">Building the services</h1>
-<p>Run the following command from the directory containing the <code>docker-compose.yml</code> file:
-<code>docker-compose --build</code></p>
-<h1 id="starting-the-services">Starting the services</h1>
-<p>To start the containers run <code>docker-compose up</code>. Optionally, you can pass <code>-d</code> to run the services detached.</p>
-<p>You can now access your application by navigating to <a href="http://localhost:8080/[application-name]">http://localhost:8080/[application-name]</a> in a web browser.</p>
+        <p>
+          This <code>docker-compose.yml</code> file includes three services:
+        </p>
+        <ul>
+          <li>
+            <strong>db</strong>: This service uses the official
+            <a href="https://hub.docker.com/_/mysql">MySQL 8.0 image</a> to run
+            a MySQL database. The <code>environment</code> key sets the root
+            password, database name, and user credentials.
+          </li>
+          <li>
+            <strong>rabbitmq</strong>:
+            <a href="https://hub.docker.com/_/rabbitmq">RabbitMQ 3 image</a>
+            runs a RabbitMQ broker with the management plugin enabled. The
+            <code>environment</code> key sets the default
+            <code>username</code> and <code>password</code> for the management
+            console. A full list of supported environment variables can be
+            <a
+              href="https://www.rabbitmq.com/configure.html#supported-environment-variables"
+              >found here</a
+            >. Mangement console is accessible via:
+            <a href="http://localhost:15672/#/">http://localhost:15672/</a>
+          </li>
+          <li>
+            <strong>yourtomcat</strong>: This service builds an image of your
+            tomcat application using the dockerfile. The
+            <code>environment</code> key sets several example environment
+            variables which might be used by a typical spring application to
+            supply database and RabbitMQ connectivity info. The
+            <code>depends_on</code> key ensures that the database and RabbitMQ
+            services are started before the Tomcat application
+            <strong
+              >WARNING: This does not guarentee that the services have reached a
+              healthy state, only that the containers are running.</strong
+            >
+          </li>
+        </ul>
+        <h1 id="building-the-services">Building the services</h1>
+        <p>
+          Run the following command from the directory containing the
+          <code>docker-compose.yml</code> file:
+          <code>docker-compose --build</code>
+        </p>
+        <h1 id="starting-the-services">Starting the services</h1>
+        <p>
+          To start the containers run <code>docker-compose up</code>.
+          Optionally, you can pass <code>-d</code> to run the services detached.
+        </p>
+        <p>
+          You can now access your application by navigating to
+          <a href="http://localhost:8080/[application-name]"
+            >http://localhost:8080/[application-name]</a
+          >
+          in a web browser.
+        </p>
 
-		<button class="blog-back-button"><a href="index.html">Back</a></button>
-    </section>
-  </main>
-  <footer>
-  </footer>
-</body>
-
+        <button class="blog-back-button"><a href="index.html">Back</a></button>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
 </html>

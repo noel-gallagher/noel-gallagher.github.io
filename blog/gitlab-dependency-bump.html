@@ -1,40 +1,58 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auto update dependencies in gitlab</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Auto update dependencies in gitlab</title>
-  <link rel="stylesheet" href="../stylesheets/style.css">
-  <link rel="stylesheet" href="../stylesheets/blog.css">
-</head>
+  <body>
+    <header role="banner">
+      <nav>
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="#" class="active">Blog</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<body>
-  <header role="banner">
-    <nav>
-      <ul>
-        <li><a href="../">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="#" class="active">Blog</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section>
-	  <p>If you have a downstream repo which shares a dependency with an upstream repo, it can be annoying to keep them in sync manually. for each new tag/version created, you will have to manually edit the downstream job.</p>
-	  <p>This is a quick script outlining how to automatically bump dependencies between these kind of repos on gitlab</p>
-      <p>Firstly in the upstream repo, ensure version is writen to some artifact. An artifact can persist between jobs.</p>
-	  <p>Next, define a job which will trigger the downstream.</p>
-	  <p>In the downstream project, add a stage, update dependency. This will perform the act of editing the dependency file, adding to vc, pushing to the repo and opening an MR.</p>
-	  <p>For this you will need to create and set an access token with write and api access permissions.</p>
-	  <p>Ensure to add the "needs" field which will take the artifact from the upstream job</p>
-      <button class="blog-back-button"><a href="..">Back</a></button>
-    </section>
-  </main>
-  <footer>
-  </footer>
-</body>
-
+    <main>
+      <section>
+        <p>
+          If you have a downstream repo which shares a dependency with an
+          upstream repo, it can be annoying to keep them in sync manually. for
+          each new tag/version created, you will have to manually edit the
+          downstream job.
+        </p>
+        <p>
+          This is a quick script outlining how to automatically bump
+          dependencies between these kind of repos on gitlab
+        </p>
+        <p>
+          Firstly in the upstream repo, ensure version is writen to some
+          artifact. An artifact can persist between jobs.
+        </p>
+        <p>Next, define a job which will trigger the downstream.</p>
+        <p>
+          In the downstream project, add a stage, update dependency. This will
+          perform the act of editing the dependency file, adding to vc, pushing
+          to the repo and opening an MR.
+        </p>
+        <p>
+          For this you will need to create and set an access token with write
+          and api access permissions.
+        </p>
+        <p>
+          Ensure to add the "needs" field which will take the artifact from the
+          upstream job
+        </p>
+        <button class="blog-back-button"><a href="..">Back</a></button>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
 </html>

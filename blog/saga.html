@@ -1,47 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sagas</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sagas</title>
-  <link rel="stylesheet" href="../stylesheets/style.css">
-  <link rel="stylesheet" href="../stylesheets/blog.css">
-</head>
+  <body>
+    <header role="banner">
+      <nav>
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="index.html" class="active">Blog</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<body>
-  <header role="banner">
-    <nav>
-      <ul>
-        <li><a href="../">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="index.html" class="active">Blog</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section>
-	  <p>One of the difficulties of working on distributed systems is losing the ability to easily execute a "unit of work" - a set of atomic operations which either all happen or none happen at all. Such an operation can be abstracted from the developer by relying on a database. however in a distributed system, each service can have its own database, losing the luxury of a single database for atomicity.
-	  </p>
-	<p>
-	  Sagas are a way to implement distributed transactions while preventing locking (such as <a href="./two-phase-commit.html">2-phase commit</a>). Relying on locks will hinder performance and scalability. A saga allows for atomic operations to complete by executing a compensating action in the event of failure.
-	</p>
-	<p>Consider a pizza ordering system consisting of separate microservices: an Ordering Service, a Payment Service, and a Kitchen Service. Implementing a saga pattern ensures consistency and handles potential failures during the order process</p>
-	<ol>
-	  <li>User places an order via ordering service</li>
-	  <li>Payment is processed via the payment service</li>
-	  <li>the order is processed by the Kitchen service</li>
-	</ol>
-	<p>Any of these steps could result in a failure. For each failure possibility, a compensating transaction must exist for rollback to be possible. Let's explore some possibilities:</p>
-	<p>The payment is rejected - Set the order to failed</p>
-	<p>The kitchen is unavailable - Refund the user, set the order to failed</p>
-      <button class="blog-back-button"><a href="index.html">Back</a></button>
-    </section>
-  </main>
-  <footer>
-  </footer>
-</body>
-
+    <main>
+      <section>
+        <p>
+          One of the difficulties of working on distributed systems is losing
+          the ability to easily execute a "unit of work" - a set of atomic
+          operations which either all happen or none happen at all. Such an
+          operation can be abstracted from the developer by relying on a
+          database. however in a distributed system, each service can have its
+          own database, losing the luxury of a single database for atomicity.
+        </p>
+        <p>
+          Sagas are a way to implement distributed transactions while preventing
+          locking (such as
+          <a href="./two-phase-commit.html">2-phase commit</a>). Relying on
+          locks will hinder performance and scalability. A saga allows for
+          atomic operations to complete by executing a compensating action in
+          the event of failure.
+        </p>
+        <p>
+          Consider a pizza ordering system consisting of separate microservices:
+          an Ordering Service, a Payment Service, and a Kitchen Service.
+          Implementing a saga pattern ensures consistency and handles potential
+          failures during the order process
+        </p>
+        <ol>
+          <li>User places an order via ordering service</li>
+          <li>Payment is processed via the payment service</li>
+          <li>the order is processed by the Kitchen service</li>
+        </ol>
+        <p>
+          Any of these steps could result in a failure. For each failure
+          possibility, a compensating transaction must exist for rollback to be
+          possible. Let's explore some possibilities:
+        </p>
+        <p>The payment is rejected - Set the order to failed</p>
+        <p>
+          The kitchen is unavailable - Refund the user, set the order to failed
+        </p>
+        <button class="blog-back-button"><a href="index.html">Back</a></button>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
 </html>

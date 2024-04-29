@@ -1,41 +1,74 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apprval testing</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apprval testing</title>
-  <link rel="stylesheet" href="../stylesheets/style.css">
-  <link rel="stylesheet" href="../stylesheets/blog.css">
-</head>
+  <body>
+    <header role="banner">
+      <nav>
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="index.html" class="active">Blog</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<body>
-  <header role="banner">
-    <nav>
-      <ul>
-        <li><a href="../">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="index.html" class="active">Blog</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section>
-	  <h1>Approval testing</h1>
-          <p>Approval testing is a method of black-box testing in software where a tester provides a set of inputs and records the outputs. Instead of focusing on pre-defined expected outcomes for specific inputs, it captures the current state of outputs as the "approved" version. This version then becomes the benchmark against which all future outputs, for the same inputs, are compared.</p>
-          <p>After changes are made to the system, a new output can be captured and compared with the previous output. This method is effective only if the application is deterministic; that is, given input A, the system will consistently produce output B.</p>
-          <p>This methodology shines particularly in environments where the software under test has evolved over time, such as legacy systems. In many cases, these systems have evolved without comprehensive documentation, making it challenging to discern the 'expected' behaviour</p>
-<p>The goal is to capture the application's current behavior through its output. This might be in the form of a dataset generated in a database, application logs, messages sent to a queue, or other sink.</p>
-<p>The output should be saved as the approved version. If the dataset is relatively small, it could be stored in version control.</p>
-<p>Subsequently, when changes are made to the software and it is re-tested, the new output is captured and compared to the approved output. If they match, the changes can proceed. If not, the developer can determine whether the new output is expected or indicates a regression.</p>
-<p>In conclusion, approval testing offers a pratical approach to defining expected behaviour in an environment which is challenging so developers can make changes with confidence without disrupting the already established accepted behaviour of the system</p>
-      <button class="blog-back-button"><a href="index.html">Back</a></button>
-    </section>
-  </main>
-  <footer>
-  </footer>
-</body>
-
+    <main>
+      <section>
+        <h1>Approval testing</h1>
+        <p>
+          Approval testing is a method of black-box testing in software where a
+          tester provides a set of inputs and records the outputs. Instead of
+          focusing on pre-defined expected outcomes for specific inputs, it
+          captures the current state of outputs as the "approved" version. This
+          version then becomes the benchmark against which all future outputs,
+          for the same inputs, are compared.
+        </p>
+        <p>
+          After changes are made to the system, a new output can be captured and
+          compared with the previous output. This method is effective only if
+          the application is deterministic; that is, given input A, the system
+          will consistently produce output B.
+        </p>
+        <p>
+          This methodology shines particularly in environments where the
+          software under test has evolved over time, such as legacy systems. In
+          many cases, these systems have evolved without comprehensive
+          documentation, making it challenging to discern the 'expected'
+          behaviour
+        </p>
+        <p>
+          The goal is to capture the application's current behavior through its
+          output. This might be in the form of a dataset generated in a
+          database, application logs, messages sent to a queue, or other sink.
+        </p>
+        <p>
+          The output should be saved as the approved version. If the dataset is
+          relatively small, it could be stored in version control.
+        </p>
+        <p>
+          Subsequently, when changes are made to the software and it is
+          re-tested, the new output is captured and compared to the approved
+          output. If they match, the changes can proceed. If not, the developer
+          can determine whether the new output is expected or indicates a
+          regression.
+        </p>
+        <p>
+          In conclusion, approval testing offers a pratical approach to defining
+          expected behaviour in an environment which is challenging so
+          developers can make changes with confidence without disrupting the
+          already established accepted behaviour of the system
+        </p>
+        <button class="blog-back-button"><a href="index.html">Back</a></button>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
 </html>

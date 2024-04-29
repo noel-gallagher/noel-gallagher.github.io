@@ -1,54 +1,91 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallaghern</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallaghern</title>
-  <link rel="stylesheet" href="../stylesheets/style.css">
-  <link rel="stylesheet" href="../stylesheets/blog.css">
-</head>
+  <body>
+    <header role="banner">
+      <nav>
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="#" class="active">Blog</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<body>
-  <header role="banner">
-    <nav>
-      <ul>
-        <li><a href="../">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="#" class="active">Blog</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section>
-      <ul class="blog-list">
-		<li class="blog-list-item"><a href="./saga.html">Sagas</a></li>
-		<li class="blog-list-item"><a href="./concurrency-control.html">Concurrency Control</a></li>
-		<li class="blog-list-item"><a href="./scala3-typeclasses.html">Typeclasses in scala3</a></li>
-		<li class="blog-list-item"><a href="./observability">observability slide deck</a></li>
-		<li class="blog-list-item"><a href="./approval-testing.html">Approval testing</a></li>
-		<li class="blog-list-item"><a href="./python-config.html">Simple DI with python</a></li>
-		<li class="blog-list-item"><a href="./kafka.html">kafka</a></li>
-		<li class="blog-list-item"><a href="./vector-clocks.html">Vector clocks</a></li>
-		<li class="blog-list-item"><a href="./fode.html">Overview of Fundamentals of Data Engineering</a></li>
-		<li class="blog-list-item"><a href="./distributed-computation.html">Distributed computation</a></li>
-		<li class="blog-list-item"><a href="./two-phase-commit.html">Two-phase commit</a></li>
-        <li class="blog-list-item"><a href="./variance-in-scala.html">Variance in scala</a></li>
-        <li class="blog-list-item"><a href="./configuring-tomcat.html">Configuring Tomcat</a></li>
-        <li class="blog-list-item"><a href="./raft.html">Raft</a></li>
-		<li class="blog-list-item"><a href="./dockerise-tomcat.html">Dockerising a Tomcat app</a></li>
-		<li class="blog-list-item"><a href="./opengl-rendering-pipeline.html">Opengl rendering pipeline</a></li>
-		<li class="blog-list-item"><a href="./view-space.html">View Space</a></li>
-        <li class="blog-list-item"><a href="./consensus.html">Consensus</a></li>
-        <li class="blog-list-item"><a href="./ansible.html">some ansible notes</a></li>
-        <li class="blog-list-item"><a href="./zero-to-one.html">What happens when you start your computer</a></li>
-      </ul>
-    </section>	
-  </main>
-  <footer>
-  </footer>
-</body>
-
+    <main>
+      <section>
+        <ul class="blog-list">
+          <li class="blog-list-item"><a href="./saga.html">Sagas</a></li>
+          <li class="blog-list-item">
+            <a href="./concurrency-control.html">Concurrency Control</a>
+          </li>
+          <li class="blog-list-item">
+            <a href="./scala3-typeclasses.html">Typeclasses in scala3</a>
+          </li>
+          <li class="blog-list-item">
+            <a href="./observability">observability slide deck</a>
+          </li>
+          <li class="blog-list-item">
+            <a href="./approval-testing.html">Approval testing</a>
+          </li>
+          <li class="blog-list-item">
+            <a href="./python-config.html">Simple DI with python</a>
+          </li>
+          <li class="blog-list-item"><a href="./kafka.html">kafka</a></li>
+          <li class="blog-list-item">
+            <a href="./vector-clocks.html">Vector clocks</a>
+          </li>
+          <li class="blog-list-item">
+            <a href="./fode.html"
+              >Overview of Fundamentals of Data Engineering</a
+            >
+          </li>
+          <li class="blog-list-item">
+            <a href="./distributed-computation.html">Distributed computation</a>
+          </li>
+          <li class="blog-list-item">
+            <a href="./two-phase-commit.html">Two-phase commit</a>
+          </li>
+          <li class="blog-list-item">
+            <a href="./variance-in-scala.html">Variance in scala</a>
+          </li>
+          <li class="blog-list-item">
+            <a href="./configuring-tomcat.html">Configuring Tomcat</a>
+          </li>
+          <li class="blog-list-item"><a href="./raft.html">Raft</a></li>
+          <li class="blog-list-item">
+            <a href="./dockerise-tomcat.html">Dockerising a Tomcat app</a>
+          </li>
+          <li class="blog-list-item">
+            <a href="./opengl-rendering-pipeline.html"
+              >Opengl rendering pipeline</a
+            >
+          </li>
+          <li class="blog-list-item">
+            <a href="./view-space.html">View Space</a>
+          </li>
+          <li class="blog-list-item">
+            <a href="./consensus.html">Consensus</a>
+          </li>
+          <li class="blog-list-item">
+            <a href="./ansible.html">some ansible notes</a>
+          </li>
+          <li class="blog-list-item">
+            <a href="./zero-to-one.html"
+              >What happens when you start your computer</a
+            >
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
 </html>

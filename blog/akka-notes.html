@@ -1,142 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>akka notes</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>akka notes</title>
-  <link rel="stylesheet" href="../stylesheets/style.css">
-  <link rel="stylesheet" href="../stylesheets/blog.css">
-</head>
+  <body>
+    <header role="banner">
+      <nav>
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="#" class="active">Blog</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<body>
-  <header role="banner">
-    <nav>
-      <ul>
-        <li><a href="../">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="#" class="active">Blog</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section>
-	  <h1>WIP</h1>
-	  <p>Actor system - controls threads, allocates to actors
-Actors - actors are uniquely identified, messages passed asynchronously, each
-actor may respond differently, actors are encapsulated (you cannot access
-their state directly)
-You can only communicate via ref
-Class person(name: String) extends Actor{
-override def receive = {
-case “hi” => println(s“hi my name is, $name”)
-}
-}
-How to instantiate an actor with arguments? Using props with argument eg
-Props(new Person(“bob”))
-Messages must be immutable and serialisable
-ActorContext -> information about the actor environment. The actor system,
-own actor reference (context.self) [similar to this.x in OOP]
-An actor can send a message to itself (using context.self)
-Actors can reply to messages - actor Alice and actor Bob:
-SayHiTo(ref: ActorRef)
-Alice ! SayHiTo(bob) // sends “hi” to bob
-// case “hi” => context.sender() ! “My reply is: Hello!”
-//sender() is same thing, when invoking the ! Method, actor sends a ref of
-itself to the receiver
-Deadletters is a ‘fake’ actor that takes care of messages not sent to anyone
-Actors can forward messages to one another
-Driver -> router -> pc
-record MyMesssage(String body, ref: ActorRef)
-Alice ! MyMesssage(hi, bob);
-//receive method:
-// case MyMesssage(body, ref) => ref forward body + “s” //keeps
-original ref, modifies body to be ‘his’
-
-Message ordering:
-Race conditions?
-Asynchronous?
-How does it all work...
-
-–
-
-–
-Akka actor system has a thread pool
-Internally, actor has a message handler and a message queue(mailbox).
-Akka schedules each actor’s execution on threads
-Communicating with an actor:
-sending a message -> enqueue onto actor’s mailbox (this is thread safe)
-processing a message ->
-a thread is scheduled to run this actor
-messages are extracted from the mailbox, in order
-the thread invokes the handler on each message (this could change
-
-actor state)
-
-at some point the actor is unscheduled
-
-Only one thread may operate on an actor at any given time
-allows us to program as if dealing with single thread
-No need for locks, synchronisation since only one thread can access an
-actors state at any time
-processing of messages is atomic
-Message deliveries:
-at most once delivery (no duplicates)
-message order is kept -> sending A then B, the receiver will always get A
-before B (but if another actor sends a message C then it’s possible that will be
-mixed in)
-
-/system -> system guardian (manages logging and other)
-/user -> user-level guardian (guardian for every user/programmer created
-actor)
-/ -> root guardian (manages system guardian and user-level guardian)
-Actor selection:
-var myActor context.actorSelection(“/user/parent/child1”);
-myActor ! “Hello”
-Logging:
-Explicitly
-val logger = Logging(context.system, this) //this is an Actor
-ActorLogging
-extends Actor with ActorLogging
-Akka config:
-config.conf
-Inline config:
-
-val configString = “””
-
-akka {
-loglevel = “DEBUG”
-}
-“””
-
-val config = ConfigFactory.parseString(configString);
-val actorSys = ActorSystem(“systemNam”, ConfigFactory.load(config))
-Configuration by file:
-create file under src/main/resources/application.conf
-akka {
-loglevel = DEBUG
-}
-Val fileConfigSystem = ActorSystem(“sys”) //will pickup the application.conf
-automatically
-Include some other config:
-akka {
-loglevel = DEBUG
-}
-otherconfig {
-akka {
-loglevel = INFO
-}
-}
-val otherConfig = ConfigFactory.load().getConfig(“otherconfig”)
-Val otherConfigSystem = ActorSystem(“otherSys”, otherConfig)
-Can define config as json or other format</p>
-      <button class="blog-back-button"><a href="..">Back</a></button>
-    </section>
-  </main>
-  <footer>
-  </footer>
-</body>
-
+    <main>
+      <section>
+        <h1>WIP</h1>
+        <p>
+          Actor system - controls threads, allocates to actors Actors - actors
+          are uniquely identified, messages passed asynchronously, each actor
+          may respond differently, actors are encapsulated (you cannot access
+          their state directly) You can only communicate via ref Class
+          person(name: String) extends Actor{ override def receive = { case “hi”
+          => println(s“hi my name is, $name”) } } How to instantiate an actor
+          with arguments? Using props with argument eg Props(new Person(“bob”))
+          Messages must be immutable and serialisable ActorContext ->
+          information about the actor environment. The actor system, own actor
+          reference (context.self) [similar to this.x in OOP] An actor can send
+          a message to itself (using context.self) Actors can reply to messages
+          - actor Alice and actor Bob: SayHiTo(ref: ActorRef) Alice !
+          SayHiTo(bob) // sends “hi” to bob // case “hi” => context.sender() !
+          “My reply is: Hello!” //sender() is same thing, when invoking the !
+          Method, actor sends a ref of itself to the receiver Deadletters is a
+          ‘fake’ actor that takes care of messages not sent to anyone Actors can
+          forward messages to one another Driver -> router -> pc record
+          MyMesssage(String body, ref: ActorRef) Alice ! MyMesssage(hi, bob);
+          //receive method: // case MyMesssage(body, ref) => ref forward body +
+          “s” //keeps original ref, modifies body to be ‘his’ Message ordering:
+          Race conditions? Asynchronous? How does it all work... – – Akka actor
+          system has a thread pool Internally, actor has a message handler and a
+          message queue(mailbox). Akka schedules each actor’s execution on
+          threads Communicating with an actor: sending a message -> enqueue onto
+          actor’s mailbox (this is thread safe) processing a message -> a thread
+          is scheduled to run this actor messages are extracted from the
+          mailbox, in order the thread invokes the handler on each message (this
+          could change actor state) at some point the actor is unscheduled Only
+          one thread may operate on an actor at any given time allows us to
+          program as if dealing with single thread No need for locks,
+          synchronisation since only one thread can access an actors state at
+          any time processing of messages is atomic Message deliveries: at most
+          once delivery (no duplicates) message order is kept -> sending A then
+          B, the receiver will always get A before B (but if another actor sends
+          a message C then it’s possible that will be mixed in) /system ->
+          system guardian (manages logging and other) /user -> user-level
+          guardian (guardian for every user/programmer created actor) / -> root
+          guardian (manages system guardian and user-level guardian) Actor
+          selection: var myActor context.actorSelection(“/user/parent/child1”);
+          myActor ! “Hello” Logging: Explicitly val logger =
+          Logging(context.system, this) //this is an Actor ActorLogging extends
+          Actor with ActorLogging Akka config: config.conf Inline config: val
+          configString = “”” akka { loglevel = “DEBUG” } “”” val config =
+          ConfigFactory.parseString(configString); val actorSys =
+          ActorSystem(“systemNam”, ConfigFactory.load(config)) Configuration by
+          file: create file under src/main/resources/application.conf akka {
+          loglevel = DEBUG } Val fileConfigSystem = ActorSystem(“sys”) //will
+          pickup the application.conf automatically Include some other config:
+          akka { loglevel = DEBUG } otherconfig { akka { loglevel = INFO } } val
+          otherConfig = ConfigFactory.load().getConfig(“otherconfig”) Val
+          otherConfigSystem = ActorSystem(“otherSys”, otherConfig) Can define
+          config as json or other format
+        </p>
+        <button class="blog-back-button"><a href="..">Back</a></button>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
 </html>

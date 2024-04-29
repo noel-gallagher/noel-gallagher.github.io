@@ -1,58 +1,124 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Overview Fundamentals of Data Engineering</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Overview Fundamentals of Data Engineering</title>
-  <link rel="stylesheet" href="../stylesheets/style.css">
-  <link rel="stylesheet" href="../stylesheets/blog.css">
-</head>
+  <body>
+    <header role="banner">
+      <nav>
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="index.html" class="active">Blog</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<body>
-  <header role="banner">
-    <nav>
-      <ul>
-        <li><a href="../">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="index.html" class="active">Blog</a></li>
-      </ul>
-    </nav>
-  </header>
+    <main>
+      <section>
+        <h1>
+          Overview of Fundamentals of Data Engineering by Joe Reis and Matt
+          Housley
+        </h1>
+        <p>
+          the book covers the entire data lifecycle, from data generation and
+          storage considerations to data ingestion, transformation, and
+          ultimately making the data available for practical applications. Each
+          step involves thoughtful decision-making based on factors such as data
+          type, access patterns, and desired outcomes.
+        </p>
+        <h2>Generation</h2>
+        <p>
+          Data is generated from various sources such as databases, message
+          brokers, and more. When integrating source systems, it's important to
+          consider factors like the type of source, the rate at which data is
+          generated, CRC, consistency guarantees, and whether the data follows a
+          structured schema or is schemaless
+        </p>
+        <h2>Storage</h2>
+        <p>
+          Deciding where to store data is crucial. Factors to consider include
+          the nature of the data, how frequently it will be accessed, and the
+          desired level of data redundancy and availability. The choice of
+          storage solution can significantly impact data retrieval efficiency
+          and overall system performance
+        </p>
+        <h2>Ingestion</h2>
+        <p>
+          Data can be gathered using different methods, including batch
+          processing and real-time streaming. Another consideration is whether
+          to push data from sources to the storage system or pull data from
+          sources to the storage system. These choices depend on the nature of
+          the data and the desired speed of data availability.
+        </p>
+        <h2>Transformation</h2>
+        <p>
+          Data often needs to be transformed to match specific data types or
+          schemas. This involves mapping the incoming data to appropriate data
+          types and potentially transforming it to align with a predefined
+          schema. Transformation ensures that the data is structured in a
+          consistent and usable format.
+        </p>
+        <h2>Serving Data</h2>
+        <p>
+          The purpose of serving data is to make it practically usable for
+          various applications, such as analytics, business intelligence (BI),
+          reverse ETL (Extract, Transform, Load), and machine learning (ML).
+          Properly serving data involves providing efficient methods for
+          querying and accessing the data, enabling insights and
+          decision-making.
+        </p>
+        <h2>Data Architecture</h2>
+        <p>
+          The book delves into the art of crafting effective data architecture
+          that not only accommodates the present but also seamlessly adapts to
+          the evolving needs of a business. The emphasis lies in creating
+          systems that exhibit flexibility, ensuring they remain receptive to
+          changes as the business landscape transforms over time. An important
+          aspect of this process is to evade the pitfalls of tight coupling,
+          which could hinder future adaptations.
+        </p>
 
-  <main>
-    <section>
-      <h1>Overview of Fundamentals of Data Engineering by Joe Reis and Matt Housley</h1>
-      <p>the book covers the entire data lifecycle, from data generation and storage considerations to data ingestion, transformation, and ultimately making the data available for practical applications. Each step involves thoughtful decision-making based on factors such as data type, access patterns, and desired outcomes.
-      </p>
-      <h2>Generation</h2>
-      <p>Data is generated from various sources such as databases, message brokers, and more. When integrating source systems, it's important to consider factors like the type of source, the rate at which data is generated, CRC, consistency guarantees, and whether the data follows a structured schema or is schemaless</p>
-      <h2>Storage</h2>
-      <p>Deciding where to store data is crucial. Factors to consider include the nature of the data, how frequently it will be accessed, and the desired level of data redundancy and availability. The choice of storage solution can significantly impact data retrieval efficiency and overall system performance</p>
-      <h2>Ingestion</h2>
-      <p>Data can be gathered using different methods, including batch processing and real-time streaming. Another consideration is whether to push data from sources to the storage system or pull data from sources to the storage system. These choices depend on the nature of the data and the desired speed of data availability.</p>
-      <h2>Transformation</h2>
-      <p>Data often needs to be transformed to match specific data types or schemas. This involves mapping the incoming data to appropriate data types and potentially transforming it to align with a predefined schema. Transformation ensures that the data is structured in a consistent and usable format.</p>
-      <h2>Serving Data</h2>
-      <p>The purpose of serving data is to make it practically usable for various applications, such as analytics, business intelligence (BI), reverse ETL (Extract, Transform, Load), and machine learning (ML). Properly serving data involves providing efficient methods for querying and accessing the data, enabling insights and decision-making.</p>
-      <h2>Data Architecture</h2>
-      <p>The book delves into the art of crafting effective data architecture that not only accommodates the present but also seamlessly adapts to the evolving needs of a business. The emphasis lies in creating systems that exhibit flexibility, ensuring they remain receptive to changes as the business landscape transforms over time. An important aspect of this process is to evade the pitfalls of tight coupling, which could hinder future adaptations.</p>
-
-	  <p>The narrative extends to provide a comprehensive overview of pivotal concepts that play a crucial role in data architecture. Domain-Driven Design is explored, focusing on aligning services with the inherent domain of the business, resulting in more intuitive and functional data systems. The discourse further extends to Distributed Systems, emphasizing the orchestration of data across different nodes and locations for improved performance and reliability.
-	  </p>
-	  <p>
-The discussion then shifts to architectural paradigms, elucidating the distinctions between n-tier architectures, monoliths, microservices, and event driven architectures. Through illustrative examples, the book not only elucidates their characteristics but also demonstrates their applications within data architecture contexts.
-	  </p>
-	  <p>
-	  Furthermore, the book delves into concrete instances of data architecture, depicting data warehouses, data marts, and data lakes. By delving into these examples, the book not only clarifies their functionalities but also showcases how they can be harnessed to serve specific business needs.
-      </p>
-      <p> Overall, the book does a great job at revealing strategies that empower the creation of adaptable, forward-looking data systems. By understanding the nuances of data, business requirements, its access patterns and practical data architecture, readers are equipped with the knowledge needed to craft data systems that stand the test of time and evolving business requirements</p>
-      <button class="blog-back-button"><a href="index.html">Back</a></button>
-    </section>
-  </main>
-  <footer>
-  </footer>
-</body>
-
+        <p>
+          The narrative extends to provide a comprehensive overview of pivotal
+          concepts that play a crucial role in data architecture. Domain-Driven
+          Design is explored, focusing on aligning services with the inherent
+          domain of the business, resulting in more intuitive and functional
+          data systems. The discourse further extends to Distributed Systems,
+          emphasizing the orchestration of data across different nodes and
+          locations for improved performance and reliability.
+        </p>
+        <p>
+          The discussion then shifts to architectural paradigms, elucidating the
+          distinctions between n-tier architectures, monoliths, microservices,
+          and event driven architectures. Through illustrative examples, the
+          book not only elucidates their characteristics but also demonstrates
+          their applications within data architecture contexts.
+        </p>
+        <p>
+          Furthermore, the book delves into concrete instances of data
+          architecture, depicting data warehouses, data marts, and data lakes.
+          By delving into these examples, the book not only clarifies their
+          functionalities but also showcases how they can be harnessed to serve
+          specific business needs.
+        </p>
+        <p>
+          Overall, the book does a great job at revealing strategies that
+          empower the creation of adaptable, forward-looking data systems. By
+          understanding the nuances of data, business requirements, its access
+          patterns and practical data architecture, readers are equipped with
+          the knowledge needed to craft data systems that stand the test of time
+          and evolving business requirements
+        </p>
+        <button class="blog-back-button"><a href="index.html">Back</a></button>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
 </html>

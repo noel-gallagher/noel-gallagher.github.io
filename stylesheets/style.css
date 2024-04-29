@@ -6,8 +6,8 @@
 
 :root {
   --main-bright-bg-colour: #bbbbbb;
-  --main-bright-text-colour: #08090A;
-  --main-dark-bg-colour: #08090A;
+  --main-bright-text-colour: #08090a;
+  --main-dark-bg-colour: #08090a;
   --main-dark-text-colour: #bbbbbb;
   --shadow-colour: rgba(0, 0, 0, 0.5);
 }
@@ -15,13 +15,13 @@
 body {
   background: var(--main-bright-bg-colour);
   color: var(--main-bright-text-colour);
-  font-family: Arial, Helvetica, Sans-Serif; 
+  font-family: Arial, Helvetica, Sans-Serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-        --shadow-colour: rgba(255, 255, 255, 0.5);
-    }
+    --shadow-colour: rgba(255, 255, 255, 0.5);
+  }
   body {
     background: var(--main-dark-bg-colour);
     color: var(--main-dark-text-colour);
@@ -95,7 +95,6 @@ nav a.active {
   background-color: #555;
 }
 
-
 p {
   font-size: 1.5rem;
   line-height: 1.5;
@@ -106,7 +105,7 @@ p {
 .code-block {
   padding: 10px;
   overflow-x: auto;
-  width:100%;
+  width: 100%;
 }
 
 footer {
@@ -118,4 +117,3 @@ footer {
   color: #fff;
   padding: 0.25rem;
 }
-
