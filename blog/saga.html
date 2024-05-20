@@ -40,9 +40,12 @@
           atomic operations to complete by executing a compensating action in
           the event of failure.
         </p>
-        <p>Sagas can be coordinated by 'choreography' or orchestration. In choreograhy, each service works in a cooperative manner, executing the transactional action and publishing a request to the next service, the receiving service executes the request and responds on success. If there is a failure, the consumer replies with a failure message indicating that the sender should perform its compensating rollback. In contrast, orchestration has a centralised service responsible for orchestrating the saga. the orchestrator sends requests to each of the involved services, the services perform the action and reply to the orchestrator. In the event of faliure, the orchestrator messgaes each of the involved services to perform the compensation/rollback process.</p>
+        <p>Sagas can be coordinated by 'choreography' or orchestration.</p>
+        <p>With choreography, each service works in a cooperative manner. Each service must be aware of its role in the saga. When a service executes a transaction action, it publishes an event to the next service. The receiving service then executes its own action and responds with success or failure. In the event of failure, the failing service sends a failure message to its requester. On receipt of this failing messages, the receiving service executes its own compensating rollback action. </p>
+        <p>In contrast, orchestration involves a centralised service responsiblie for managing the saga.  the orchestrator sends requests to each of the involved services, the services perform the action and reply to the orchestrator. In the event of faliure, the orchestrator messgaes each of the involved services to perform the compensation/rollback process.</p>
+        <p>With this approach, the workflow is somewhat simplified at the cost of potentially introducing a single point of failure or bottleneck to the system.</p>
         <p>
-          Consider a pizza ordering system consisting of separate microservices:
+          As an example, consider a pizza ordering system consisting of separate microservices:
           an Ordering Service, a Payment Service, and a Kitchen Service.
           Implementing a saga pattern ensures consistency and handles potential
           failures during the order process
