@@ -40,6 +40,7 @@
           atomic operations to complete by executing a compensating action in
           the event of failure.
         </p>
+        <p>Sagas can be coordinated by 'choreography' or orchestration. In choreograhy, each service works in a cooperative manner, executing the transactional action and publishing a request to the next service, the receiving service executes the request and responds on success. If there is a failure, the consumer replies with a failure message indicating that the sender should perform its compensating rollback. In contrast, orchestration has a centralised service responsible for orchestrating the saga. the orchestrator sends requests to each of the involved services, the services perform the action and reply to the orchestrator. In the event of faliure, the orchestrator messgaes each of the involved services to perform the compensation/rollback process.</p>
         <p>
           Consider a pizza ordering system consisting of separate microservices:
           an Ordering Service, a Payment Service, and a Kitchen Service.
