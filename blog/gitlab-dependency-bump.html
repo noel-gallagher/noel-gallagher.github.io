@@ -15,13 +15,14 @@
         <ul>
           <li><a href="../">Home</a></li>
           <li><a href="/about">About</a></li>
-          <li><a href="#" class="active">Blog</a></li>
+          <li><a href="index.html" class="active">Blog</a></li>
         </ul>
       </nav>
     </header>
 
     <main>
       <section>
+        <h1>Auto updating dependencies in Gitlab</h1>
         <p>
           If you have a downstream repo which shares a dependency with an
           upstream repo, it can be annoying to keep them in sync manually. for
@@ -34,14 +35,54 @@
         </p>
         <p>
           Firstly in the upstream repo, ensure version is writen to some
-          artifact. An artifact can persist between jobs.
+          artifact. An artifact can persist between jobs. for example:
         </p>
-        <p>Next, define a job which will trigger the downstream.</p>
+        <pre class="code-block"><code>
+          stages:
+            - job_one
+
+          my_job:
+            script:
+              - echo "tag=${date + %s}" >> output.sh
+            stage: job_one
+            artifacts:
+                paths:
+                  - output.sh
+        </code></pre>
+        <p>Next, define a job which will trigger the downstream parent project.</p>
+        <pre class="code-block"><code>
+          stages:
+            - job_two
+          
+          update_dep:
+            stage: job_two
+            trigger:
+              project: parent/project
+        </code></pre>
         <p>
           In the downstream project, add a stage, update dependency. This will
           perform the act of editing the dependency file, adding to vc, pushing
           to the repo and opening an MR.
         </p>
+        <pre class="code-block"><code>
+        stages:
+            - update-dep
+        
+        update-dep:
+          stage: update-dep
+          before_script: 
+            - source output.sh
+          script:
+            - echo "bumping dep with $tag"
+            - git config --global user.email "gitlab-ci-user@mydomain.com"
+            - git config --global user.nane "CI USER"
+            # - the script to change your dep here
+            - git add .
+            - git commit -m "AUTO UPDATE DEP $tag"
+            - git push https://oauth2:$ACCESS_TOKEN@mygitlabinstance.com/project/repo.git
+            # make post request using gitlab api, using token for auth:
+            - curl --request POST --header "PRIVATE-TOKEN: $ACCESS_TOKEN" --header 
+           </code></pre>
         <p>
           For this you will need to create and set an access token with write
           and api access permissions.
@@ -50,7 +91,17 @@
           Ensure to add the "needs" field which will take the artifact from the
           upstream job
         </p>
-        <button class="blog-back-button"><a href="..">Back</a></button>
+        <pre class="code-block"><code>
+          needs:
+            # the project that created the artifact:
+            - project: child_project/repo
+            - job: update_dep
+            - ref: main
+            - artifacts: true
+          only:
+            - pipelines
+          </code></pre>
+        <button class="blog-back-button"><a href="index.html">Back</a></button>
       </section>
     </main>
     <footer></footer>
