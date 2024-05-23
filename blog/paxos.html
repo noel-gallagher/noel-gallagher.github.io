@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paxos</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+  </head>
+
+  <body>
+    <div class="content">
+      <header role="banner">
+        <nav>
+          <ul>
+            <li><a href="../">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="index.html" class="active">Blog</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+        <section>
+          <h1>Paxos</h1>
+          <h1>Simple paxos</h1>
+          <p>
+            Paxos is an algorithm used by distributed systems as a method of
+            acheivng <a href="./consensus.html"> consensus</a>. It consists of
+            three entities: proposers, acceptors and learners. A proposer is
+            responsible for... proposing values to the acceptors. Acceptors,
+            receive values from propsers and reply to the proposers if they
+            accepted the value or not. Finally, learners are responsible for
+            storing the accepted value.
+          </p>
+          <p>
+            Starting with simple paxos, or the synod protocol; this describes a
+            way for a group of nodes to agree on a single value, a ballot is
+            started by a proposer by sending a proposed value to a group of
+            acceptors. This proposal is identifiable by its proposal number.
+          </p>
+          <p>
+            An acceptor can accept or reject the proposed value. An acceptor can
+            only accept at most one value. The value is accepted if and only if
+            the proposal number is higher than any previous proposal number.
+          </p>
+          <p>
+            The value is determined to be chosen once a majority or quorum of
+            acceptors have accepted the proposal. this ensures consistency
+          </p>
+
+          <h1>to be continued...</h1>
+          <button class="blog-back-button">
+            <a href="index.html">Back</a>
+          </button>
+        </section>
+      </main>
+      <footer></footer>
+    </div>
+  </body>
+</html>
