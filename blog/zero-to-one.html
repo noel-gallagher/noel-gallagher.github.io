@@ -11,59 +11,65 @@
 
   <body>
     <div class="content">
-    <header role="banner">
-      <nav>
-        <ul>
-          <li><a href="../">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="index.html" class="active">Blog</a></li>
-        </ul>
-      </nav>
-    </header>
+      <header role="banner">
+        <nav>
+          <ul>
+            <li><a href="../">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="index.html" class="active">Blog</a></li>
+          </ul>
+        </nav>
+      </header>
 
-    <main>
-      <section>
-        <h2>What happens when we start our computers?</h2>
+      <main>
+        <section>
+          <h2>What happens when we start our computers?</h2>
 
-        <p>
-          When you power up your computer, the first software to run is either
-          BIOS or the UEFI.These firmware systems reside on the motherboard and
-          serve a crucial role in starting the computer.
-        </p>
+          <p>
+            When you power up your computer, the first software to run is either
+            BIOS or the UEFI.These firmware systems reside on the motherboard
+            and serve a crucial role in starting the computer.
+          </p>
 
-        <p>
-          BIOS or UEFI performs some POST checks to verify the health of the
-          system and hardware components like the processor, memory, and storage
-          devices. Once POST is successful, the firmware follows a specified
-          boot order to locate a bootable device containing an operating system.
-        </p>
+          <p>
+            BIOS or UEFI performs some POST checks to verify the health of the
+            system and hardware components like the processor, memory, and
+            storage devices. Once POST is successful, the firmware follows a
+            specified boot order to locate a bootable device containing an
+            operating system.
+          </p>
 
-        <p>
-          For BIOS, this involves reading the Master Boot Record (MBR). This is
-          a small section at the beginning of a storage device(first 512 bytes)
-          like a hard drive or SSD. The MBR contains a bootloader program,
-          responsible for locating and starting the operating system's core (the
-          kernel).
-        </p>
+          <p>
+            For BIOS, this involves reading the Master Boot Record (MBR). This
+            is a small section at the beginning of a storage device(first 512
+            bytes) like a hard drive or SSD. The MBR contains a bootloader
+            program, responsible for locating and starting the operating
+            system's core (the kernel).
+          </p>
 
-        <p>
-          UEFI departs from the MBR approach. Instead, it utilises a special
-          partition called the EFI System Partition (ESP). This can store more
-          sophisticated bootloader programs. This gives UEFI greater flexibility
-          and support for advanced features on modern hardware.
-        </p>
+          <p>
+            UEFI departs from the MBR approach. Instead, it utilises a special
+            partition called the EFI System Partition (ESP). This can store more
+            sophisticated bootloader programs. This gives UEFI greater
+            flexibility and support for advanced features on modern hardware.
+          </p>
 
-        <p>
-          In summary, both BIOS and UEFI are essential for starting your
-          computer. BIOS represents the older standard, while UEFI provides a
-          more modern and versatile approach to initialising hardware and
-          loading the operating system.
-        </p>
-        <p>A simple bootloader can be found <a href="https://github.com/noel-gallagher/boot">here</a></p>
-        <button class="blog-back-button"><a href="index.html">Back</a></button>
-      </section>
-    </main>
-    <footer></footer>
-  </div>
+          <p>
+            In summary, both BIOS and UEFI are essential for starting your
+            computer. BIOS represents the older standard, while UEFI provides a
+            more modern and versatile approach to initialising hardware and
+            loading the operating system.
+          </p>
+          <p>
+            A simple bootloader can be found
+            <a href="https://github.com/noel-gallagher/boot">here</a>
+          </p>
+          <button class="blog-back-button">
+            <a href="index.html">Back</a>
+          </button>
+        </section>
+      </main>
+      <footer></footer>
+    </div>
   </body>
 </html>

@@ -11,41 +11,101 @@
 
   <body>
     <div class="content">
-    <header role="banner">
-      <nav>
-        <ul>
-          <li><a href="../">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="index.html" class="active">Blog</a></li>
-        </ul>
-      </nav>
-    </header>
+      <header role="banner">
+        <nav>
+          <ul>
+            <li><a href="../">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="index.html" class="active">Blog</a></li>
+          </ul>
+        </nav>
+      </header>
 
-    <main>
-      <section>
-        <h1>Onion Architecture</h1>
+      <main>
+        <section>
+          <h1>Onion Architecture</h1>
           <p>
-            Adding new functionality to an ever evolving piece of a software is challenging. Different approaches to design and architecture have evolved to try and tackle this complexity; n-tier, ports and adapters/hexagonal, onion and others. These methods aim to reduce the need to change large portions of the application when introducing changes which affect only a portion of the system. Ultimately, the idea is isolating business logic in order to make it independent of technology choices. as a consequence, this makes the system more maintainable, scalable and testable by default.
+            Adding new functionality to an ever evolving piece of a software is
+            challenging. Different approaches to design and architecture have
+            evolved to try and tackle this complexity; n-tier, ports and
+            adapters/hexagonal, onion and others. These methods aim to reduce
+            the need to change large portions of the application when
+            introducing changes which affect only a portion of the system.
+            Ultimately, the idea is isolating business logic in order to make it
+            independent of technology choices. as a consequence, this makes the
+            system more maintainable, scalable and testable by default.
           </p>
           <p>
-            One such approach is the onion architecture. This focuses on dividing different concerns into layers: the Domain, the service, infrastructure. the principle idea is that the inner layers (starting from domain) have no dependencies on outside layers, while the outside layers have dependencies on the inner layers. Let's explore each of these layers:
+            One such approach is the onion architecture. This focuses on
+            dividing different concerns into layers: the Domain, the service,
+            infrastructure. the principle idea is that the inner layers
+            (starting from domain) have no dependencies on outside layers, while
+            the outside layers have dependencies on the inner layers. Let's
+            explore each of these layers:
           </p>
-          <h2>The Domain Layer</h2> 
-          <p>houses all the business logic. This is were your domain model/DDD entities live. These entities represent business concepts and rules.<p>
-          <h2>The Service Layer</h2> 
-          <p>This layer offers 'services' for interacting with the domain layer. This is the business logic to manipulate your domain entities: perform some computation, execute some algorithm. These operations can be modelled as pure functions. Depending on the author, the service layer may be split into two further sub-layers: domain services: services operating only on domain objects and application services: services which coordinate domain services</p>
+          <h2>The Domain Layer</h2>
+          <p>
+            houses all the business logic. This is were your domain model/DDD
+            entities live. These entities represent business concepts and rules.
+          </p>
+          <p></p>
+          <h2>The Service Layer</h2>
+          <p>
+            This layer offers 'services' for interacting with the domain layer.
+            This is the business logic to manipulate your domain entities:
+            perform some computation, execute some algorithm. These operations
+            can be modelled as pure functions. Depending on the author, the
+            service layer may be split into two further sub-layers: domain
+            services: services operating only on domain objects and application
+            services: services which coordinate domain services
+          </p>
           <h2>The Infrastructure Layer</h2>
-          <p>application code related to external infrastruture - connecting to a database, calling a third-party web api etc It implements the requirements for these operations while the service and domain layers are ignorant of them.</p>
-          <p>Following such an approach helps maintain a clear separation of concerns leading to a loosely coupled and more maintainable codebase.</p>
+          <p>
+            application code related to external infrastruture - connecting to a
+            database, calling a third-party web api etc It implements the
+            requirements for these operations while the service and domain
+            layers are ignorant of them.
+          </p>
+          <p>
+            Following such an approach helps maintain a clear separation of
+            concerns leading to a loosely coupled and more maintainable
+            codebase.
+          </p>
           <h1>Why Bother?</h1>
-          <p>Business and technology requirements change over time. When you need to migrate a mission-critical application to another environment such as a new cloud provider in order to benefit from cost savings and reduced operational overhead, you shouldn't have to dig deep into your code and rewrite large portions.</p> 
-          <p>For example, consider switching from PostgreSQL to a managed NoSQL service. This should be as simple as navigating to the infrastructure layer and swapping out the PostgreSQL connection for your new persistence technology.</p> 
-          <p>Another scenario might be changing the data exchange format between this application and an external one. Suppose these apps currently communicate with JSON and now you want to switch to Protobuf - since this change revolves around infrastructure (serialisation/deserialisation), no further modifications would need to be made in the domain or service layers.</p>
-          <p>So you can see how such an architecture helps you achieve maintainability - changes are localised to the appropriate layer, scalability: technology and requirements can be adopted with minimal disruption and testability - business logic is isolated and ignorant of external dependencies.</p>
-        <button class="blog-back-button"><a href="index.html">Back</a></button>
-      </section>
-    </main>
-    <footer></footer>
-  </div>
+          <p>
+            Business and technology requirements change over time. When you need
+            to migrate a mission-critical application to another environment
+            such as a new cloud provider in order to benefit from cost savings
+            and reduced operational overhead, you shouldn't have to dig deep
+            into your code and rewrite large portions.
+          </p>
+          <p>
+            For example, consider switching from PostgreSQL to a managed NoSQL
+            service. This should be as simple as navigating to the
+            infrastructure layer and swapping out the PostgreSQL connection for
+            your new persistence technology.
+          </p>
+          <p>
+            Another scenario might be changing the data exchange format between
+            this application and an external one. Suppose these apps currently
+            communicate with JSON and now you want to switch to Protobuf - since
+            this change revolves around infrastructure
+            (serialisation/deserialisation), no further modifications would need
+            to be made in the domain or service layers.
+          </p>
+          <p>
+            So you can see how such an architecture helps you achieve
+            maintainability - changes are localised to the appropriate layer,
+            scalability: technology and requirements can be adopted with minimal
+            disruption and testability - business logic is isolated and ignorant
+            of external dependencies.
+          </p>
+          <button class="blog-back-button">
+            <a href="index.html">Back</a>
+          </button>
+        </section>
+      </main>
+      <footer></footer>
+    </div>
   </body>
 </html>

@@ -11,66 +11,70 @@
 
   <body>
     <div class="content">
-    <header role="banner">
-      <nav>
-        <ul>
-          <li><a href="../">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="index.html" class="active">Blog</a></li>
-        </ul>
-      </nav>
-    </header>
+      <header role="banner">
+        <nav>
+          <ul>
+            <li><a href="../">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="index.html" class="active">Blog</a></li>
+          </ul>
+        </nav>
+      </header>
 
-    <main>
-      <section>
-        <h1>Raft</h1>
-        <p>
-          Raft is a consensus algorithm based on replicated state machines. It
-          comprises a single leader and a group of followers. The leader's role
-          is to manage requests and subsequently forward them to the followers.
-          All members maintain a write-ahead log, utilized to persist each
-          action as it is received. Once a majority of the followers have
-          confirmed an action, a quorum is established, enabling the leader to
-          commit the action to its log. Subsequently, the leader prompts each
-          peer to apply the action to their internal state machine.
-        </p>
-        <p>
-          A node can be in one of three states: a leader, a follower, or a
-          candidate. In the beginning, all nodes start as followers. A node
-          enters the candidate state if it does not recieve a heart-beat message
-          from the leader. As a candidate, the node solicits votes from other
-          nodes. A candidate is elected a leader if it gets a majority of votes.
-          Once elected leader, all changes to the cluster are routed through the
-          leader.
-        </p>
-        <p>
-          When a client issues a command to the leader, the leader enters it in
-          its log as an uncommited command, it then replicates the command to
-          the followers. Once a majority of followers confirm the command, the
-          leader commits the entry. The leader then notifies all followers that
-          the entry has been commited, thus a consensus on the command has been
-          reached.
-        </p>
-        <p>
-          Leader election is triggered by timers. There is an election timeout
-          which determines the amount of time a follower should wait before
-          becoming a candidate. After this timeout, an election term is started
-          by the node which has enetered the candidate state. During this term,
-          the candidate votes for itself and then issues requests to other nodes
-          for voting. On receipt of these requests, if the node has not voted in
-          this term, it will vote for the candidate which issued the request.
-          After voting, the node resets its own election timer.
-        </p>
-        <p>
-          In the event of a network parition and two or more leaders are
-          elected, when the parition is healed, the node with highest election
-          term will become the leader. The previous leaders will rollback their
-          log and accept the new leader's log
-        </p>
-        <button class="blog-back-button"><a href="index.html">Back</a></button>
-      </section>
-    </main>
-    <footer></footer>
-  </div>
+      <main>
+        <section>
+          <h1>Raft</h1>
+          <p>
+            Raft is a consensus algorithm based on replicated state machines. It
+            comprises a single leader and a group of followers. The leader's
+            role is to manage requests and subsequently forward them to the
+            followers. All members maintain a write-ahead log, utilized to
+            persist each action as it is received. Once a majority of the
+            followers have confirmed an action, a quorum is established,
+            enabling the leader to commit the action to its log. Subsequently,
+            the leader prompts each peer to apply the action to their internal
+            state machine.
+          </p>
+          <p>
+            A node can be in one of three states: a leader, a follower, or a
+            candidate. In the beginning, all nodes start as followers. A node
+            enters the candidate state if it does not recieve a heart-beat
+            message from the leader. As a candidate, the node solicits votes
+            from other nodes. A candidate is elected a leader if it gets a
+            majority of votes. Once elected leader, all changes to the cluster
+            are routed through the leader.
+          </p>
+          <p>
+            When a client issues a command to the leader, the leader enters it
+            in its log as an uncommited command, it then replicates the command
+            to the followers. Once a majority of followers confirm the command,
+            the leader commits the entry. The leader then notifies all followers
+            that the entry has been commited, thus a consensus on the command
+            has been reached.
+          </p>
+          <p>
+            Leader election is triggered by timers. There is an election timeout
+            which determines the amount of time a follower should wait before
+            becoming a candidate. After this timeout, an election term is
+            started by the node which has enetered the candidate state. During
+            this term, the candidate votes for itself and then issues requests
+            to other nodes for voting. On receipt of these requests, if the node
+            has not voted in this term, it will vote for the candidate which
+            issued the request. After voting, the node resets its own election
+            timer.
+          </p>
+          <p>
+            In the event of a network parition and two or more leaders are
+            elected, when the parition is healed, the node with highest election
+            term will become the leader. The previous leaders will rollback
+            their log and accept the new leader's log
+          </p>
+          <button class="blog-back-button">
+            <a href="index.html">Back</a>
+          </button>
+        </section>
+      </main>
+      <footer></footer>
+    </div>
   </body>
 </html>

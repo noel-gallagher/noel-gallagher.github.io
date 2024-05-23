@@ -11,41 +11,96 @@
 
   <body>
     <div class="content">
-    <header role="banner">
-      <nav>
-        <ul>
-          <li><a href="../">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="index.html" class="active">Blog</a></li>
-        </ul>
-      </nav>
-    </header>
+      <header role="banner">
+        <nav>
+          <ul>
+            <li><a href="../">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="index.html" class="active">Blog</a></li>
+          </ul>
+        </nav>
+      </header>
 
-    <main>
-      <section>
-        <h1>Database Isolation Levels</h1>
-        <p>
-            In databases, a transaction is a collection of operations which are treated as a single unit of work. Ensuring the integrity and consistency of data during concurrent transactions is where the 'I' (Isolation) property of ACID comes into play.
-        </p>
-        <p>
-          Given multiple ongoing transcations, how can we prevent interference between each transaction? If transaction A is running some SELECT query, while transaction B simultanously performs an UPDATE which would affect A's results, what should happen?
-        </p>
-        <p>The result depends entirely only the isolation level setting of the database (and also the database vendor's interpretation of this definition)</p>
+      <main>
+        <section>
+          <h1>Database Isolation Levels</h1>
+          <p>
+            In databases, a transaction is a collection of operations which are
+            treated as a single unit of work. Ensuring the integrity and
+            consistency of data during concurrent transactions is where the 'I'
+            (Isolation) property of ACID comes into play.
+          </p>
+          <p>
+            Given multiple ongoing transcations, how can we prevent interference
+            between each transaction? If transaction A is running some SELECT
+            query, while transaction B simultanously performs an UPDATE which
+            would affect A's results, what should happen?
+          </p>
+          <p>
+            The result depends entirely only the isolation level setting of the
+            database (and also the database vendor's interpretation of this
+            definition)
+          </p>
           <h2>Read uncommitted</h2>
           <p>
-            This level offers essentially no isolation. Transaction A can see the uncommitted results of transaction B. This can lead to a number of issues such as a "dirty read". If there's a row representing a user's bank balance and two transactions A and B. A BEGINs a transaction and performs an UPDATE to increment the balance by 200, meanwhile  B BEGINs a seperate simultanous transaction which SELECTs the balance. If A rolls back, B still sees the balance as the inital value + 200 - meanwhile the actual balance is the intial value.</p>
-          <h2>Read committed</h2> 
-          <p>Each query in a transaction only sees committed changes. Given two transactions A and B, A BEGINs and SELECTs ID 1, getting the value x. If B BEGINs and then UPDATEs ID 1 to x + 1 and then commits, when A performs another SELECT on ID 1, it will see different values. This is called a non-repeatable read. under either read committed or read uncommited, non-repeatable reads are possible</p>
+            This level offers essentially no isolation. Transaction A can see
+            the uncommitted results of transaction B. This can lead to a number
+            of issues such as a "dirty read". If there's a row representing a
+            user's bank balance and two transactions A and B. A BEGINs a
+            transaction and performs an UPDATE to increment the balance by 200,
+            meanwhile B BEGINs a seperate simultanous transaction which SELECTs
+            the balance. If A rolls back, B still sees the balance as the inital
+            value + 200 - meanwhile the actual balance is the intial value.
+          </p>
+          <h2>Read committed</h2>
+          <p>
+            Each query in a transaction only sees committed changes. Given two
+            transactions A and B, A BEGINs and SELECTs ID 1, getting the value
+            x. If B BEGINs and then UPDATEs ID 1 to x + 1 and then commits, when
+            A performs another SELECT on ID 1, it will see different values.
+            This is called a non-repeatable read. under either read committed or
+            read uncommited, non-repeatable reads are possible
+          </p>
           <h2>Repeatable read</h2>
-        <p>For the duration of a transaction, when the row is read, the row will remain unchanged. This means that for two transactions A and B, even if B COMMITs a change to a value which A previously read, when A rereads that value, it will remain unchanged. However, if transaction A were to SELECT a range of values, perhaps calculating the SUM based on a specific predicate, and transaction B were to COMMIT a change that affects the result of this SUM operation (such as inserting or deleting rows within that range), transaction A could get different results each time it re-executes the SUM query. This phenomenon is known as a phantom read.</p>
+          <p>
+            For the duration of a transaction, when the row is read, the row
+            will remain unchanged. This means that for two transactions A and B,
+            even if B COMMITs a change to a value which A previously read, when
+            A rereads that value, it will remain unchanged. However, if
+            transaction A were to SELECT a range of values, perhaps calculating
+            the SUM based on a specific predicate, and transaction B were to
+            COMMIT a change that affects the result of this SUM operation (such
+            as inserting or deleting rows within that range), transaction A
+            could get different results each time it re-executes the SUM query.
+            This phenomenon is known as a phantom read.
+          </p>
           <h2>Snapshot</h2>
-          <p>Each query only sees changes that have been committed up to the start of the transaction. like taking a snapshot of the database at the current moment. Even if transaction B has COMMITed changes, transaction A will have a consistent view of the data for the duration of its transaction. This prevents phantom reads but can lead to another issue. Should transaction B COMMIT and update to row X, then transaction A modifies row X - only A's change will be taken into account. This can lead to a "lost update"</p>
-        <h2>Serializable</h2><p>no transactions can run simultanously. Transaction B must follow transaction B</p>
-        <p>Each isolation level offers different guarantees and has consequences on behaviour. It's important to keep in mind the appropriate isolation level when executing transactions.</p>
-        <button class="blog-back-button"><a href="index.html">Back</a></button>
-      </section>
-    </main>
-    <footer></footer>
-  </div>
+          <p>
+            Each query only sees changes that have been committed up to the
+            start of the transaction. like taking a snapshot of the database at
+            the current moment. Even if transaction B has COMMITed changes,
+            transaction A will have a consistent view of the data for the
+            duration of its transaction. This prevents phantom reads but can
+            lead to another issue. Should transaction B COMMIT and update to row
+            X, then transaction A modifies row X - only A's change will be taken
+            into account. This can lead to a "lost update"
+          </p>
+          <h2>Serializable</h2>
+          <p>
+            no transactions can run simultanously. Transaction B must follow
+            transaction B
+          </p>
+          <p>
+            Each isolation level offers different guarantees and has
+            consequences on behaviour. It's important to keep in mind the
+            appropriate isolation level when executing transactions.
+          </p>
+          <button class="blog-back-button">
+            <a href="index.html">Back</a>
+          </button>
+        </section>
+      </main>
+      <footer></footer>
+    </div>
   </body>
 </html>

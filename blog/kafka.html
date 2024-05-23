@@ -1,60 +1,113 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kafka</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kafka</title>
-  <link rel="stylesheet" href="../stylesheets/style.css">
-  <link rel="stylesheet" href="../stylesheets/blog.css">
-</head>
+  <body>
+    <div class="content">
+      <header role="banner">
+        <nav>
+          <ul>
+            <li><a href="../">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="index.html" class="active">Blog</a></li>
+          </ul>
+        </nav>
+      </header>
 
-<body>
-  <div class ="content">
-  <header role="banner">
-    <nav>
-      <ul>
-        <li><a href="../">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="index.html" class="active">Blog</a></li>
-      </ul>
-    </nav>
-  </header>
+      <main>
+        <section>
+          <h1>Kafka</h1>
+          <p>
+            Kafka is a distributed message queue capable of spreading data and
+            workload across multiple servers(brokers). This enables high
+            availability, fault tolerance, and scalability. Kafka brokers
+            collectively form cluster, and they coordinate with each other to
+            distribute messages.
+          </p>
+          <p>
+            Kafka messages are published to topics which are then persisted on
+            disk. This enables a broker to withstand system failures. This is
+            essential for ensuring that no data is lost. Kafka can be configured
+            to provide the level of durability you need via replication factors
+            and acknowledgement settings.
+          </p>
+          <p>
+            Kafka is designed to be horizontally scalable. You can add more
+            machines to the cluster to increase its ability to handle greater
+            volumes of traffic.
+          </p>
+          <p>
+            Kafka is designed for high throughput and low latency. Its
+            architecture allows for the fast processing of large streams of
+            real-time data. Read/write throughput can be parallelised by
+            dividing topics into partitions and having partitions distributed
+            acros different brokers.
+          </p>
+          <p>
+            In Kafka, a message is the fundamental unit of data. It is
+            essentially an immutable array of bytes. Once a message is written
+            to a Kafka topic, it cannot be changed or deleted
+          </p>
+          <p>
+            A topic is a like a category for which messages can be sent. Topics
+            enable messages to be organised and help consumers subscribe they
+            find relevant.
+          </p>
+          <p>
+            A producer is a process that writes messages to a topic. producers
+            can also decide which partition within a topic to send a message to.
+          </p>
+          <p>
+            A consumer is a process that subscribes to topics and reads messages
+            from them. Consumers are typically part of a consumer group, which
+            allows for message processing to be load-balanced across multiple
+            consumers.
+          </p>
+          <p>
+            Brokers are servers that store data and serve clients. Multiple
+            brokers make up a cluster. The broker handles incoming messages from
+            producers, stores them, and serves them to consumers when requested.
+          </p>
+          <p>
+            Topics are divided into partitions to allow for greater parallelism
+            and scalability. Partitions may be hosted on different servers for
+            fault tolerance and load balancing.
+          </p>
+          <p>
+            Producers determine which partition a message will be sent to. This
+            is done using a partitioning algorithm. Additionally, a message key
+            can be used to ensure that messages with the same key go to the same
+            partition.
+          </p>
+          <p>
+            Brokers can fail - to ensure high availability and durability, Kafka
+            replicates each partition across multiple brokers
+          </p>
+          <h3>Leaders - One Leader, N-1 Followers</h3>
+          <p>
+            For each partition, there's a leader broker with N-1 followers. The
+            leader handles all reads + writes while the followers replicate the
+            data.
+          </p>
+          <p>
+            for a partition, clients interact through the leader only. This
+            simplifies the system architecture and improves performance.
+          </p>
+          <p>When a leader becomes unreachable, a new leader is elected</p>
 
-  <main>
-    <section>
-	  <h1>Kafka</h1>
-	  <p>
-	  Kafka is a distributed message queue capable of spreading data and workload across multiple servers(brokers). This enables high availability, fault tolerance, and scalability. Kafka brokers collectively form cluster, and they coordinate with each other to distribute messages.</p>
-	  <p> Kafka messages are published to topics which are then persisted on disk. This enables a broker to withstand system failures. This is essential for ensuring that no data is lost. Kafka can be configured to provide the level of durability you need via replication factors and acknowledgement settings.</p>
-	  <p> Kafka is designed to be horizontally scalable. You can add more machines to the cluster to increase its ability to handle greater volumes of traffic.</p>
-	  <p>Kafka is designed for high throughput and low latency. Its architecture allows for the fast processing of large streams of real-time data. Read/write throughput can be parallelised by dividing topics into partitions and having partitions distributed acros different brokers.</p>
-	  <p>In Kafka, a message is the fundamental unit of data. It is essentially an immutable array of bytes. Once a message is written to a Kafka topic, it cannot be changed or deleted</p>
-	  <p>A topic is a like a category for which messages can be sent. Topics enable messages to be organised and help consumers subscribe they find relevant.</p>
-	  <p>A producer is a process that writes messages to a topic. producers can also decide which partition within a topic to send a message to.</p>
-	  <p>A consumer is a process that subscribes to topics and reads messages from them. Consumers are typically part of a consumer group, which allows for message processing to be load-balanced across multiple consumers.</p>
-	  <p>Brokers are servers that store data and serve clients. Multiple brokers make up a cluster. The broker handles incoming messages from producers, stores them, and serves them to consumers when requested.</p>
-	  <p>Topics are divided into partitions to allow for greater parallelism and scalability. Partitions may be hosted on different servers for fault tolerance and load balancing.</p>
-	  <p>Producers determine which partition a message will be sent to. This is done using a partitioning algorithm. Additionally, a message key can be used to ensure that messages with the same key go to the same partition.</p>
-	  </p>
-	  <p>
-	  Brokers can fail - to ensure high availability and durability, Kafka replicates each partition across multiple brokers
-	  </p>
-	  <h3>Leaders - One Leader, N-1 Followers</h3>
-	      <p>
-	      For each partition, there's a leader broker with N-1 followers. The leader handles all reads + writes while the followers replicate the data.
-	      </p>
-	      <p>
-	      for a partition, clients interact through the leader only. This simplifies the system architecture and improves performance.</p>
-	      <p>When a leader becomes unreachable, a new leader is elected</p>
-
-      <button class="blog-back-button"><a href="index.html">Back</a></button>
-    </section>
-  </main>
-  <footer>
-  </footer>
-</div>
-</body>
-
+          <button class="blog-back-button">
+            <a href="index.html">Back</a>
+          </button>
+        </section>
+      </main>
+      <footer></footer>
+    </div>
+  </body>
 </html>

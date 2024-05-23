@@ -11,112 +11,115 @@
 
   <body>
     <div class="content">
-    <header role="banner">
-      <nav>
-        <ul>
-          <li><a href="../">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="index.html" class="active">Blog</a></li>
-        </ul>
-      </nav>
-    </header>
+      <header role="banner">
+        <nav>
+          <ul>
+            <li><a href="../">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="index.html" class="active">Blog</a></li>
+          </ul>
+        </nav>
+      </header>
 
-    <main>
-      <section>
-        <h1>Opengl rendering pipeline</h1>
-        <h2>Rendering pipeline</h2>
-        <p>
-          The OpenGL rendering pipeline is a sequence of stages that are
-          executed to render an image on the screen. These stages ensure that
-          each pixel on the screen is accurately colored and positioned
-          according to the 3D scene data. Let's expand on each of these stages
-        </p>
-        <h2>Vertex Specification</h2>
-        <p>
-          At the beginning of the rendering pipeline, we define the geometry of
-          the 3D objects in our scene. This includes specifying the coordinates
-          (x, y, z) of each vertex, which collectively create simple shapes,
-          usually triangles, forming the objects. To set up the data for these
-          vertices, we use Vertex Array Objects (VAO) to define what data a
-          vertex should have, and Vertex Buffer Objects (VBO) to store the
-          actual vertex data. Attribute pointers help establish the relationship
-          between data in VAO/VBO and the attributes used in the shaders. The
-          process of creating VAOs and VBOs is vital in initiating the drawing
-          of objects.
-        </p>
-        <h2>Vertex Shader</h2>
-        <p>
-          The Vertex Shader is a programmable stage that operates on each vertex
-          of the primitives being rendered. It can perform transformations, such
-          as translation, rotation, and scaling, to position the vertices
-          correctly in 3D space. This shader is responsible for converting 3D
-          world coordinates into 2D screen coordinates.
-        </p>
-        <h2>Tessellation</h2>
-        <p>
-          Tessellation is an optional stage that divides the data into smaller
-          primitives, allowing for finer control over the level of detail in the
-          rendering process. This can be particularly useful for smoothly curved
-          surfaces.
-        </p>
-        <h2>Geometry shader</h2>
-        <p>
-          The Geometry Shader is another programmable stage that processes
-          entire primitives, such as points, lines, or triangles. It can create
-          new primitives, discard primitives, or perform other operations based
-          on the input. This stage is often used for tasks like particle system
-          generation or procedural geometry manipulation.
-        </p>
-        <h2>Vertex post-processing</h2>
-        <p>
-          This stage includes transformations and operations that occur after
-          the Vertex Shader. Transformation feedback can capture the transformed
-          vertices for later use. Clipping is essential for removing primitives
-          that fall outside the view frustum, ensuring that only visible objects
-          are processed further.
-        </p>
-        <h2>Primitive Assembly</h2>
-        <p>
-          In this stage, the vertices are grouped into series of primitives. For
-          example, sets of three vertices become triangles. Face culling can be
-          applied here to improve rendering performance by discarding
-          back-facing or front-facing triangles based on the winding order.
-        </p>
-        <h2>Rasterization</h2>
-        <p>
-          Rasterization is the process of converting the primitives (e.g.,
-          triangles) into individual fragments (pixels) on the screen. It
-          determines which pixels are covered by the primitive and generates
-          fragment data for them.
-        </p>
-        <h2>Fragment Shader</h2>
-        <p>
-          The Fragment Shader is a programmable stage responsible for
-          calculating the final color and other attributes for each fragment. It
-          can perform shading calculations, apply textures, and determine the
-          fragment's final appearance.
-        </p>
-        <h2>Per-sample Operations</h2>
-        <p>
-          After the Fragment Shader, per-sample operations are performed. These
-          operations include various tests, such as the depth test, stencil
-          test, and alpha test, to determine whether a fragment should be drawn
-          or discarded. The depth test, for instance, checks if a fragment is in
-          front of previously rendered fragments and updates the depth buffer
-          accordingly.
-        </p>
-        <p>
-          In the simplest OpenGL program, you typically have a Vertex Shader and
-          a Fragment Shader to control the basic rendering process. However, you
-          can also extend the pipeline with optional stages like Tessellation
-          and Geometry Shaders to achieve more complex and customized rendering
-          effects.
-        </p>
+      <main>
+        <section>
+          <h1>Opengl rendering pipeline</h1>
+          <h2>Rendering pipeline</h2>
+          <p>
+            The OpenGL rendering pipeline is a sequence of stages that are
+            executed to render an image on the screen. These stages ensure that
+            each pixel on the screen is accurately colored and positioned
+            according to the 3D scene data. Let's expand on each of these stages
+          </p>
+          <h2>Vertex Specification</h2>
+          <p>
+            At the beginning of the rendering pipeline, we define the geometry
+            of the 3D objects in our scene. This includes specifying the
+            coordinates (x, y, z) of each vertex, which collectively create
+            simple shapes, usually triangles, forming the objects. To set up the
+            data for these vertices, we use Vertex Array Objects (VAO) to define
+            what data a vertex should have, and Vertex Buffer Objects (VBO) to
+            store the actual vertex data. Attribute pointers help establish the
+            relationship between data in VAO/VBO and the attributes used in the
+            shaders. The process of creating VAOs and VBOs is vital in
+            initiating the drawing of objects.
+          </p>
+          <h2>Vertex Shader</h2>
+          <p>
+            The Vertex Shader is a programmable stage that operates on each
+            vertex of the primitives being rendered. It can perform
+            transformations, such as translation, rotation, and scaling, to
+            position the vertices correctly in 3D space. This shader is
+            responsible for converting 3D world coordinates into 2D screen
+            coordinates.
+          </p>
+          <h2>Tessellation</h2>
+          <p>
+            Tessellation is an optional stage that divides the data into smaller
+            primitives, allowing for finer control over the level of detail in
+            the rendering process. This can be particularly useful for smoothly
+            curved surfaces.
+          </p>
+          <h2>Geometry shader</h2>
+          <p>
+            The Geometry Shader is another programmable stage that processes
+            entire primitives, such as points, lines, or triangles. It can
+            create new primitives, discard primitives, or perform other
+            operations based on the input. This stage is often used for tasks
+            like particle system generation or procedural geometry manipulation.
+          </p>
+          <h2>Vertex post-processing</h2>
+          <p>
+            This stage includes transformations and operations that occur after
+            the Vertex Shader. Transformation feedback can capture the
+            transformed vertices for later use. Clipping is essential for
+            removing primitives that fall outside the view frustum, ensuring
+            that only visible objects are processed further.
+          </p>
+          <h2>Primitive Assembly</h2>
+          <p>
+            In this stage, the vertices are grouped into series of primitives.
+            For example, sets of three vertices become triangles. Face culling
+            can be applied here to improve rendering performance by discarding
+            back-facing or front-facing triangles based on the winding order.
+          </p>
+          <h2>Rasterization</h2>
+          <p>
+            Rasterization is the process of converting the primitives (e.g.,
+            triangles) into individual fragments (pixels) on the screen. It
+            determines which pixels are covered by the primitive and generates
+            fragment data for them.
+          </p>
+          <h2>Fragment Shader</h2>
+          <p>
+            The Fragment Shader is a programmable stage responsible for
+            calculating the final color and other attributes for each fragment.
+            It can perform shading calculations, apply textures, and determine
+            the fragment's final appearance.
+          </p>
+          <h2>Per-sample Operations</h2>
+          <p>
+            After the Fragment Shader, per-sample operations are performed.
+            These operations include various tests, such as the depth test,
+            stencil test, and alpha test, to determine whether a fragment should
+            be drawn or discarded. The depth test, for instance, checks if a
+            fragment is in front of previously rendered fragments and updates
+            the depth buffer accordingly.
+          </p>
+          <p>
+            In the simplest OpenGL program, you typically have a Vertex Shader
+            and a Fragment Shader to control the basic rendering process.
+            However, you can also extend the pipeline with optional stages like
+            Tessellation and Geometry Shaders to achieve more complex and
+            customized rendering effects.
+          </p>
 
-        <button class="blog-back-button"><a href="index.html">Back</a></button>
-      </section>
-    </main>
-    <footer></footer>
-  </div>
+          <button class="blog-back-button">
+            <a href="index.html">Back</a>
+          </button>
+        </section>
+      </main>
+      <footer></footer>
+    </div>
   </body>
 </html>

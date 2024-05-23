@@ -11,73 +11,76 @@
 
   <body>
     <div class="content">
-    <header role="banner">
-      <nav>
-        <ul>
-          <li><a href="../">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="index.html" class="active">Blog</a></li>
-        </ul>
-      </nav>
-    </header>
+      <header role="banner">
+        <nav>
+          <ul>
+            <li><a href="../">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="index.html" class="active">Blog</a></li>
+          </ul>
+        </nav>
+      </header>
 
-    <main>
-      <section>
-        <h2>Consensus - Something we can agree on</h2>
-        <p>
-          In the realm of distributed systems, a crucial objective is the
-          capability to withstand faults, particularly in managing node
-          failures. In such scenarios, the systems must sustain their
-          functionality. Achieving this goal is facilitated by consensus
-          algorithms.
-        </p>
-        <p>
-          Usually, these algorithms are implemented through a replicated state
-          machine mechanism, which involves duplicating data across nodes and
-          maybe utilizing a write-ahead log.
-        </p>
-        <p>
-          A write-ahead log is a robust append-only data structure employed to
-          persist each state change as a command. This guarantees that in the
-          event of a machine failure, the system can reestablish its state by
-          replaying the write-ahead log.
-        </p>
-        <p>
-          To achieve consensus, a specific value must be replicated across nodes
-          a predefined number of times before it can be collectively accepted.
-          This agreement could be about electing a leader, committing a
-          transaction, or making any other collective decision.
-        </p>
-        <p>
-          There are many challenges preventing this. Distributed systems are
-          inherently concurrent. Multiple processes can execute simultaneously.
-          Moreover, they operate in an asynchronous environment, meaning there
-          is no global clock, and message delivery times are not fixed.
-          Additionally, processes can fail at any time. Distributed consensus
-          protocols need to handle these complexities to ensure correctness and
-          reliability.
-        </p>
-        <p>
-          One of the key properties of distributed consensus is termination. It
-          ensures that every correct process will eventually decide on a value,
-          even if it takes an indefinite amount of time. This property ensures
-          that the consensus problem is solvable under various conditions.
-        </p>
-        <p>
-          The value decided upon must have been initially proposed by one of the
-          processes. This property is called integrity and it is used to ensure
-          against any external influence or tampering with the agreed-upon
-          value.
-        </p>
-        <p>
-          Some of the more well known consensus algorithms are
-          <a href="./raft.html">Raft</a>, Paxos, view-stamped replication and
-          Zab (used by zookeeper)
-        </p>
-        <button class="blog-back-button"><a href="index.html">Back</a></button>
-      </section>
-    </main>
-    <footer></footer>
-  </div>
+      <main>
+        <section>
+          <h2>Consensus - Something we can agree on</h2>
+          <p>
+            In the realm of distributed systems, a crucial objective is the
+            capability to withstand faults, particularly in managing node
+            failures. In such scenarios, the systems must sustain their
+            functionality. Achieving this goal is facilitated by consensus
+            algorithms.
+          </p>
+          <p>
+            Usually, these algorithms are implemented through a replicated state
+            machine mechanism, which involves duplicating data across nodes and
+            maybe utilizing a write-ahead log.
+          </p>
+          <p>
+            A write-ahead log is a robust append-only data structure employed to
+            persist each state change as a command. This guarantees that in the
+            event of a machine failure, the system can reestablish its state by
+            replaying the write-ahead log.
+          </p>
+          <p>
+            To achieve consensus, a specific value must be replicated across
+            nodes a predefined number of times before it can be collectively
+            accepted. This agreement could be about electing a leader,
+            committing a transaction, or making any other collective decision.
+          </p>
+          <p>
+            There are many challenges preventing this. Distributed systems are
+            inherently concurrent. Multiple processes can execute
+            simultaneously. Moreover, they operate in an asynchronous
+            environment, meaning there is no global clock, and message delivery
+            times are not fixed. Additionally, processes can fail at any time.
+            Distributed consensus protocols need to handle these complexities to
+            ensure correctness and reliability.
+          </p>
+          <p>
+            One of the key properties of distributed consensus is termination.
+            It ensures that every correct process will eventually decide on a
+            value, even if it takes an indefinite amount of time. This property
+            ensures that the consensus problem is solvable under various
+            conditions.
+          </p>
+          <p>
+            The value decided upon must have been initially proposed by one of
+            the processes. This property is called integrity and it is used to
+            ensure against any external influence or tampering with the
+            agreed-upon value.
+          </p>
+          <p>
+            Some of the more well known consensus algorithms are
+            <a href="./raft.html">Raft</a>, <a href="./paxos.html">Paxos</a>,
+            view-stamped replication and Zab (used by zookeeper)
+          </p>
+          <button class="blog-back-button">
+            <a href="index.html">Back</a>
+          </button>
+        </section>
+      </main>
+      <footer></footer>
+    </div>
   </body>
 </html>

@@ -1,46 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Configuring Tomcat</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Configuring Tomcat</title>
-  <link rel="stylesheet" href="../stylesheets/style.css">
-  <link rel="stylesheet" href="../stylesheets/blog.css">
-</head>
+  <body>
+    <header role="banner">
+      <nav>
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="index.html" class="active">Blog</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<body>
-  <header role="banner">
-    <nav>
-      <ul>
-        <li><a href="../">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="index.html" class="active">Blog</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section>
-      <h2>Tomcat configuration</h2>
-      <hr>
-      <p>Main files concerning tomcat configuration</p>
-      <p>On a deployed tomcat instance, these files can be found at <code>/opt/tomcat/conf</code>
-      <p>references: <a href="https://tomcat.apache.org/tomcat-8.5-doc/appdev/deployment.html">tomcat docs</a></p>
-      <pre class="code-block">conf/
+    <main>
+      <section>
+        <h2>Tomcat configuration</h2>
+        <hr />
+        <p>Main files concerning tomcat configuration</p>
+        <p>
+          On a deployed tomcat instance, these files can be found at
+          <code>/opt/tomcat/conf</code>
+        </p>
+        <p>
+          references:
+          <a
+            href="https://tomcat.apache.org/tomcat-8.5-doc/appdev/deployment.html"
+            >tomcat docs</a
+          >
+        </p>
+        <pre class="code-block">
+conf/
    - catalina.policy
    - catalina.properties
    - logging.properties
    - server.xml
    - tomcat-users.xml
    - web.xml
-   - context.xml</pre>
-      <h2>server.xml</h2>
-      <hr>
-      <p>
-      this is the main config file. located in the <code>conf</code> dir of installed tomcat configure <code>Resources</code> such as jdbc, messge brokers etc within <code>GlobalNamingResources</code>:
-      <pre class="code-block"><code>conf/
+   - context.xml</pre
+        >
+        <h2>server.xml</h2>
+        <hr />
+        <p>
+          this is the main config file. located in the <code>conf</code> dir of
+          installed tomcat configure <code>Resources</code> such as jdbc, messge
+          brokers etc within <code>GlobalNamingResources</code>:
+        </p>
+
+        <pre class="code-block"><code>conf/
    -<span class="ruby"> catalina.policy
 </span>   -<span class="ruby"> catalina.properties
 </span>   -<span class="ruby"> logging.properties
@@ -48,10 +62,16 @@
 </span>   -<span class="ruby"> tomcat-users.xml
 </span>   -<span class="ruby"> web.xml
 </span>   -<span class="ruby"> context.xml</span>
-</code></pre><h2 id="server-xml">server.xml</h2>
-<p>this is the main config file. located in the <code>conf</code> dir of installed tomcat
-configure <code>Resource</code>s such as jdbc, messge brokers etc within <code>GlobalNamingResources</code>:</p>
-<pre class="code-block"><code class="lang-xml">&lt;Server <span class="hljs-params">...</span>
+</code></pre>
+        <h2 id="server-xml">server.xml</h2>
+        <p>
+          this is the main config file. located in the <code>conf</code> dir of
+          installed tomcat configure <code>Resource</code>s such as jdbc, messge
+          brokers etc within <code>GlobalNamingResources</code>:
+        </p>
+        <pre
+          class="code-block"
+        ><code class="lang-xml">&lt;Server <span class="hljs-params">...</span>
   <span class="hljs-params">...</span>
   &lt;GlobalNamingResources&gt;
     &lt;Resource name=<span class="hljs-string">"jdbc/db"</span> auth=<span class="hljs-string">"Container"</span> <span class="hljs-keyword">type</span>=<span class="hljs-string">"javax.sql.DataSource"</span>
@@ -63,9 +83,15 @@ configure <code>Resource</code>s such as jdbc, messge brokers etc within <code>G
   &lt;/GlobalNamingResources&gt;
 /Server&gt;
 </code></pre>
-<h2 id="web-xml">web.xml</h2>
-<p>deployment descriptor for a web application. Defines servlets, filters and other components.  during development typically located in <code>WEB-INF</code> dir</p>
-<pre class="code-block"><code class="lang-xml"><span class="hljs-attribute">&lt;web-app ...
+        <h2 id="web-xml">web.xml</h2>
+        <p>
+          deployment descriptor for a web application. Defines servlets, filters
+          and other components. during development typically located in
+          <code>WEB-INF</code> dir
+        </p>
+        <pre
+          class="code-block"
+        ><code class="lang-xml"><span class="hljs-attribute">&lt;web-app ...
   &lt;display-name&gt;</span>my web app<span class="hljs-attribute">&lt;/display-name&gt;</span>
 
   <span class="hljs-attribute">&lt;welcome-file-list&gt;</span>
@@ -90,12 +116,26 @@ configure <code>Resource</code>s such as jdbc, messge brokers etc within <code>G
 
 <span class="hljs-attribute">&lt;/web-app&gt;</span>
 </code></pre>
-<p><code>resource-ref</code> element refers to the <code>jdbc/db</code> data source defined in <code>server.xml</code></p>
-<h2 id="context-xml">context.xml</h2>
-<p>defines database connections, JNDI resources and other configurations</p>
-<p>There exists a server context and a context for each web application. The server context is found in the <code>conf</code> dir and is used to define global resources shared across many web applications.</p>
-<p>An application context is located in the <code>META-INF</code> dir and is used to define resources specific to that application.</p>
-<pre class="code-block"><code class="lang-xml">&lt;<span class="hljs-keyword">Context</span>&gt;
+        <p>
+          <code>resource-ref</code> element refers to the
+          <code>jdbc/db</code> data source defined in <code>server.xml</code>
+        </p>
+        <h2 id="context-xml">context.xml</h2>
+        <p>
+          defines database connections, JNDI resources and other configurations
+        </p>
+        <p>
+          There exists a server context and a context for each web application.
+          The server context is found in the <code>conf</code> dir and is used
+          to define global resources shared across many web applications.
+        </p>
+        <p>
+          An application context is located in the <code>META-INF</code> dir and
+          is used to define resources specific to that application.
+        </p>
+        <pre
+          class="code-block"
+        ><code class="lang-xml">&lt;<span class="hljs-keyword">Context</span>&gt;
   &lt;Resouce name<span class="hljs-string">"jdbc/db"</span>
     auth=<span class="hljs-string">"Container"</span>
     <span class="hljs-keyword">type</span>=<span class="hljs-string">"javax.sql.DataSource"</span>
@@ -107,21 +147,42 @@ configure <code>Resource</code>s such as jdbc, messge brokers etc within <code>G
   /&gt;
 &lt;/<span class="hljs-keyword">Context</span>&gt;
 </code></pre>
-<p>The above <code>context.xml</code> contains a <code>Resource</code> element which specifies connection parameters for a mqsql database including jdbc driver class name, url, username, password and connection pooling settings. </p>
-<p>A <code>context.xml</code> file might also detail a <code>ResourceLink</code> element:</p>
-<pre class="code-block"><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Context</span>&gt;</span>
+        <p>
+          The above <code>context.xml</code> contains a
+          <code>Resource</code> element which specifies connection parameters
+          for a mqsql database including jdbc driver class name, url, username,
+          password and connection pooling settings.
+        </p>
+        <p>
+          A <code>context.xml</code> file might also detail a
+          <code>ResourceLink</code> element:
+        </p>
+        <pre
+          class="code-block"
+        ><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Context</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">ResourceLink</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"jdbc/db"</span>
                 <span class="hljs-attr">global</span>=<span class="hljs-string">"jdbdc/db"</span>
                 <span class="hljs-attr">type</span>=<span class="hljs-string">"javax.sql.DataSource"</span>
   /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Context</span>&gt;</span>
 </code></pre>
-<p>which refers to an external resource called <code>jdbc/db</code>. <code>global</code> specifies the JNDI name of the resource - defined in the server context and referenced in the application context </p>
-<h2 id="catalina-properties">catalina.properties</h2>
-<p>contains the global config settings located in <code>conf</code> dir</p>
-<h2 id="setenv-sh">setenv.sh</h2>
-<p>set environment variables for tomcat. typically java options. located in <code>bin</code> dir</p>
-<pre class="code-block"><code class="lang-bash"><span class="hljs-meta">#!/bin/sh
+        <p>
+          which refers to an external resource called <code>jdbc/db</code>.
+          <code>global</code> specifies the JNDI name of the resource - defined
+          in the server context and referenced in the application context
+        </p>
+        <h2 id="catalina-properties">catalina.properties</h2>
+        <p>
+          contains the global config settings located in <code>conf</code> dir
+        </p>
+        <h2 id="setenv-sh">setenv.sh</h2>
+        <p>
+          set environment variables for tomcat. typically java options. located
+          in <code>bin</code> dir
+        </p>
+        <pre
+          class="code-block"
+        ><code class="lang-bash"><span class="hljs-meta">#!/bin/sh
 </span>
 <span class="hljs-built_in">export</span> JAVA_OPTS=<span class="hljs-string">"-xms512m -Xmx1024"</span>
 
@@ -129,16 +190,17 @@ configure <code>Resource</code>s such as jdbc, messge brokers etc within <code>G
 
 ...
 </code></pre>
-<h2 id="logging-properties">logging.properties</h2>
-<p>defines log levels, log file location and log format</p>
-<h3 id="note">note</h3>
-<p>During development these files could be located in different locations depending on the codebase. Some options such as JDBC connectivity or runtime settings might be set programatically.</p>
-
-      </p>
-      <button class="blog-back-button"><a href="index.html">Back</a></button>
-    </section>
-  </main>
-  <footer>
-  </footer>
-</body>
-
+        <h2 id="logging-properties">logging.properties</h2>
+        <p>defines log levels, log file location and log format</p>
+        <h3 id="note">note</h3>
+        <p>
+          During development these files could be located in different locations
+          depending on the codebase. Some options such as JDBC connectivity or
+          runtime settings might be set programatically.
+        </p>
+        <button class="blog-back-button"><a href="index.html">Back</a></button>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
+</html>

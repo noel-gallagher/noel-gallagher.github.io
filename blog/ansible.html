@@ -40,13 +40,12 @@
   <h2>Check Mode</h2>
   <p>Check mode helps analyze potential outcomes without making changes.</p>
   <p>Example: <code>ansible -m copy -a "dest='hello' content='world'" localhost"</code></p>
-  <p>Outcomes:
+  <p>Outcomes:</p>
     <ul>
       <li><code>SUCCESS</code>: File and contents already exist.</li>
       <li><code>CHANGED</code>: File did not exist or contents were changed.</li>
       <li><code>FAILED</code>: The operation failed.</li>
     </ul>
-  </p>
   <p>Use <code>--check</code> to reveal the state without performing the operation.</p>
 
   <h2>Diff Flag</h2>

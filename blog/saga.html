@@ -11,63 +11,86 @@
 
   <body>
     <div class="content">
-    <header role="banner">
-      <nav>
-        <ul>
-          <li><a href="../">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="index.html" class="active">Blog</a></li>
-        </ul>
-      </nav>
-    </header>
+      <header role="banner">
+        <nav>
+          <ul>
+            <li><a href="../">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="index.html" class="active">Blog</a></li>
+          </ul>
+        </nav>
+      </header>
 
-    <main>
-      <section>
-        <h1>Sagas</h1>
-        <p>
-          One of the difficulties of working on distributed systems is losing
-          the ability to easily execute a "unit of work" - a set of atomic
-          operations which either all happen or none happen at all. Such an
-          operation can be abstracted from the developer by relying on a
-          database. however in a distributed system, each service can have its
-          own database, losing the luxury of a single database for atomicity.
-        </p>
-        <p>
-          Sagas are a way to implement distributed transactions while preventing
-          locking (such as
-          <a href="./two-phase-commit.html">2-phase commit</a>). Relying on
-          locks will hinder performance and scalability. A saga allows for
-          atomic operations to complete by executing a compensating action in
-          the event of failure.
-        </p>
-        <p>Sagas can be coordinated by 'choreography' or orchestration.</p>
-        <p>With choreography, each service works in a cooperative manner. Each service must be aware of its role in the saga. When a service executes a transaction action, it publishes an event to the next service. The receiving service then executes its own action and responds with success or failure. In the event of failure, the failing service sends a failure message to its requester. On receipt of this failing messages, the receiving service executes its own compensating rollback action. </p>
-        <p>In contrast, orchestration involves a centralised service responsiblie for managing the saga.  the orchestrator sends requests to each of the involved services, the services perform the action and reply to the orchestrator. In the event of faliure, the orchestrator messgaes each of the involved services to perform the compensation/rollback process.</p>
-        <p>With this approach, the workflow is somewhat simplified at the cost of potentially introducing a single point of failure or bottleneck to the system.</p>
-        <p>
-          As an example, consider a pizza ordering system consisting of separate microservices:
-          an Ordering Service, a Payment Service, and a Kitchen Service.
-          Implementing a saga pattern ensures consistency and handles potential
-          failures during the order process
-        </p>
-        <ol>
-          <li>User places an order via ordering service</li>
-          <li>Payment is processed via the payment service</li>
-          <li>the order is processed by the Kitchen service</li>
-        </ol>
-        <p>
-          Any of these steps could result in a failure. For each failure
-          possibility, a compensating transaction must exist for rollback to be
-          possible. Let's explore some possibilities:
-        </p>
-        <p>The payment is rejected - Set the order to failed</p>
-        <p>
-          The kitchen is unavailable - Refund the user, set the order to failed
-        </p>
-        <button class="blog-back-button"><a href="index.html">Back</a></button>
-      </section>
-    </main>
-    <footer></footer>
-  </div>
+      <main>
+        <section>
+          <h1>Sagas</h1>
+          <p>
+            One of the difficulties of working on distributed systems is losing
+            the ability to easily execute a "unit of work" - a set of atomic
+            operations which either all happen or none happen at all. Such an
+            operation can be abstracted from the developer by relying on a
+            database. however in a distributed system, each service can have its
+            own database, losing the luxury of a single database for atomicity.
+          </p>
+          <p>
+            Sagas are a way to implement distributed transactions while
+            preventing locking (such as
+            <a href="./two-phase-commit.html">2-phase commit</a>). Relying on
+            locks will hinder performance and scalability. A saga allows for
+            atomic operations to complete by executing a compensating action in
+            the event of failure.
+          </p>
+          <p>Sagas can be coordinated by 'choreography' or orchestration.</p>
+          <p>
+            With choreography, each service works in a cooperative manner. Each
+            service must be aware of its role in the saga. When a service
+            executes a transaction action, it publishes an event to the next
+            service. The receiving service then executes its own action and
+            responds with success or failure. In the event of failure, the
+            failing service sends a failure message to its requester. On receipt
+            of this failing messages, the receiving service executes its own
+            compensating rollback action.
+          </p>
+          <p>
+            In contrast, orchestration involves a centralised service
+            responsiblie for managing the saga. the orchestrator sends requests
+            to each of the involved services, the services perform the action
+            and reply to the orchestrator. In the event of faliure, the
+            orchestrator messgaes each of the involved services to perform the
+            compensation/rollback process.
+          </p>
+          <p>
+            With this approach, the workflow is somewhat simplified at the cost
+            of potentially introducing a single point of failure or bottleneck
+            to the system.
+          </p>
+          <p>
+            As an example, consider a pizza ordering system consisting of
+            separate microservices: an Ordering Service, a Payment Service, and
+            a Kitchen Service. Implementing a saga pattern ensures consistency
+            and handles potential failures during the order process
+          </p>
+          <ol>
+            <li>User places an order via ordering service</li>
+            <li>Payment is processed via the payment service</li>
+            <li>the order is processed by the Kitchen service</li>
+          </ol>
+          <p>
+            Any of these steps could result in a failure. For each failure
+            possibility, a compensating transaction must exist for rollback to
+            be possible. Let's explore some possibilities:
+          </p>
+          <p>The payment is rejected - Set the order to failed</p>
+          <p>
+            The kitchen is unavailable - Refund the user, set the order to
+            failed
+          </p>
+          <button class="blog-back-button">
+            <a href="index.html">Back</a>
+          </button>
+        </section>
+      </main>
+      <footer></footer>
+    </div>
   </body>
 </html>

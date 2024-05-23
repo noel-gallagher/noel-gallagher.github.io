@@ -1,33 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Python config</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Python config</title>
-  <link rel="stylesheet" href="../stylesheets/style.css">
-  <link rel="stylesheet" href="../stylesheets/blog.css">
-</head>
+  <body>
+    <header role="banner">
+      <nav>
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="index.html" class="active">Blog</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<body>
-  <header role="banner">
-    <nav>
-      <ul>
-        <li><a href="../">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="index.html" class="active">Blog</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section>
-	  <h1>DI in python</h1>
-      <a href=https://github.com/noel-gallagher/python_di_example/>code on github</a>
-	  <p> Handling DI in python<p> 
-	  <p> Let's write a simple wiring of two services, A and B. first we can capture the behaviour of the service via two abstract base classes (ABCs), `ServiceA` and `ServiceB`, and then create multiple concrete implementations for each of these services.</p>
-<pre class="code-block"><code>
+    <main>
+      <section>
+        <h1>DI in python</h1>
+        <a href="https://github.com/noel-gallagher/python_di_example/"
+          >code on github</a
+        >
+        <p>Handling DI in python</p>
+        <p></p>
+        <p>
+          Let's write a simple wiring of two services, A and B. first we can
+          capture the behaviour of the service via two abstract base classes
+          (ABCs), `ServiceA` and `ServiceB`, and then create multiple concrete
+          implementations for each of these services.
+        </p>
+        <pre class="code-block"><code>
 from abc import ABC, abstractmethod
 
 class ServiceA(ABC):
@@ -56,20 +63,27 @@ class ServiceBImpl2(ServiceB):
     def run(self):
         return "Running Service B Impl 2"
 </code></pre>
-<p>
-Now, we can define a configuration file which will specify which implementation to be used for ServiceA and ServiceB
-</p>
+        <p>
+          Now, we can define a configuration file which will specify which
+          implementation to be used for ServiceA and ServiceB
+        </p>
 
-<pre class="code-block"><code>
+        <pre class="code-block"><code>
 [SERVICES]
 ServiceA = ServiceAImpl1
 ServiceB = ServiceBImpl2
 </code></pre>
 
-<p>This file specifies ServiceA, should use ServiceAImpl1 and for ServiceB, it should use ServiceBImpl2.</p>
+        <p>
+          This file specifies ServiceA, should use ServiceAImpl1 and for
+          ServiceB, it should use ServiceBImpl2.
+        </p>
 
-<p>Then, to use the configuration, we can use python's configparser to get the correct class implementations:</p>
-<pre class="code-block"><code>
+        <p>
+          Then, to use the configuration, we can use python's configparser to
+          get the correct class implementations:
+        </p>
+        <pre class="code-block"><code>
 # assumes that the services and the main loading script are in the same module. 
 import configparser
 
@@ -92,16 +106,14 @@ print(service_a_instance.execute())
 print(service_b_instance.run())
 </code></pre>
 
-<p>this would print:</p>
-<pre class="code-block"><code>
+        <p>this would print:</p>
+        <pre class="code-block"><code>
 Executing Service A Impl 1
 Running Service B Impl 2
 </code></pre>
-      <button class="blog-back-button"><a href="index.html">Back</a></button>
-    </section>
-  </main>
-  <footer>
-  </footer>
-</body>
-
+        <button class="blog-back-button"><a href="index.html">Back</a></button>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
 </html>
