@@ -15,7 +15,8 @@
 body {
   background: var(--main-bright-bg-colour);
   color: var(--main-bright-text-colour);
-  font-family: Arial, Helvetica, Sans-Serif;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, Helvetica, Sans-Serif;
+  line-height: 1.8;
 }
 
 @media (prefers-color-scheme: dark) {
