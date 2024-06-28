@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Source to Execution</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+  </head>
+
+  <body>
+    <div class="content">
+      <header role="banner">
+        <nav>
+          <ul>
+            <li><a href="../">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="index.html" class="active">Blog</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+        <section>
+          <h1>From source to execution</h1>
+          <p>
+            When writing code, what happens to transform it from source code to
+            an executable binary? First we have the compiler, a piece of
+            software that takes source code written in a programming language
+            and converts it into another, typically assembly. Different
+            processors support different instruction sets, but the most common
+            are x86/x64 or ARM.
+          </p>
+          <p>
+            Once we have assembly, we can convert it to binary (object code)
+            using an assembler.
+          </p>
+          <p>
+            The final step involves the linker. The linker is responsible for
+            taking these object files and resolving variable names and other
+            pieces of data in order to make the program executable.
+          </p>
+
+          <h2>Inside the compiler</h2>
+          <p>
+            Within a compiler, there are sub-responsiblities split into two(or
+            more) sections:
+          </p>
+
+          <p>frontend:</p>
+          <ul>
+            <li>
+              lexing: the process of scanning the input text and converting to
+              tokens. Tokens represent the smallest unit of meaning such as
+              keywords (think "for", "class", "return" etc), identifiers and
+              operators.
+            </li>
+            <li>
+              parser: builds up the program into a representation to be
+              anaylsed, typically an abstract-syntax tree(AST). This is a
+              hierarchial structure of the source, allowing it to be easily
+              interpretered.
+            </li>
+          </ul>
+          <p>backend:</p>
+          <ul>
+            <li>
+              Intermediate representation: Before generating machine code, many
+              compilers manipulate the AST in order to produce some intermediate
+              representation - this is a lower level represetnation of the
+              program but still high-level enough to be independant of the
+              underlying hardware.
+            </li>
+            <li>
+              code generation: take the IR and output machine code/assembly
+              language specific to the target CPU.
+            </li>
+          </ul>
+
+          <p>
+            there could be more stages for handling a preprocessor and
+            introducing optimisations
+          </p>
+          <h2>Linker</h2>
+          <p>
+            The linker combines multiple object files produced by the compiler
+            into a single executable. It resolves references(variables,
+            functions) between different object files and memory addresses.
+          </p>
+          <p>
+            It also handles static and dynamic libraries. Static libraries are
+            baked into the executable at compile time. This can result in faster
+            executable times but larger binaries since common functionalities
+            cannot be shared across multiple executables (each program will
+            require it to be compiled with the library.)
+          </p>
+          <p>
+            Dynamic/shared libraries are not included directly in the binary,
+            they are loaded at runtime instead. This results in more reuse (ie
+            libc), ability to change behaviour at runtime among other things.
+          </p>
+
+          <button class="blog-back-button">
+            <a href="index.html">Back</a>
+          </button>
+        </section>
+      </main>
+      <footer></footer>
+    </div>
+  </body>
+</html>

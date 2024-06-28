@@ -24,8 +24,19 @@
       <main>
         <section>
           <h1>Writing a hashmap in c</h1>
-          <p>The code for this project can be found on <a href="https://github.com/noel-gallagher/hashmap-fun">github</a></p>
-          <p>Hashmaps(associative arrays) are a type of data structures which store key/value pairs. A key is usually a type(usually a string) and the value some type. For example a kv pair which maps strings to integers could be represented by "k" -> [0,1,2,3,(4)], when the key "k" is hashed, it maps to the value (4). Interestingly, the c standard library does not provide an implementation. so let's write one:</p>
+          <p>
+            The code for this project can be found on
+            <a href="https://github.com/noel-gallagher/hashmap-fun">github</a>
+          </p>
+          <p>
+            Hashmaps(associative arrays) are a type of data structures which
+            store key/value pairs. A key is usually a type(usually a string) and
+            the value some type. For example a kv pair which maps strings to
+            integers could be represented by "k" -> [0,1,2,3,(4)], when the key
+            "k" is hashed, it maps to the value (4). Interestingly, the c
+            standard library does not provide an implementation. so let's write
+            one:
+          </p>
           <h2>Basic structure</h2>
           <p>First let's start by representing a simple key/value pair:</p>
           <pre class="code-block"><code>
@@ -35,14 +46,21 @@ typedef struct KeyValuePair {
 	struct KeyValuePair *next;
         } KeyValuePair;
           </code></pre>
-          <p>for now it's just a string->int kv pair. Next we define our hashmap:</p>
+          <p>
+            for now it's just a string->int kv pair. Next we define our hashmap:
+          </p>
           <pre class="code-block"><code>
           typedef struct {
             HashFunction hashfunction; 
             KeyValuePair *buckets[HASHMAP_SIZE]; 
           } HashMap;
           </code></pre>
-          <p>This will hold our keyValuePairs and use a user-supplied hash function to compute the index into the array of key value pairs in order to perform an operation. Speaking of which... let's define our operations:</p>
+          <p>
+            This will hold our keyValuePairs and use a user-supplied hash
+            function to compute the index into the array of key value pairs in
+            order to perform an operation. Speaking of which... let's define our
+            operations:
+          </p>
           <pre class="code-block"><code>
           HashMap* createHashMap();
           void freeHashMap(HashMap *hmap);
@@ -50,11 +68,32 @@ typedef struct KeyValuePair {
           void put(HashMap *map, const char *key, int value);
           int get(const HashMap *map, const char *key);
           </code></pre>
-          <p>These functions allow us to support the basic requirements of the data structure: inserting a value and getting that value (if it exists)</p>
-          <p>We won't concern ourselves with allocating and deallocating memory, you can checkout the source code for more details, what we will focus on instead is how to resolve a collision when one occurs. It's possilbe that the hash function computes the same index for different items, this is known as a collision. There are different ways of resolving collisions. First let's take a look at chaining.</p>
+          <p>
+            These functions allow us to support the basic requirements of the
+            data structure: inserting a value and getting that value (if it
+            exists)
+          </p>
+          <p>
+            We won't concern ourselves with allocating and deallocating memory,
+            you can checkout the source code for more details, what we will
+            focus on instead is how to resolve a collision when one occurs. It's
+            possilbe that the hash function computes the same index for
+            different items, this is known as a collision. There are different
+            ways of resolving collisions. First let's take a look at chaining.
+          </p>
           <h2>Chaining</h2>
-          <p>With this method of handling collisions, each bucket in the hashmap is backed by a linkedlist. </p>
-          <p>checkout <a href="https://github.com/noel-gallagher/hashmap-fun/blob/49c38238f0cc2a5c882200072fa97521fb97f8df/src/hashmap.c">this commit</a> for the source</p>
+          <p>
+            With this method of handling collisions, each bucket in the hashmap
+            is backed by a linkedlist.
+          </p>
+          <p>
+            checkout
+            <a
+              href="https://github.com/noel-gallagher/hashmap-fun/blob/49c38238f0cc2a5c882200072fa97521fb97f8df/src/hashmap.c"
+              >this commit</a
+            >
+            for the source
+          </p>
           <pre class="code-block"><code>
           void put(HashMap *map, const char *key, int value) {
             int index = hash(key); 
@@ -72,8 +111,15 @@ typedef struct KeyValuePair {
             }
         }
           </code></pre>
-          <p>As you can see, should we index into the bucket and it is not empty, that means we have a collision. When a collision occurs, we walk the list and insert at the end of the list.</p>
-          <p>As a consequence, we must adapt our get function to search the linkedlist for the key:</p>
+          <p>
+            As you can see, should we index into the bucket and it is not empty,
+            that means we have a collision. When a collision occurs, we walk the
+            list and insert at the end of the list.
+          </p>
+          <p>
+            As a consequence, we must adapt our get function to search the
+            linkedlist for the key:
+          </p>
           <pre class="code-block"><code>
           int get(const HashMap *map, const char *key) {
             int index = hash(key);
@@ -88,11 +134,26 @@ typedef struct KeyValuePair {
           }
           </code></pre>
           <h2>Open addressing</h2>
-          <p>Open addressing is another method of collision resolution. Instead of using another datastructure which can handle multiple values, ie a linkedlist as in the above chaining example, open addressing moves to the next available empty slot in the associative array. There are several methods of determining where to find the next slot in the array such as:</p>
+          <p>
+            Open addressing is another method of collision resolution. Instead
+            of using another datastructure which can handle multiple values, ie
+            a linkedlist as in the above chaining example, open addressing moves
+            to the next available empty slot in the associative array. There are
+            several methods of determining where to find the next slot in the
+            array such as:
+          </p>
           <ul>
-            <li>linear probing: just go to the next free index, wrapping around when reaching the end.</li> 
-            <li>Quadratic probing: use quadratic function to determine the next index</li>
-            <li>double hashing: use another hash function if a collision occurs</li>
+            <li>
+              linear probing: just go to the next free index, wrapping around
+              when reaching the end.
+            </li>
+            <li>
+              Quadratic probing: use quadratic function to determine the next
+              index
+            </li>
+            <li>
+              double hashing: use another hash function if a collision occurs
+            </li>
           </ul>
           <p>below is a simple linear probing example:</p>
           <pre class="code-block"><code>
@@ -115,8 +176,18 @@ typedef struct KeyValuePair {
 }
           </code></pre>
           <h2>Make it generic</h2>
-          <p>In order to support other types, it is mostly a case of providing your size_t and replacing occurances of int with void*</p>
-          <p>see <a href="https://github.com/noel-gallagher/hashmap-fun/commit/ae539a2c15a91cb1c61ba84bd0545a56fa4e83a9">this commit</a> for more details</p>
+          <p>
+            In order to support other types, it is mostly a case of providing
+            your size_t and replacing occurances of int with void*
+          </p>
+          <p>
+            see
+            <a
+              href="https://github.com/noel-gallagher/hashmap-fun/commit/ae539a2c15a91cb1c61ba84bd0545a56fa4e83a9"
+              >this commit</a
+            >
+            for more details
+          </p>
           <pre class=""><code>
           typedef int (*HashFunction)(const char* key, size_t hmap_size);
 
