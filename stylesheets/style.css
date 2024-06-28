@@ -36,6 +36,18 @@ body {
   }
 }
 
+section {
+  padding: 2rem 10rem;
+  text-align: justify;
+}
+
+@media screen and (max-width: 768px) {
+  section {
+    text-align: left;
+    padding: 1rem;
+  }
+}
+
 .center {
   display: grid;
   place-items: center;
