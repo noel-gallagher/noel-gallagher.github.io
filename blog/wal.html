@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Database Durability</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+  </head>
+
+  <body>
+    <div class="content">
+      <header role="banner">
+        <nav>
+          <ul>
+            <li><a href="../">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="index.html" class="active">Blog</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+        <section>
+          <h1>Database Durability</h1>
+          <p>
+            Durability guarantees that once a transaction is committed, its
+            changes are permanently stored in the database, even in the event of
+            a crash. But crashes DO happen - What should happen in the event of
+            a crash when a transaction is being committed? How does a database
+            ensure durability in such a case?
+          </p>
+          <p>
+            Each action can be written to disk - but this will break atomicity
+            should the transaction only partially complete. Therefore, any
+            transaction which begins must either complete or be rolled back.
+            Databases can handle this process in different ways: two popular
+            approaches are working with shadow copies/pages or a write-ahead log
+            (WAL)
+          </p>
+          <h2>Shadow Copies/Pages</h2>
+          <p>
+            Shadow copies involved creating an entire copy of or part of the
+            database. Should an error occur, the copy is removed. When the
+            transaction completes, the old data can be replaced with the new
+            data via an atomic operation (such as rename)
+          </p>
+          <h2>Write ahead logging</h2>
+          <p>
+            Write each action to a log. On crash, the unfinished transaction can
+            be completed or rolled back. the WAL represents a sequence of
+            actions which must be written to storage before any operation is
+            executed on the database.
+          </p>
+          <p>
+            How to optimise such a log without suffering the penalty of constant
+            writes? how to use this log to recover efficiently? These are the
+            questions answered by ARIES - algorithms for recovery and isolation
+            exploring semantics.
+            <a href="https://web.stanford.edu/class/cs345d-01/rl/aries.pdf"
+              >the ARIES paper</a
+            >
+            describes mechanisms for transaction recovery
+          </p>
+          <p>
+            Each log entry is structred to facilitate performance and minimise
+            recovery impact. Each entry has the following:
+          </p>
+          <ul>
+            <li>
+              Log sequence number: for ordering in a chronological fashion
+            </li>
+            <li>
+              A transactionID: associated with the transaction responsible for
+              the action
+            </li>
+            <li>
+              A pageID: the location of the modified data. A database page is
+              the minimum amount of IO possible, so this is where the data is
+              located on disk.
+            </li>
+            <li>
+              previous log sequence number: ref to the previous log of the same
+              transaction
+            </li>
+            <li>undo: some function to undo the operation</li>
+            <li>redo: some function to apply the operation</li>
+          </ul>
+          <p>
+            in order to prevent these writes from becoming a bottleneck, they
+            are buffered in memory. First, the query is parsed and executed,
+            then the buffer pool which caches pages in memory is updated, then
+            the log is updated. at some later point the log entries are flushed
+            to disk. Deffering the writes in such a way allows us to take
+            greater advantage of the hardware's pagesize rather than repeatedly
+            wasting IOs. Later again, the buffer pool cache is written to disk.
+            so why do we need a log? writing to a sequential file is less effort
+            than writing to a structure is optimised for querying and reading.
+          </p>
+          <button class="blog-back-button">
+            <a href="index.html">Back</a>
+          </button>
+        </section>
+      </main>
+      <footer></footer>
+    </div>
+  </body>
+</html>
