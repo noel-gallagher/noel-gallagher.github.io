@@ -49,13 +49,13 @@
           <h2>Write ahead logging</h2>
           <p>
             Write each action to a log. On crash, the unfinished transaction can
-            be completed or rolled back. the WAL represents a sequence of
+            be completed or rolled back. The WAL represents a sequence of
             actions which must be written to storage before any operation is
             executed on the database.
           </p>
           <p>
             How to optimise such a log without suffering the penalty of constant
-            writes? how to use this log to recover efficiently? These are the
+            writes? How to use this log to recover efficiently? These are the
             questions answered by ARIES - algorithms for recovery and isolation
             exploring semantics.
             <a href="https://web.stanford.edu/class/cs345d-01/rl/aries.pdf"
@@ -64,7 +64,7 @@
             describes mechanisms for transaction recovery
           </p>
           <p>
-            Each log entry is structred to facilitate performance and minimise
+            Each log entry is structured to facilitate performance and minimise
             recovery impact. Each entry has the following:
           </p>
           <ul>
@@ -91,11 +91,11 @@
             in order to prevent these writes from becoming a bottleneck, they
             are buffered in memory. First, the query is parsed and executed,
             then the buffer pool which caches pages in memory is updated, then
-            the log is updated. at some later point the log entries are flushed
-            to disk. Deffering the writes in such a way allows us to take
+            the log is updated. At some later point the log entries are flushed
+            to disk. Deferring the writes in such a way allows us to take
             greater advantage of the hardware's pagesize rather than repeatedly
             wasting IOs. Later again, the buffer pool cache is written to disk.
-            so why do we need a log? writing to a sequential file is less effort
+            So why do we need a log? Writing to a sequential file is less effort
             than writing to a structure is optimised for querying and reading.
           </p>
           <button class="blog-back-button">
