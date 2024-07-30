@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Async overview</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+  </head>
+
+  <body>
+    <div class="content">
+      <header role="banner">
+        <nav>
+          <ul>
+            <li><a href="../">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="index.html" class="active">Blog</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+        <section>
+          <h1>Concurrency vs Parallelism</h1>
+          <p>"Concurrency is about dealing with a lot of things at the same time. Parallelism is about doing a lot of things at the same time."</p>
+          <p>At a high level, one can group a set of instructions to perform some operation into a descriptive interruptible task. In order to execute some task, the task will require some resource to continue. This could be CPU, memory, IO. While waiting for such resources, the task can be paused and another task can run. In contrast, parallelism allows multiple tasks to execute simultaneously.</p>
+          <h1>Operating system threads</h1>
+          <p>As programmers, we are at the mercy of the OS - it abstracts over our physical machine and allows us(in userland) to interact with it via syscalls(libc, winapi...). Can be used as a means to achieve concurrency and parallelism. Do not map 1:1 with the number of cores on a computer. If you create more threads than cores, the OS will switch between them so each thread has some time to run.<p/>
+          <h1>An Overview of Async</h1>
+          <p>The goal of an async implementation is to provide an interface for the programmer to write non-sequential programs.</p>
+          <p>Cooperative / Non-preemptive multitasking - the developer is responsible for yielding control of the program to the OS.</p>
+          <p>Preemptive multitasking - forcing each programmer to be responsible for yielding control of their program leads to issues. Be it simple mistakes or malicious intent, could potentially halt the entire system. Instead, a program can request resources from the operating system and the OS can schedule to halt or run the process. </p>
+          <p>cooperative and preemptive async - rust/js tasks vs os-threads + goroutines</p>
+          <p>stackful vs stackless. stackful - can suspend execution anytime. entire stack is preserved. stackless - share the same stack. cannot suspend in the middle of a stackframe, limits ability to preempt. can be more efficient.</p>
+          <h1>Threads</h1>
+          <p>A thread of execution - sequence of instructions to be executed sequentially.</p>
+          <p>OS threads vs userland threads: kernal thread. OS threads: 1:1 threading, costly in terms of creation and destruction. Each thread has its own stack. Context switching: CPU stops running one task, storing and restoring register values. Each process can spawn multiple threads that share the same address space. Gives you parallelism for free (except the mental cost designing and synchronising shared resources)</p>
+          <p>Fibers/Green threads/stackful coroutines: M:N threading - there are M tasks which run on N OS threads. They emulate os threads by setting up a stack, saving state, and context switch. Within the runtime, there is a scheduler responsible for running different tasks once a task has yielded control to the scheduler. Since they are stackful, they can be preempted by the runtime also. Each task must setup its stack, potentially costing more than what you actually use. Unlike OS threads however, the stack can grow.</p>
+          <h1>Async</h1>
+          <p>If the OS has us covered when it comes to running tasks asynchronously, why go to the trouble of recreating such an async environment?</p>
+          <p>As discussed, there is more than one way to handle async computation. The abstraction offered by the OS might not effectively cover our usecase. In such cases, it is necessary to have an alternative runtime. </p>
+          <p>Each task is scheduled to run by a scheduler. When a task yields, it is placed on a queue, another task which is in a ready state can be scheduled to run.</p>
+          <h1>Callbacks</h1>
+          <p>Each task consists of a group of callbacks. Typical in javascript code. Requires writing a program in quite a different way than sequentially. Easy to enter "callback hell", where large chains of callbacks become difficult to reason about. Memory increases with the number of callbacks.</p>
+          <h1>Coroutines</h1>
+          <p>Represent each task as a state machine. stackless, pre-emption not possible. Memory efficient.</p>
+          <button class="blog-back-button">
+            <a href="index.html">Back</a>
+          </button>
+        </section>
+      </main>
+      <footer></footer>
+    </div>
+  </body>
+</html>
