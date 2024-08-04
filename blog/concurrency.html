@@ -25,14 +25,17 @@
         <section>
           <h1>Concurrency vs Parallelism</h1>
           <p>"Concurrency is about dealing with a lot of things at the same time. Parallelism is about doing a lot of things at the same time."</p>
-          <p>At a high level, one can group a set of instructions to perform some operation into a descriptive interruptible task. In order to execute some task, the task will require some resource to continue. This could be CPU, memory, IO. While waiting for such resources, the task can be paused and another task can run. In contrast, parallelism allows multiple tasks to execute simultaneously.</p>
+          <p>At a high level, one can group a set of instructions to perform some operation into a descriptive interruptible task. In order to execute some task, the task will require some resource to continue. This could be CPU, memory, IO. While waiting for such resources, the task can be paused and another task can run. In contrast, parallelism allows multiple tasks to execute simultaneously. This is made possible by executing code on multiple processors or cores.</p>
           <h1>Operating system threads</h1>
-          <p>As programmers, we are at the mercy of the OS - it abstracts over our physical machine and allows us(in userland) to interact with it via syscalls(libc, winapi...). Can be used as a means to achieve concurrency and parallelism. Do not map 1:1 with the number of cores on a computer. If you create more threads than cores, the OS will switch between them so each thread has some time to run.<p/>
+          <p>As programmers, we are at the mercy of the OS - it abstracts over our physical machine and allows us(in userland) to interact with it via syscalls(libc, winapi...). Threads can be used as a means to achieve concurrency and parallelism - the OS can run threads across multiple cores. Threads need not map 1:1 with the number of cores on a computer: if you create more threads than cores, the OS will schedule each thread to run, switching between them(context switch) so each thread has some time to run.<p/>
           <h1>An Overview of Async</h1>
-          <p>The goal of an async implementation is to provide an interface for the programmer to write non-sequential programs.</p>
-          <p>Cooperative / Non-preemptive multitasking - the developer is responsible for yielding control of the program to the OS.</p>
-          <p>Preemptive multitasking - forcing each programmer to be responsible for yielding control of their program leads to issues. Be it simple mistakes or malicious intent, could potentially halt the entire system. Instead, a program can request resources from the operating system and the OS can schedule to halt or run the process. </p>
-          <p>cooperative and preemptive async - rust/js tasks vs os-threads + goroutines</p>
+          <p>The goal of an async implementation is to provide an interface for the programmer to write non-sequential programs. It allows one to handle many tasks without waiting on completion of a task. This is essential in scenarios such as handling user input, providing a responsive program, or improving the efficiency of an I/O bound program. </p>
+          <h2>Async programming comes in a couple of different forms:</h2> 
+          <ul>
+            <li>Cooperative / Non-preemptive multitasking - the developer is responsible for yielding control of the program to the OS.</li>
+          <li>Preemptive multitasking - forcing each programmer to be responsible for yielding control of their program leads to issues. Be it simple mistakes or malicious intent, could potentially halt the entire system. Instead, a program can request resources from the operating system and the OS can schedule to halt or run the process. </li>
+          <li>cooperative and preemptive async - rust/js tasks vs os-threads + goroutines</li>
+          </ul>
           <p>stackful vs stackless. stackful - can suspend execution anytime. entire stack is preserved. stackless - share the same stack. cannot suspend in the middle of a stackframe, limits ability to preempt. can be more efficient.</p>
           <h1>Threads</h1>
           <p>A thread of execution - sequence of instructions to be executed sequentially.</p>
