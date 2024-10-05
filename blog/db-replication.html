@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Database Replication strategies</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+  </head>
+
+  <body>
+    <div class="content">
+      <header role="banner">
+        <nav>
+          <ul>
+            <li><a href="../">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="index.html" class="active">Blog</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+        <section>
+          <h1>Database Replication Strategies</h1>
+          <p>Database replication exists to keep many copies of a database on different (maybe even geographically different) machines. This is beneficial for example to achieve high availability via redundancy, improved performance by offsetting read/write load from a single server to multiple.
+          </p>
+          <p>Databases can be replicated in many different ways, each with its own tradeoffs. However the underlying mechanism enabling replication can either be logical or physical. Logical replication is achieve by sending each of the high-level logical operations the database must perform i.e update record x, insert y etc or even SQL to be executed. Physical replication refers to simply duplicating the actual binary representation of the database. Usually logical replication is more flexible when it comes to replicating across different database vendors or even versions of the same database. However physical replication comes with a speed advantage. </p>
+          <h2>Types of database replication</h2>
+          <p>When exploring different methods of replication, one can consider a couple of options: single-leader, multi-leader, leaderless, synchronous or asynchronous approaches.</p>
+          <h2>Single leader replication</h2>
+          <p>Single leader replication is often the easiest to configure. As the name suggests, there is a single leader responsible for forwarding writes received to a number of replicas. As such, write operations are limited to the leader, making the leader a bottleneck for write operations. Replicas can be used to handle read operations (read-replicas). This setup can be synchronous or asynchronous. In the synchronous configuration, the leader will wait for each replica to respond that it has received and committed the write operation. On the other hand, with async, the replicas will eventually be in sync with the leader (eventual consistency) this choice can improve write throughput as there is no need to wait for each replica to acknowledge and commit the write.</p>
+          <p>There are a number of downsides to this approach. Most notably making the leader a single point of failure. Should the leader fail there needs to be a new leader chosen. This can be a manual or automated process during which writes will not be available during the fail over period.</p>
+          <h2>Multi-leader</h2>
+          <p>In a multi-leader setup, write operations can be accepted by multiple nodes in a cluster. This prevents the single point of failure issue but introduces a new difficulty - how to determine the source of truth when there is a write conflict.</p>
+          <p>The easiest solution and one chosen by Cassandra for example, is "last write wins". This strategy involves using a time stamp to select which write operation is the latest and choose that value. The problem with this approach is clocks are unreliable, especially in distributed systems.</p>
+          <p>Another solution to this problem is simply offloading the problem to the client. Make it the application or user's responsibility to select the correct value (think conflict-resolution in git)</p>
+          <p><a href="./vector-clocks.html">Version vectors</a> are another possible solution. Each node is assigned an identifier and increments its counter for the operation applied.</p>
+          <p>Alternatively, CRDTs might be a choice for automatic resolution of write-conflicts. Some conflicting operations can be automatically resolved if they are commutative for example simple counters, sets, sequences</p>
+          <h2>Leaderless replication</h2> 
+          <p>With leaderless replication, reads and writes are sent to many different nodes. After a quorum of nodes(see <a href="./consensus.html"> consensus</a>) returns a response, the write is accepted and/or the read can be used. </p>
+          <p>Advantages of this approach are improved availability, no-need for failover and scalability. However, it will introduce some potential latency while waiting for a consensus on a value.</p>
+          <button class="blog-back-button">
+            <a href="index.html">Back</a>
+          </button>
+        </section>
+      </main>
+      <footer></footer>
+    </div>
+  </body>
+</html>
