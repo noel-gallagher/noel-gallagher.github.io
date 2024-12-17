@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apache Iceberg</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+  </head>
+
+  <body>
+    <div class="content">
+      <header role="banner">
+        <nav>
+          <ul>
+            <li><a href="../">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="index.html" class="active">Blog</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+        <section>
+          <h1>Apache Iceberg</h1>
+          <p>
+            Iceberg is a table format used to specify how tools should interpret
+            data. It abstracts away the storage layer from the compute layer.
+            Without such a layer, you can imagine working with raw files
+            directly. Using a table format such as iceberg allows us to
+            determine which files belong to a dataset. Iceberg boasts a number
+            of advantages over other table formats (such as hive): how to handle
+            data integrity, schema evolution, time travel/rollback and good
+            performance.
+          </p>
+          <p>
+            Iceberg uses a hierarchy of metadata to determine which files belong
+            to a dataset, what the schema of the data is, and also how it has
+            evolved over time. This hierarchy can be broken down into:
+          </p>
+          <ul>
+            <li>
+              <p>
+                At the top level, there is a catalog. It is used to point to the
+                latest metadata file. Whenever a change is made to the table,
+                the catalog creates a new metadata file and updates its
+                reference to point to this new metadata file.
+              </p>
+            </li>
+            <li>
+              <p>
+                A metadata file can be considered as a snapshot of the table at
+                a point in time. It holds the current snapshot, a list of all
+                snapshots as well as the schema.
+              </p>
+            </li>
+            <li>
+              <p>
+                Each metadata file points to a number of manifest lists. In
+                turn, each manifest list contains a number of manifest files.
+              </p>
+            </li>
+            <li>
+              <p>
+                A manifest file details the actual data files as well as some
+                metadata about them.
+              </p>
+            </li>
+            <p>
+              The underlying storage layer for Iceberg is typically blob storage
+              systems like S3, minio, or HDFS. While HDFS supports data
+              appending, these storage systems are generally designed for
+              immutable data storage.
+            </p>
+            <p>
+              So how are files updated? They can be updated using a
+              copy-on-write or a merge on read process.
+            </p>
+            <p>
+              Copy-on-write involves copying the entire file, making the change
+              then saving this as a new version. As you can imagine this is
+              quite expensive when dealing with huge datasets.
+            </p>
+            <p>
+              On the other hand, merge on read keeps track of change and applies
+              them at the time of reading. This is either through "position
+              deletes" or "equality deletes"
+            </p>
+          </ul>
+          <button class="blog-back-button">
+            <a href="index.html">Back</a>
+          </button>
+        </section>
+      </main>
+      <footer></footer>
+    </div>
+  </body>
+</html>

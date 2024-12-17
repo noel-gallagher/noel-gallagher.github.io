@@ -25,12 +25,41 @@
         <section>
           <h1>The Cap Theorem</h1>
           <p>
-             states that there are three possible attributes to optimise for from when dealing with database systems: consistency, availability,and partition tolerance. When designing a system, developers must take these trade-offs into consideration for the system they intend to build. 
+            states that there are three possible attributes to optimise for from
+            when dealing with database systems: consistency, availability,and
+            partition tolerance. When designing a system, developers must take
+            these trade-offs into consideration for the system they intend to
+            build.
           </p>
-          <p>For a system to be considered highly available, it should be able to serve requests even if affected by some kind of extreme failure. For example, in a distributed system, if we have a cluster of several nodes; should one node fail, the system will remain available as it can still serve requests from another node.</p>
-          <p>Consistency can be seen as making a read request and getting the latest write. For a distributed system with multiple nodes to be considered consistent, all updates should be reflected across all nodes. For a user of the system, it should not matter which node they happen to connect to, they should get the latest data.</p>
-          <p>partition tolerance - the system should be able to handle communication issues between nodes. Should a node suffer from a network issue or hardware failure, the other nodes in the cluster must remain operational. </p>
-          <p>Working with distributed systems, partition tolerance is a requirement so it limits our optimisations to either Consistency + Partition tolerance OR availability + partition tolerance. This leads to systems which are classified as CP or AP. For consistency and partition tolerance, we can think of a typical relational database such as postgres. For an AP system, we can think of dynamodb or cassandra.</p>
+          <p>
+            For a system to be considered highly available, it should be able to
+            serve requests even if affected by some kind of extreme failure. For
+            example, in a distributed system, if we have a cluster of several
+            nodes; should one node fail, the system will remain available as it
+            can still serve requests from another node.
+          </p>
+          <p>
+            Consistency can be seen as making a read request and getting the
+            latest write. For a distributed system with multiple nodes to be
+            considered consistent, all updates should be reflected across all
+            nodes. For a user of the system, it should not matter which node
+            they happen to connect to, they should get the latest data.
+          </p>
+          <p>
+            partition tolerance - the system should be able to handle
+            communication issues between nodes. Should a node suffer from a
+            network issue or hardware failure, the other nodes in the cluster
+            must remain operational.
+          </p>
+          <p>
+            Working with distributed systems, partition tolerance is a
+            requirement so it limits our optimisations to either Consistency +
+            Partition tolerance OR availability + partition tolerance. This
+            leads to systems which are classified as CP or AP. For consistency
+            and partition tolerance, we can think of a typical relational
+            database such as postgres. For an AP system, we can think of
+            dynamodb or cassandra.
+          </p>
           <button class="blog-back-button">
             <a href="index.html">Back</a>
           </button>
