@@ -20,7 +20,126 @@
         </nav>
       </header>
       <main class="center">
-        <p>Hello world.</p>
+        <h1>Latest entries</h1>
+        <section>
+          <div class="blog-entry">
+            <div class="blog-entry-img">
+              <img
+                src="https://images.pexels.com/photos/13576268/pexels-photo-13576268.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt="multiple ducks in a row"
+              />
+            </div>
+            <div class="blog-entry-description">
+              <h2>Database Replication Strategies</h2>
+              <p>
+                Database replication exists to keep many copies of a database on
+                different (maybe even geographically different) machines. This
+                is beneficial for example to achieve high availability via
+                redundancy, improved performance by offsetting read/write load
+                from a single server to multiple.
+              </p>
+            </div>
+            <div class="blog-entry-link">
+              <a href="blog/db-replication.html">read more...</a>
+            </div>
+          </div>
+          <div class="blog-entry">
+            <div class="blog-entry-img">
+              <img
+                src="https://images.pexels.com/photos/220237/pexels-photo-220237.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt="metal chain`"
+              />
+            </div>
+            <div class="blog-entry-description">
+              <h2>Database Durability</h2>
+              <p>
+                Durability guarantees that once a transaction is committed, its
+                changes are permanently stored in the database, even in the
+                event of a crash. But crashes DO happen - What should happen in
+                the event of a crash when a transaction is being committed? How
+                does a database ensure durability in such a case?
+              </p>
+            </div>
+            <div class="blog-entry-link">
+              <a href="blog/wal.html">read more</a>
+            </div>
+          </div>
+          <div class="blog-entry">
+            <div class="blog-entry-img">
+              <img
+                src="https://images.pexels.com/photos/20510145/pexels-photo-20510145/free-photo-of-red-circle-on-top-of-a-green-circle-on-a-dark-background.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt="overlapping circles, unfocused"
+              />
+            </div>
+            <div class="blog-entry-description">
+              <h2>Database Isolation Levels</h2>
+              <p>
+                In databases, a transaction is a collection of operations which
+                are treated as a single unit of work. Ensuring the integrity and
+                consistency of data during concurrent transactions is where the
+                'I' (Isolation) property of ACID comes into play. Given multiple
+                ongoing transcations, how can we prevent interference between
+                each transaction? If transaction A is running some SELECT query,
+                while transaction B simultanously performs an UPDATE which would
+                affect A's results, what should happen?
+              </p>
+            </div>
+            <div class="blog-entry-link">
+              <a href="blog/db-isolation.html">read more</a>
+            </div>
+          </div>
+
+          <div class="blog-entry">
+            <div class="blog-entry-img">
+              <img
+                src="https://images.pexels.com/photos/11889329/pexels-photo-11889329.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt="hexagons, connected"
+              />
+            </div>
+            <div class="blog-entry-description">
+              <h2>Onion Architecture and the like</h2>
+              <p>
+                Adding new functionality to an ever evolving piece of a software
+                is challenging. Different approaches to design and architecture
+                have evolved to try and tackle this complexity; n-tier, ports
+                and adapters/hexagonal, onion and others. These methods aim to
+                reduce the need to change large portions of the application when
+                introducing changes which affect only a portion of the system.
+                Ultimately, the idea is isolating business logic in order to
+                make it independent of technology choices. as a consequence,
+                this makes the system more maintainable, scalable and testable
+                by default.
+              </p>
+            </div>
+            <div class="blog-entry-link">
+              <a href="blog/onion.html">read more</a>
+            </div>
+          </div>
+
+          <div class="blog-entry">
+            <div class="blog-entry-img">
+              <img
+                src="https://images.pexels.com/photos/12290903/pexels-photo-12290903.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt="a conductor conducting an orchrestra"
+              />
+            </div>
+            <div class="blog-entry-description">
+              <h2>Sagas</h2>
+              <p>
+                One of the difficulties of working on distributed systems is
+                losing the ability to easily execute a "unit of work" - a set of
+                atomic operations which either all happen or none happen at all.
+                Such an operation can be abstracted from the developer by
+                relying on a database. however in a distributed system, each
+                service can have its own database, losing the luxury of a single
+                database for atomicity
+              </p>
+            </div>
+            <div class="blog-entry-link">
+              <a href="blog/saga.html">read more</a>
+            </div>
+          </div>
+        </section>
       </main>
       <footer></footer>
     </div>
