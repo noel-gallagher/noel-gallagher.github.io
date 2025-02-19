@@ -10,6 +10,15 @@ section {
   text-align: justify;
 }
 
+@media screen and (max-width: 768px) {
+  section {
+    text-align: left;
+    padding: 1rem;
+  }
+}
+
+
+
 .blog-list-item {
   padding: 10px;
   font-size: 1rem;

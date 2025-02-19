@@ -19,7 +19,7 @@ body {
   line-height: 1.8;
 }
 
-section {
+.main-section {
   padding: 2rem 10rem;
 }
 
@@ -31,11 +31,11 @@ section {
     background: var(--main-dark-bg-colour);
     color: var(--main-dark-text-colour);
   }
-  section .blog-entry:nth-child(odd) {
+  .main-section .blog-entry:nth-child(odd) {
     background-color: #121416;
   }
 
-  section .blog-entry:nth-child(even) {
+  .main-section .blog-entry:nth-child(even) {
     background-color: #1c1e21;
   }
 }
@@ -47,18 +47,18 @@ section {
   }
 
 
-  section .blog-entry:nth-child(odd) {
+  .main-section .blog-entry:nth-child(odd) {
     background-color: #f9f9f9;
   }
 
-  section .blog-entry:nth-child(even) {
+  .main-section .blog-entry:nth-child(even) {
     background-color: #ffffff;
   }
 }
 
 
 @media screen and (max-width: 768px) {
-  section {
+  .main-section {
     text-align: left;
     padding: 1rem;
   }
