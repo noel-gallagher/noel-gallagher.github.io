@@ -5,6 +5,11 @@
   box-shadow: 3px 3px 5px var(--shadow-colour);
 }
 
+section {
+  padding: 2rem 10rem;
+  text-align: justify;
+}
+
 .blog-list-item {
   padding: 10px;
   font-size: 1rem;
