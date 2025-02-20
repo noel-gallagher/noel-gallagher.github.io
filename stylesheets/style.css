@@ -15,7 +15,7 @@
 body {
   background: var(--main-bright-bg-colour);
   color: var(--main-bright-text-colour);
-  font-family: "Segoe UI", Roboto, Helvetica, Arial, Helvetica, Sans-Serif;
+  font-family: Serif;
   line-height: 1.8;
 }
 
@@ -79,11 +79,13 @@ header {
   max-width: 100%;
 }
 
-header h1 {
-  font-size: 30px;
-  margin: 0;
+h1 {
+  font-size: 3rem;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, Helvetica, Sans-Serif;
 }
-
+h2 {
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, Helvetica, Sans-Serif;
+}
 nav {
   display: flex;
   justify-content: space-between;
@@ -149,6 +151,10 @@ img {
   max-width: 100%;
 }
 
+.blog-entry {
+    margin-bottom: 4em;
+}
+
 .blog-entry-link {
     grid-area: link;
     font-size: 1.25em;
@@ -181,20 +187,17 @@ img {
       "image desc"
       "image link";
     grid-gap: 20px;
-    margin-bottom: 4em;
     border-radius: 10px;
-  
   }
 
   .blog-entry-img {
     grid-area: image;
-    background: rgba(0,0,0,0.3);
+    align-self: center;
+    justify-self: center;
   }
-
-  .blog-entry-img::after {
-    width: 100%;
-    height: 100%;
-    content: '';
+  
+  .blog-entry-link {
+    justify-self: right; 
   }
 
 
