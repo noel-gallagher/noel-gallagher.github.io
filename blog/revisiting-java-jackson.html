@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Revisiting Java - Jackson</title>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link rel="stylesheet" href="../stylesheets/blog.css" />
+  </head>
+
+  <body>
+    <div class="content">
+      <header role="banner">
+        <nav>
+          <ul>
+            <li><a href="../">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="index.html" class="active">Blog</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+        <section>
+          <h1>Revisiting Java - intro to Jackson</h1>
+          <p>
+            Recently, I was asked to introduce some python developers to a java
+            codebase. It was a nice opportunity to reflect(pun unintended) on
+            java annotations, project structure and drawing
+            comparisons/contrasts between the languages. The following is an
+            excerpt from one such workshop
+          </p>
+          <p>
+            In many projects, a common task is to serialise/deserialise some
+            inbound/outbound data from one format to another. In the context of
+            the web, JSON is a fairly ubiquitous target.
+          </p>
+          <p>
+            When it comes to java, there is a no standard library
+            support(outside EE releases) for json serialisation/deserialisation.
+            To facilitate this, the majority of projects use a library called
+            <a href="https://github.com/FasterXML/jackson">Jackson</a>
+          </p>
+          <p>
+            Let's walk-through a simple example of parsing json from an inbound
+            request into a domain transfer object POJO. Here we will receive a
+            JSON object with several fields: name, age and email - and using
+            jackson, annotate them appropriately
+          </p>
+          <pre class="code-block"><code>
+          {
+            "name": "john",
+            "age": 20,
+            "email": "john@example.com" 
+          }
+          </code></pre>
+          <p>
+            And what we want is to convert this json into the corresponding java
+            code:
+          </p>
+          <pre class="code-block"><code>
+          @Value
+          public class UserDto {
+            String name;
+            int age;
+            String email;
+          }
+          </code></pre>
+          <p>
+            In order to do that, we will use the @JsonProperty annotation. There
+            are many annotations available for use - keeping things simple with
+            @JsonPropery is appropriate for a lot of use-cases, it handles both
+            serialisation and deserialisation.
+          </p>
+          <pre class="code-block"><code>
+          @Value
+          public class UserDto {
+            @JsonProperty("name")
+            String Name;
+            @JsonProperty("age")
+            Int age;
+            @JsonProperty("email")
+            String email;
+          }
+          </code></pre>
+          <p>
+            Finally what we need is an instance of the 'ObjectMapper' class.
+            This is the actual object responsible for performing
+            serialisation/deserialisation. Putting it all together, we have:
+          </p>
+          <pre class="code-block"><code>
+           public class JsonParsingUserDtoTest {
+           @Test
+             void test_should_parse_valid_user_dto() {
+                 String rawJson = "{\"name\": \"john\", \"age\": 20, \"email\": \"john@example.com\"}";
+
+                 ObjectMapper objectMapper = new ObjectMapper();
+
+                 try {
+                     UserDto userDto = objectMapper.readValue(rawJson, UserDto.class);
+                     assertEquals("john", userDto.getName());
+                     assertEquals(20, userDto.getAge());
+                     assertEquals("john@example.com", userDto.getEmail());
+                 } catch (Exception e) {
+                     e.printStackTrace();
+                 }
+             }
+          }   
+          </code></pre>
+          <p>What about polymorphism? We can manage that with @JsonTypeInfo &@JsonSubTypes</p>
+          <p>We start by defining our base class and decorating it with some annotations to indicate which properties to subtypes should be created based on that property:</p>
+          <pre class="code-block">
+          @JsonTypeInfo(use= JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property = "type")
+          @JsonSubTypes({
+            @JsonSubTypes.Type(name = "User", value = User.class),
+            @JsonSubTypes.Type (name = "Admin", value = Admin.class), 
+          })
+          public abstract class UserType {
+            String type; 
+          }<code></code></pre>
+          <p>Followed by our actual subtype classes:</p>
+          <pre class="code-block"><code>
+          public class User extends UserType { // specific user fields }
+          </code></pre>
+          <pre class="code-block"><code>
+          public class Admin extends UserType {//specific admin fields}
+          </code></pre>
+          <p>Ok JSON is cool but what about YAML? We can simply provide a YAMLFactory:</p>
+          <pre class="code-block"><code>new ObjectMapper(new YAMLFactory())</code></pre>
+          <button class="blog-back-button">
+            <a href="index.html">Back</a>
+          </button>
+        </section>
+      </main>
+      <footer></footer>
+    </div>
+  </body>
+</html>
