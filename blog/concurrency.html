@@ -22,7 +22,18 @@
       </header>
 
       <main>
-        <section>
+        <section> 
+	<p>wip needs a lot of tidying and complete some sections</p>
+	<h1>An Overview of Async</h1>
+          <p>
+            The goal of an async implementation is to provide an interface for
+            the programmer to write non-sequential programs. It allows one to
+            handle many tasks without waiting on completion of a task. This is
+            essential in scenarios such as handling user input, providing a
+            responsive program, or improving the efficiency of an I/O bound
+            program.
+          </p>
+
           <h1>Concurrency vs Parallelism</h1>
           <p>
             "Concurrency is about dealing with a lot of things at the same time.
@@ -36,28 +47,20 @@
             can be paused and another task can run. In contrast, parallelism
             allows multiple tasks to execute simultaneously. This is made
             possible by executing code on multiple processors or cores.
+	    You can have concurrency without parallelism (multiple tasks on a single core), but you cannot have parallelism without concurrency.
           </p>
           <h1>Operating system threads</h1>
           <p>
             As programmers, we are at the mercy of the OS - it abstracts over
             our physical machine and allows us(in userland) to interact with it
-            via syscalls(libc, winapi...). Threads can be used as a means to
+            via syscalls(libc, winapi...). A thread is a sequence of instructions to be executed & managed by the os scheduler. A single process can create and manage multiple threads which share the same memory space. Threads can be used as a means to
             achieve concurrency and parallelism - the OS can run threads across
             multiple cores. Threads need not map 1:1 with the number of cores on
             a computer: if you create more threads than cores, the OS will
             schedule each thread to run, switching between them(context switch)
             so each thread has some time to run.
           </p>
-          <h1>An Overview of Async</h1>
-          <p>
-            The goal of an async implementation is to provide an interface for
-            the programmer to write non-sequential programs. It allows one to
-            handle many tasks without waiting on completion of a task. This is
-            essential in scenarios such as handling user input, providing a
-            responsive program, or improving the efficiency of an I/O bound
-            program.
-          </p>
-          <h2>Async programming comes in a couple of different forms:</h2>
+                    <h2>Async programming comes in a couple of different forms:</h2>
           <ul>
             <li>
               Cooperative / Non-preemptive multitasking - Here, the developer is
@@ -139,11 +142,31 @@
             difficult to reason about. Memory increases with the number of
             callbacks.
           </p>
+	  <p>We first define our initial function (ie fetch data from a service) and then a "callback" function which should be executed once the first function completes.</p>
+	  <pre class="code-block"><code>
+	  function getUserFromDb(userId, callback_fn) {
+		setTimeout(() => { const user_from_db= { id: userId, name = "john"}};
+                  // run our callback after some simulated delay
+                  callback_fn(user_from_db));
+                  }, 1000);
+	  }
+          
+          function logUser(user) {
+            console.log(`id: ${user.id}`);
+            console.log(`name: ${user.name}`);
+          }
+          // using our call back to first get the user from db and then log the users via logUser fn
+	  getUserFromDb(123, logUser); 
+          // we do not wait for the above to complete, we can perform some other operation
+          console.log("I am not blocked!");
+	  </code></pre>
           <h1>Coroutines</h1>
           <p>
             Represent each task as a state machine and can either be stackful or
             stackless.
           </p>
+	  <h1>Actors</h1>
+	  <p>Programming concurrent operations in the form of actors allows one to avoid shared state entirely. Each actor contains its own private state and can only communicate with other actors via message passing. Since there is no shared state, race conditions become impossible.</p>
           <button class="blog-back-button">
             <a href="index.html">Back</a>
           </button>
