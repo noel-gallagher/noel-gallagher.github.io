@@ -108,8 +108,15 @@
              }
           }   
           </code></pre>
-          <p>What about polymorphism? We can manage that with @JsonTypeInfo &@JsonSubTypes</p>
-          <p>We start by defining our base class and decorating it with some annotations to indicate which properties to subtypes should be created based on that property:</p>
+          <p>
+            What about polymorphism? We can manage that with @JsonTypeInfo
+            &@JsonSubTypes
+          </p>
+          <p>
+            We start by defining our base class and decorating it with some
+            annotations to indicate which properties to subtypes should be
+            created based on that property:
+          </p>
           <pre class="code-block">
           @JsonTypeInfo(use= JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property = "type")
           @JsonSubTypes({
@@ -126,8 +133,13 @@
           <pre class="code-block"><code>
           public class Admin extends UserType {//specific admin fields}
           </code></pre>
-          <p>Ok JSON is cool but what about YAML? We can simply provide a YAMLFactory:</p>
-          <pre class="code-block"><code>new ObjectMapper(new YAMLFactory())</code></pre>
+          <p>
+            Ok JSON is cool but what about YAML? We can simply provide a
+            YAMLFactory:
+          </p>
+          <pre
+            class="code-block"
+          ><code>new ObjectMapper(new YAMLFactory())</code></pre>
           <button class="blog-back-button">
             <a href="index.html">Back</a>
           </button>
