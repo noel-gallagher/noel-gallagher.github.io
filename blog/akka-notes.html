@@ -22,60 +22,58 @@
 
     <main>
       <section>
-        <h1>WIP</h1>
+        <h1>Akka notes: walkthrough of the actor model</h1>
+	<p>The actor model provides a powerful abstraction for writing concurrent programs.As discussed in my post on <a href="./concurrency.html">Concurrency</a>, actors allow you to avoid shared state entirely, eliminating race conditions by design.</p>
+	<p>It does this by introducing the concept of an "actor". An actor can be thought of as something which can perform computations based on messages that it receives. An actor can hold its own private state and can only communicate with other actors via message passing.</p>
+	<h2>Akka - an implementation of the actor model for the JVM</h2>
         <p>
-          Actor system - controls threads, allocates to actors Actors - actors
-          are uniquely identified, messages passed asynchronously, each actor
-          may respond differently, actors are encapsulated (you cannot access
-          their state directly) You can only communicate via ref Class
-          person(name: String) extends Actor{ override def receive = { case “hi”
-          => println(s“hi my name is, $name”) } } How to instantiate an actor
-          with arguments? Using props with argument eg Props(new Person(“bob”))
-          Messages must be immutable and serialisable ActorContext ->
-          information about the actor environment. The actor system, own actor
-          reference (context.self) [similar to this.x in OOP] An actor can send
-          a message to itself (using context.self) Actors can reply to messages
-          - actor Alice and actor Bob: SayHiTo(ref: ActorRef) Alice !
-          SayHiTo(bob) // sends “hi” to bob // case “hi” => context.sender() !
-          “My reply is: Hello!” //sender() is same thing, when invoking the !
-          Method, actor sends a ref of itself to the receiver Deadletters is a
-          ‘fake’ actor that takes care of messages not sent to anyone Actors can
-          forward messages to one another Driver -> router -> pc record
+          In order to get things started, one must intialise an actor system. This is a construct responsible for controlling threadpools, config, and all the actors to be created. There is a single actor system per application.
+	  <h1>Actors </h1>
+	  <p> Actors are uniquely identifiable via an ActorRef. They are lightweight objects which model a unit of computation. As mentioned, actors can only communicate with other actors by passing messages. Each actor possesses a mailbox (message queue) where each received message is stored. Actors processes messages from its mailbox one at a time - it emulates the behaviour of a single-threaded program, no need to worry about locking or synchronising resources.</p>
+	  <p>actors are encapsulated (you cannot access
+	  their state directly) You can only communicate via the ActorRef</p> <pre class="code-block"><code>
+          Class person(name: String) extends Actor{ 
+              override def receive = { 
+                  case “hi” => println(s“hi my name is, $name”) 
+              } 
+          } </code></pre>
+	  <p>How to instantiate an actor
+	  with arguments? Using props with argument eg Props(new Person(“bob”)) </p>
+	  <p>Messages sent to an actor must be immutable and serialisable</p> 
+	  <p> An actor can have more information about its environment via ActorContext. Such info can be the actor system, its own actor
+	  reference (context.self) [similar to this.x in OOP] </p><p> This can be useful given that an actor can send
+	  a message to itself (using context.self) </p>
+	  <p>Actors can reply to messages</p>
+	  <p>Given actor Alice and actor Bob:</p> 
+	  <pre class="code-block"><code>
+          SayHiTo(ref: ActorRef) Alice !  SayHiTo(bob) // sends “hi” to bob  
+              // ...
+              case “hi” => context.sender() !  “My reply is: Hello!” 
+          </code></pre>
+	  <p>Also worth noting is that Deadletters is a ‘fake’ actor that takes care of messages not sent to anyone</p>
+	  <p> Actors also have the ability to forward messages to one another Driver -> router -> pc record
           MyMesssage(String body, ref: ActorRef) Alice ! MyMesssage(hi, bob);
           //receive method: // case MyMesssage(body, ref) => ref forward body +
-          “s” //keeps original ref, modifies body to be ‘his’ Message ordering:
-          Race conditions? Asynchronous? How does it all work... – – Akka actor
-          system has a thread pool Internally, actor has a message handler and a
-          message queue(mailbox). Akka schedules each actor’s execution on
-          threads Communicating with an actor: sending a message -> enqueue onto
-          actor’s mailbox (this is thread safe) processing a message -> a thread
-          is scheduled to run this actor messages are extracted from the
-          mailbox, in order the thread invokes the handler on each message (this
-          could change actor state) at some point the actor is unscheduled Only
-          one thread may operate on an actor at any given time allows us to
-          program as if dealing with single thread No need for locks,
-          synchronisation since only one thread can access an actors state at
-          any time processing of messages is atomic Message deliveries: at most
-          once delivery (no duplicates) message order is kept -> sending A then
-          B, the receiver will always get A before B (but if another actor sends
-          a message C then it’s possible that will be mixed in) /system ->
-          system guardian (manages logging and other) /user -> user-level
-          guardian (guardian for every user/programmer created actor) / -> root
-          guardian (manages system guardian and user-level guardian) Actor
-          selection: var myActor context.actorSelection(“/user/parent/child1”);
-          myActor ! “Hello” Logging: Explicitly val logger =
-          Logging(context.system, this) //this is an Actor ActorLogging extends
-          Actor with ActorLogging Akka config: config.conf Inline config: val
-          configString = “”” akka { loglevel = “DEBUG” } “”” val config =
-          ConfigFactory.parseString(configString); val actorSys =
-          ActorSystem(“systemNam”, ConfigFactory.load(config)) Configuration by
-          file: create file under src/main/resources/application.conf akka {
-          loglevel = DEBUG } Val fileConfigSystem = ActorSystem(“sys”) //will
-          pickup the application.conf automatically Include some other config:
-          akka { loglevel = DEBUG } otherconfig { akka { loglevel = INFO } } val
-          otherConfig = ConfigFactory.load().getConfig(“otherconfig”) Val
-          otherConfigSystem = ActorSystem(“otherSys”, otherConfig) Can define
-          config as json or other format
+          “s” //keeps original ref, modifies body to be ‘his’ 
+	  <h1>Concurrency</h1>
+	  <p>If everything is async, how to avoid race conditions?</p>
+	  <p>At the heart of Akka's ActorSystem, there is a  shared pool of threads. When sending a message, the message is delivered asynchronously and placed in the actor's mailbox. Enqueuing messages is a thread-safe operation, so multiple actors can send messages to a single actor simultaneously without issues.</p>
+	  <p>The Akka runtime continuously monitors mailboxes for messages, the runtime schedules the actor to be executed on one of the threads from the thread pool.</p>
+	  <p>Next, a thread is assigned to the actor. Then it begins processing messages from the mailbox one at a time. Messages are processed in the order they were received. Akka guarantees that only one thread can operate on an actor's state and logic at a time.</p>
+	  <p>Since messages are processed one at at time, the actor's internal state can be modified safely without any need for locks or synchronised constructs. This eases the cognitive burden on the developer, allowing one program as if it were a single-threaded program.</p>
+	  <p>Once an actor has processed its messages, or its allotted time slice is up, the akka runtime scheduler interrupts the thread and it is returned to the threadpool.</p>
+	  <p>The use of the threadpool in this way allows handling of millions of actors on a small number of threads.</p>
+	  <h1>Message ordering and delivery guarantees</h1> 
+	  <p>Akka offers some configurations for ensuing message deliver</p> 
+	  <p>At most once delivery (no duplicates): This guarantees message order is kept ie sending A then B, the receiver will always get A before B (but if another actor sends a message C then it’s possible that will be mixed in) </p>
+	  <p>It is possible to enforce stricter guarantees at the cost of performance.</p>
+	  <h1>Actor hierarchy</h1>Akka has the following hierarchy: A root guardian, a user guardian and system guardian.</p>
+	  <p>The root guardian - the parent to all actors.</p>
+	  <p> the system guardian (manages logging and other library responsibilities) 
+	  <p>user -> user-level actor used to start all other actors in the system.</p>
+	  <h1>Fault tolerance</h1>
+	  <p>One of the great benefits of using an actor based system such as akka is the fault-tolerance it provides. One can easily set up parent actors which supervise child actors. In the event of a failure, the parent can determine if a new child needs to be created, one needs to be killed, or if the failure should be escalated to its own parent.</p>
+	  <p>This allows the developer to write supervised self-healing systems which can handle failure and isolate it to a sub-section of the system.</p>
         </p>
         <button class="blog-back-button"><a href="..">Back</a></button>
       </section>
