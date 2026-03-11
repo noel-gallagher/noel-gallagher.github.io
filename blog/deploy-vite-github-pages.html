@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deploying a Vite App to a GitHub Pages Subdirectory</title>
+  <link rel="stylesheet" href="../stylesheets/style.css" />
+  <link rel="stylesheet" href="../stylesheets/blog.css" />
+</head>
+
+<body>
+  <div class="content">
+    <header role="banner">
+      <nav>
+        <ul>
+          <li><a href="../">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="index.html" class="active">Blog</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <h1>Deploying a Vite App to a GitHub Pages Subdirectory</h1>
+        <p>
+          Deploying a single-page application (SPA) like a React site built with Vite to a subdirectory of an existing
+          GitHub Pages site...
+        </p>
+        <p>
+          By default, Vite assumes your application is being served from the root path (`/`). front-end
+          routers like React Router need to be aware of the subpath, or else they will fail to map subpaths
+        <p>You will need to update vite.config.ts</p>
+        Vite needs to know the base public path when it builds your assets. Setting the <code>base</code>
+        configuration property ensures that all generated JS and CSS file paths correctly prefix your subdirectory.
+        </p>
+        <pre><code>import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  base: '/my-cool-subdir/', 
+})
+</code></pre>
+
+        <p>After that, you will need to update your React Router Basename</p>
+        <p>
+          If you're using React Router (<code>react-router-dom</code>), your <code>BrowserRouter</code> needs to be
+          informed of the base path. Otherwise, navigating to <code>/my-cool-subdir/</code> will throw a "No routes
+          matched
+          location" error.
+        </p>
+        <pre><code>import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+function App() {
+  return (
+    &lt;BrowserRouter basename="/typing"&gt;
+      &lt;div className="app-container"&gt;
+        &lt;Routes&gt;
+          &lt;Route path="/" element={&lt;LandingPage /&gt;} /&gt;
+          &lt;Route path="/play" element={&lt;TypingGame /&gt;} /&gt;
+        &lt;/Routes&gt;
+      &lt;/div&gt;
+    &lt;/BrowserRouter&gt;
+  );
+}
+</code></pre>
+
+        <p>
+          Once your config files are updated, you can build your application:
+        </p>
+        <pre><code>npm run build</code></pre>
+        <p>
+          This generates a <code>dist/</code> folder which you can simply copy to the corresponding folder on your main
+          `github.io` repository and push
+          the changes.
+        </p>
+        <pre><code>cp -r dist/ ~/path/to/my-repo.github.io/my-cool-subdir
+cd ~/path/to/my-repo.github.io/my-cool-subdir
+git add my-cool-subdir/
+git commit -m "Deploying to subdirectory"
+# yolo
+git push 
+</code></pre>
+        <p>
+          And that's... it. GitHub Pages will now serve the bundled index.html from that directory
+        </p>
+        <button class="blog-back-button">
+          <a href="index.html">Back</a>
+        </button>
+      </section>
+    </main>
+    <footer></footer>
+  </div>
+</body>
+
+</html>
