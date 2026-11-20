@@ -5,23 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Paxos</title>
-    <link rel="stylesheet" href="../stylesheets/style.css" />
-    <link rel="stylesheet" href="../stylesheets/blog.css" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="../stylesheets/site.css" />
+    <link rel="stylesheet" href="blog.css" />
   </head>
 
   <body>
     <div class="content">
-      <header role="banner">
-        <nav>
-          <ul>
-            <li><a href="../">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="index.html" class="active">Blog</a></li>
-          </ul>
+      <header class="site-header">
+        <nav class="site-nav" aria-label="Primary">
+          <a class="brand" href="../">Gallaghern</a>
+          <div class="site-nav-links">
+            <a class="pseudo button" href="../about/">About</a>
+            <a class="pseudo button" href="./">Blog</a>
+            <a class="pseudo button" href="../typing/">Typing Thing</a>
+          </div>
         </nav>
       </header>
 
-      <main>
+      <main class="page-prose blog-post">
         <section>
           <h1>Paxos</h1>
           <h1>Simple paxos</h1>
@@ -51,9 +53,7 @@
           </p>
 
           <h1>to be continued...</h1>
-          <button class="blog-back-button">
-            <a href="index.html">Back</a>
-          </button>
+          <a class="button blog-back-link" href="./">Back to blog</a>
         </section>
       </main>
       <footer></footer>

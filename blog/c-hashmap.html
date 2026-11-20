@@ -5,23 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hashmap in c</title>
-    <link rel="stylesheet" href="../stylesheets/style.css" />
-    <link rel="stylesheet" href="../stylesheets/blog.css" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="../stylesheets/site.css" />
+    <link rel="stylesheet" href="blog.css" />
   </head>
 
   <body>
     <div class="content">
-      <header role="banner">
-        <nav>
-          <ul>
-            <li><a href="../">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="index.html" class="active">Blog</a></li>
-          </ul>
+      <header class="site-header">
+        <nav class="site-nav" aria-label="Primary">
+          <a class="brand" href="../">Gallaghern</a>
+          <div class="site-nav-links">
+            <a class="pseudo button" href="../about/">About</a>
+            <a class="pseudo button" href="./">Blog</a>
+            <a class="pseudo button" href="../typing/">Typing Thing</a>
+          </div>
         </nav>
       </header>
 
-      <main>
+      <main class="page-prose blog-post">
         <section>
           <h1>Writing a hashmap in c</h1>
           <p>
@@ -39,7 +41,7 @@
           </p>
           <h2>Basic structure</h2>
           <p>First let's start by representing a simple key/value pair:</p>
-          <pre class="code-block"><code>
+          <pre class="code-block" tabindex="0" role="region" aria-label="Code example"><code>
 typedef struct KeyValuePair {
 	char *key;
 	int value;
@@ -49,7 +51,7 @@ typedef struct KeyValuePair {
           <p>
             for now it's just a string->int kv pair. Next we define our hashmap:
           </p>
-          <pre class="code-block"><code>
+          <pre class="code-block" tabindex="0" role="region" aria-label="Code example"><code>
           typedef struct {
             HashFunction hashfunction; 
             KeyValuePair *buckets[HASHMAP_SIZE]; 
@@ -61,7 +63,7 @@ typedef struct KeyValuePair {
             order to perform an operation. Speaking of which... let's define our
             operations:
           </p>
-          <pre class="code-block"><code>
+          <pre class="code-block" tabindex="0" role="region" aria-label="Code example"><code>
           HashMap* createHashMap();
           void freeHashMap(HashMap *hmap);
           int hash(const char *key);
@@ -94,7 +96,7 @@ typedef struct KeyValuePair {
             >
             for the source
           </p>
-          <pre class="code-block"><code>
+          <pre class="code-block" tabindex="0" role="region" aria-label="Code example"><code>
           void put(HashMap *map, const char *key, int value) {
             int index = hash(key); 
             //collision
@@ -120,7 +122,7 @@ typedef struct KeyValuePair {
             As a consequence, we must adapt our get function to search the
             linkedlist for the key:
           </p>
-          <pre class="code-block"><code>
+          <pre class="code-block" tabindex="0" role="region" aria-label="Code example"><code>
           int get(const HashMap *map, const char *key) {
             int index = hash(key);
             KeyValuePair* current = map->buckets[index];
@@ -156,7 +158,7 @@ typedef struct KeyValuePair {
             </li>
           </ul>
           <p>below is a simple linear probing example:</p>
-          <pre class="code-block"><code>
+          <pre class="code-block" tabindex="0" role="region" aria-label="Code example"><code>
           void put(HashMap *map, const char *key, int value) {
             int index = hash(key); 
             KeyValuePair* kvp = createKeyValuePairWithValues(key, value);
@@ -188,7 +190,7 @@ typedef struct KeyValuePair {
             >
             for more details
           </p>
-          <pre class=""><code>
+          <pre class="" tabindex="0" role="region" aria-label="Code example"><code>
           typedef int (*HashFunction)(const char* key, size_t hmap_size);
 
           typedef struct KeyValuePair {
@@ -210,9 +212,7 @@ typedef struct KeyValuePair {
           void* get(const HashMap *map, const char *key);
           </code></pre>
           <p>concurrency to follow!</p>
-          <button class="blog-back-button">
-            <a href="index.html">Back</a>
-          </button>
+          <a class="button blog-back-link" href="./">Back to blog</a>
         </section>
       </main>
       <footer></footer>

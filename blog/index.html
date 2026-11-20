@@ -2,147 +2,61 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gallaghern</title>
-    <link rel="stylesheet" href="../stylesheets/style.css" />
-    <link rel="stylesheet" href="../stylesheets/blog.css" />
+    <title>Blog entries | Gallaghern</title>
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="../stylesheets/site.css" />
+    <link rel="stylesheet" href="blog.css" />
   </head>
-
   <body>
-    <div class="content">
-      <header role="banner">
-        <nav>
-          <ul>
-            <li><a href="../">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="#" class="active">Blog</a></li>
-          </ul>
-        </nav>
-      </header>
-
-      <main>
-        <div class="center">
-          <section>
-            <h1>Blog entries</h1>
-            <ul class="blog-list">
-              <li class="blog-list-item">
-                <a href="./deploy-vite-github-pages.html"
-                  >Deploying a Vite App to a GitHub Pages Subdirectory</a
-                >
-              </li>
-              <li class="blog-list-item">
-                <a href="./concurrency.html">Concurrency</a>
-              </li>
-              <li class="blog-list-item">
-                <a href="./db-replication.html"
-                  >Database Replication Strategies</a
-                >
-              </li>
-              <li class="blog-list-item">
-                <a href="./wal.html">Database Durability</a>
-              </li>
-              <li class="blog-list-item">
-                <a href="./db-isolation.html">Database isolation levels</a>
-              </li>
-              <li class="blog-list-item">
-                <a href="./onion.html">Onion Architecture and the like</a>
-              </li>
-              <li class="blog-list-item"><a href="./saga.html">Sagas</a></li>
-              <li class="blog-list-item">
-                <a href="./concurrency-control.html">Concurrency Control</a>
-              </li>
-              <li class="blog-list-item">
-                <a href="./scala3-typeclasses.html">Typeclasses in scala3</a>
-              </li>
-              <li class="blog-list-item">
-                <a href="./observability">observability slide deck</a>
-              </li>
-              <li class="blog-list-item">
-                <a href="./approval-testing.html">Approval testing</a>
-              </li>
-              <li class="blog-list-item">
-                <a href="./python-config.html">Simple DI with python</a>
-              </li>
-              <li class="blog-list-item"><a href="./kafka.html">kafka</a></li>
-              <li class="blog-list-item">
-                <a href="./vector-clocks.html">Vector clocks</a>
-              </li>
-              <li class="blog-list-item">
-                <a href="./fode.html"
-                  >Overview of Fundamentals of Data Engineering</a
-                >
-              </li>
-              <li class="blog-list-item">
-                <a href="./distributed-computation.html"
-                  >Distributed computation</a
-                >
-              </li>
-              <li class="blog-list-item">
-                <a href="./two-phase-commit.html">Two-phase commit</a>
-              </li>
-              <li class="blog-list-item">
-                <a href="./variance-in-scala.html">Variance in scala</a>
-              </li>
-              <li class="blog-list-item">
-                <a href="./iceberg.html">Apache Iceberg</a>
-              </li>
-              <li class="blog-list-item">
-                <a href="./configuring-tomcat.html">Configuring Tomcat</a>
-              </li>
-              <li class="blog-list-item"><a href="./raft.html">Raft</a></li>
-              <li class="blog-list-item">
-                <a href="./dockerise-tomcat.html">Dockerising a Tomcat app</a>
-              </li>
-              <li class="blog-list-item">
-                <a href="./opengl-rendering-pipeline.html"
-                  >Opengl rendering pipeline</a
-                >
-              </li>
-              <li class="blog-list-item">
-                <a href="./view-space.html">View Space</a>
-              </li>
-              <li class="blog-list-item">
-                <a href="./consensus.html">Consensus</a>
-              </li>
-              <li class="blog-list-item"><a href="./paxos.html">Paxos</a></li>
-              <li class="blog-list-item">
-                <a href="./c-hashmap.html">Writing a hashmap in c</a>
-              </li>
-              <li class="blog-list-item">
-                <a href="./compile.html">From Source to Executable</a>
-              </li>
-              <li class="blog-list-item">
-                <a href="./ansible.html">some ansible notes</a>
-              </li>
-              <li class="blog-list-item">
-                <a href="./cap.html">CAP Theorem</a>
-              </li>
-              <li class="blog-list-item">
-                <a href="./gitlab-dependency-bump.html"
-                  >Auto update dependencies in gitlab</a
-                >
-              </li>
-              <li class="blog-list-item">
-                <a href="./revisiting-java-jackson.html"
-                  >Revisiting Java - Mapping with Jackson</a
-                >
-              </li>
-              <li class="blog-list-item">
-                <a href="./akka-notes.html"
-                  >Akka and the actor model</a
-                >
-              </li>
-              <li class="blog-list-item">
-                <a href="./zero-to-one.html"
-                  >What happens when you start your computer</a
-                >
-              </li>
-            </ul>
-          </section>
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Primary">
+        <a class="brand" href="../">Gallaghern</a>
+        <div class="site-nav-links">
+          <a class="pseudo button" href="../about/">About</a>
+          <a class="pseudo button" href="./" aria-current="page">Blog</a>
+          <a class="pseudo button" href="../typing/">Typing Thing</a>
         </div>
-      </main>
-      <footer></footer>
-    </div>
+      </nav>
+    </header>
+    <main class="page-prose">
+      <h1>Blog entries</h1>
+      <ul class="card blog-list">
+        <li><a href="./deploy-vite-github-pages.html">Deploying a Vite App to a GitHub Pages Subdirectory</a></li>
+        <li><a href="./concurrency.html">Concurrency</a></li>
+        <li><a href="./db-replication.html">Database Replication Strategies</a></li>
+        <li><a href="./wal.html">Database Durability</a></li>
+        <li><a href="./db-isolation.html">Database isolation levels</a></li>
+        <li><a href="./onion.html">Onion Architecture and the like</a></li>
+        <li><a href="./saga.html">Sagas</a></li>
+        <li><a href="./concurrency-control.html">Concurrency Control</a></li>
+        <li><a href="./scala3-typeclasses.html">Typeclasses in scala3</a></li>
+        <li><a href="./observability.html">observability slide deck</a></li>
+        <li><a href="./approval-testing.html">Approval testing</a></li>
+        <li><a href="./python-config.html">Simple DI with python</a></li>
+        <li><a href="./kafka.html">kafka</a></li>
+        <li><a href="./vector-clocks.html">Vector clocks</a></li>
+        <li><a href="./fode.html">Overview of Fundamentals of Data Engineering</a></li>
+        <li><a href="./distributed-computation.html">Distributed computation</a></li>
+        <li><a href="./two-phase-commit.html">Two-phase commit</a></li>
+        <li><a href="./variance-in-scala.html">Variance in scala</a></li>
+        <li><a href="./iceberg.html">Apache Iceberg</a></li>
+        <li><a href="./configuring-tomcat.html">Configuring Tomcat</a></li>
+        <li><a href="./raft.html">Raft</a></li>
+        <li><a href="./dockerise-tomcat.html">Dockerising a Tomcat app</a></li>
+        <li><a href="./opengl-rendering-pipeline.html">Opengl rendering pipeline</a></li>
+        <li><a href="./view-space.html">View Space</a></li>
+        <li><a href="./consensus.html">Consensus</a></li>
+        <li><a href="./paxos.html">Paxos</a></li>
+        <li><a href="./c-hashmap.html">Writing a hashmap in c</a></li>
+        <li><a href="./compile.html">From Source to Executable</a></li>
+        <li><a href="./ansible.html">some ansible notes</a></li>
+        <li><a href="./cap.html">CAP Theorem</a></li>
+        <li><a href="./gitlab-dependency-bump.html">Auto update dependencies in gitlab</a></li>
+        <li><a href="./revisiting-java-jackson.html">Revisiting Java - Mapping with Jackson</a></li>
+        <li><a href="./akka-notes.html">Akka and the actor model</a></li>
+        <li><a href="./zero-to-one.html">What happens when you start your computer</a></li>
+      </ul>
+    </main>
   </body>
 </html>

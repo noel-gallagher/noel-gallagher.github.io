@@ -5,22 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Typeclasses in scala 3</title>
-    <link rel="stylesheet" href="../stylesheets/style.css" />
-    <link rel="stylesheet" href="../stylesheets/blog.css" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="../stylesheets/site.css" />
+    <link rel="stylesheet" href="blog.css" />
   </head>
 
   <body>
-    <header role="banner">
-      <nav>
-        <ul>
-          <li><a href="../">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="index.html" class="active">Blog</a></li>
-        </ul>
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Primary">
+        <a class="brand" href="../">Gallaghern</a>
+        <div class="site-nav-links">
+          <a class="pseudo button" href="../about/">About</a>
+          <a class="pseudo button" href="./">Blog</a>
+          <a class="pseudo button" href="../typing/">Typing Thing</a>
+        </div>
       </nav>
     </header>
 
-    <main>
+    <main class="page-prose blog-post">
       <section>
         <h1>Typeclasses in scala 3</h1>
         <p>
@@ -38,7 +40,7 @@
           string "".
         </p>
         <p>First start by defining the trait</p>
-        <pre class="code-block"><code>
+        <pre class="code-block" tabindex="0" role="region" aria-label="Code example"><code>
 	  trait Monoid[M]:
   		extension (m: M) def mempty: M
   		extension (m: M) def combine(m2: M): M
@@ -49,7 +51,7 @@
           types M and produces a combined type M
         </p>
         <p>Creating an instance for type String</p>
-        <pre class="code-block"><code>
+        <pre class="code-block" tabindex="0" role="region" aria-label="Code example"><code>
 	  given Monoid[String] with
 		extension (s: String) def mempty: String = ""
 		extension (s: String) def combine(str2: String): String = s ++ str2
@@ -60,7 +62,7 @@
           combine for type String is defined as concatenation.
         </p>
         <p>Previously in scala 2, one would implement the above as:</p>
-        <pre class="code-block"><code>
+        <pre class="code-block" tabindex="0" role="region" aria-label="Code example"><code>
 		trait Monoid[M] {
   			def combine(m: M, m2: M): M
   			def mempty: M
@@ -79,7 +81,7 @@
           methods and the "given" syntax to declare instances of typeclasses
           compared to Scala 2's implicits
         </p>
-        <button class="blog-back-button"><a href="index.html">Back</a></button>
+        <a class="button blog-back-link" href="./">Back to blog</a>
       </section>
     </main>
     <footer></footer>

@@ -6,23 +6,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Deploying a Vite App to a GitHub Pages Subdirectory</title>
-  <link rel="stylesheet" href="../stylesheets/style.css" />
-  <link rel="stylesheet" href="../stylesheets/blog.css" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="stylesheet" href="../stylesheets/site.css" />
+  <link rel="stylesheet" href="blog.css" />
 </head>
 
 <body>
   <div class="content">
-    <header role="banner">
-      <nav>
-        <ul>
-          <li><a href="../">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="index.html" class="active">Blog</a></li>
-        </ul>
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Primary">
+        <a class="brand" href="../">Gallaghern</a>
+        <div class="site-nav-links">
+          <a class="pseudo button" href="../about/">About</a>
+          <a class="pseudo button" href="./">Blog</a>
+          <a class="pseudo button" href="../typing/">Typing Thing</a>
+        </div>
       </nav>
     </header>
 
-    <main>
+    <main class="page-prose blog-post">
       <section>
         <h1>Deploying a Vite App to a GitHub Pages Subdirectory</h1>
         <p>
@@ -36,7 +38,7 @@
         Vite needs to know the base public path when it builds your assets. Setting the <code>base</code>
         configuration property ensures that all generated JS and CSS file paths correctly prefix your subdirectory.
         </p>
-        <pre><code>import { defineConfig } from 'vite'
+        <pre tabindex="0" role="region" aria-label="Code example"><code>import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
@@ -53,7 +55,7 @@ export default defineConfig({
           matched
           location" error.
         </p>
-        <pre><code>import { BrowserRouter, Routes, Route } from 'react-router-dom';
+        <pre tabindex="0" role="region" aria-label="Code example"><code>import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
@@ -72,13 +74,13 @@ function App() {
         <p>
           Once your config files are updated, you can build your application:
         </p>
-        <pre><code>npm run build</code></pre>
+        <pre tabindex="0" role="region" aria-label="Code example"><code>npm run build</code></pre>
         <p>
           This generates a <code>dist/</code> folder which you can simply copy to the corresponding folder on your main
           `github.io` repository and push
           the changes.
         </p>
-        <pre><code>cp -r dist/ ~/path/to/my-repo.github.io/my-cool-subdir
+        <pre tabindex="0" role="region" aria-label="Code example"><code>cp -r dist/ ~/path/to/my-repo.github.io/my-cool-subdir
 cd ~/path/to/my-repo.github.io/my-cool-subdir
 git add my-cool-subdir/
 git commit -m "Deploying to subdirectory"
@@ -88,9 +90,7 @@ git push
         <p>
           And that's... it. GitHub Pages will now serve the bundled index.html from that directory
         </p>
-        <button class="blog-back-button">
-          <a href="index.html">Back</a>
-        </button>
+        <a class="button blog-back-link" href="./">Back to blog</a>
       </section>
     </main>
     <footer></footer>

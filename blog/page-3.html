@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog archive, page 3 | Gallaghern</title>
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="../stylesheets/site.css" />
+    <link rel="stylesheet" href="blog.css" />
+    <script src="search.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Primary">
+        <a class="brand" href="../">Gallaghern</a>
+        <div class="site-nav-links">
+          <a class="pseudo button" href="../about/">About</a>
+          <a class="pseudo button" href="./">Blog</a>
+          <a class="pseudo button" href="../typing/">Typing Thing</a>
+        </div>
+      </nav>
+    </header>
+    <main class="page-wide">
+      <h1>Blog archive</h1>
+      <search class="blog-search" hidden>
+        <label for="search-input">Search posts</label>
+        <input id="search-input" type="search" placeholder="Title or topic" />
+        <div class="blog-topics" aria-label="Popular search topics" role="group">
+          <button class="pseudo" type="button" data-topic="data">#Data</button>
+          <button class="pseudo" type="button" data-topic="distributed">#Distributed</button>
+          <button class="pseudo" type="button" data-topic="value">#Value</button>
+          <button class="pseudo" type="button" data-topic="service">#Service</button>
+        </div>
+        <p id="search-status" role="status"></p>
+      </search>
+      <div class="flex one two-600 three-900 blog-grid" id="blog-grid">
+        <div>
+          <article class="card blog-card">
+            <header><h2><a href="view-space.html">View Space</a></h2></header>
+          </article>
+        </div>
+        <div>
+          <article class="card blog-card">
+            <header><h2><a href="consensus.html">Consensus</a></h2></header>
+          </article>
+        </div>
+        <div>
+          <article class="card blog-card">
+            <header><h2><a href="paxos.html">Paxos</a></h2></header>
+          </article>
+        </div>
+        <div>
+          <article class="card blog-card">
+            <header><h2><a href="c-hashmap.html">Writing a hashmap in c</a></h2></header>
+          </article>
+        </div>
+        <div>
+          <article class="card blog-card">
+            <header><h2><a href="compile.html">From Source to Executable</a></h2></header>
+          </article>
+        </div>
+        <div>
+          <article class="card blog-card">
+            <header><h2><a href="ansible.html">some ansible notes</a></h2></header>
+          </article>
+        </div>
+        <div>
+          <article class="card blog-card">
+            <header><h2><a href="cap.html">CAP Theorem</a></h2></header>
+          </article>
+        </div>
+        <div>
+          <article class="card blog-card">
+            <header><h2><a href="gitlab-dependency-bump.html">Auto update dependencies in gitlab</a></h2></header>
+          </article>
+        </div>
+        <div>
+          <article class="card blog-card">
+            <header><h2><a href="revisiting-java-jackson.html">Revisiting Java - Mapping with Jackson</a></h2></header>
+          </article>
+        </div>
+        <div>
+          <article class="card blog-card">
+            <header><h2><a href="akka-notes.html">Akka and the actor model</a></h2></header>
+          </article>
+        </div>
+        <div>
+          <article class="card blog-card">
+            <header><h2><a href="zero-to-one.html">What happens when you start your computer</a></h2></header>
+          </article>
+        </div>
+      </div>
+      <nav class="blog-pagination" id="pagination-block" aria-label="Archive pages">
+        <a class="pseudo button" href="index.html" aria-label="Page 1">1</a>
+        <a class="pseudo button" href="page-2.html" aria-label="Page 2">2</a>
+        <a class="button" href="page-3.html" aria-label="Page 3" aria-current="page">3</a>
+      </nav>
+    </main>
+  </body>
+</html>

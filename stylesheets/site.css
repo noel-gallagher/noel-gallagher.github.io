@@ -1,0 +1,176 @@
+/* Picnic CSS v7.1.0 · https://github.com/franciscop/picnic/tree/v7.1.0 */
+@import url("vendor/picnic/picnic.min.css") layer(picnic);
+
+:root {
+  color-scheme: light dark;
+  --paper: #f6f7f9;
+  --surface: #fff;
+  --text: #202a36;
+  --muted: #536173;
+  --line: #cdd6e0;
+  --link: #07589c;
+  --code: #e9eef4;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #15202c;
+    --surface: #1d2a38;
+    --text: #ecf1f7;
+    --muted: #b1bed0;
+    --line: #4c5d70;
+    --link: #9bd1ff;
+    --code: #273749;
+  }
+}
+
+body {
+  background: var(--paper);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+
+a {
+  color: var(--link);
+  overflow-wrap: anywhere;
+}
+
+:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 3px;
+}
+
+.site-header {
+  background: var(--surface);
+  border-block-end: 1px solid var(--line);
+}
+
+.site-nav,
+.blog-pagination {
+  position: static;
+  block-size: auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .25rem;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.site-nav {
+  justify-content: space-between;
+  max-inline-size: 72rem;
+  margin-inline: auto;
+  padding: .5rem clamp(1rem, 4vw, 2rem);
+}
+
+.site-nav .brand {
+  position: static;
+  transform: none;
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+  max-inline-size: none;
+  padding: 0;
+  color: var(--text);
+}
+
+.site-nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem;
+}
+
+:is(.site-nav-links, .blog-topics, .blog-pagination) :is(a, button) {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+  min-inline-size: 2.75rem;
+  justify-content: center;
+  margin: 0;
+}
+
+:is(.site-nav-links, .blog-topics, .blog-pagination) .pseudo {
+  color: var(--link);
+}
+
+:is(.site-nav-links, .blog-topics, .blog-pagination) .pseudo:hover {
+  background: var(--code);
+}
+
+.site-nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+.page-wide,
+.page-prose {
+  margin-inline: auto;
+  padding: clamp(1.5rem, 5vw, 4rem) clamp(1rem, 4vw, 2rem);
+}
+
+.page-wide {
+  max-inline-size: 72rem;
+}
+
+.page-prose {
+  max-inline-size: 76ch;
+}
+
+:is(.page-wide, .page-prose) h1 {
+  padding-block-start: 0;
+  font-size: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.page-prose p a {
+  text-decoration: underline;
+  text-underline-offset: .16em;
+}
+
+.card {
+  background: var(--surface);
+  border-color: var(--line);
+}
+
+.card header {
+  border-color: var(--line);
+}
+
+.latest-entries > div {
+  display: flex;
+  min-inline-size: 0;
+}
+
+.entry-card {
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
+  margin: 0;
+}
+
+.entry-card img {
+  inline-size: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--code);
+}
+
+.entry-card > p {
+  margin-block: .25rem 0;
+}
+
+.entry-card footer {
+  margin-block-start: auto;
+  border-color: var(--line);
+  padding: .6em .8em;
+}
+
+.entry-card footer a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+}

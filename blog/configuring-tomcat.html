@@ -5,22 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Configuring Tomcat</title>
-    <link rel="stylesheet" href="../stylesheets/style.css" />
-    <link rel="stylesheet" href="../stylesheets/blog.css" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="../stylesheets/site.css" />
+    <link rel="stylesheet" href="blog.css" />
   </head>
 
   <body>
-    <header role="banner">
-      <nav>
-        <ul>
-          <li><a href="../">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="index.html" class="active">Blog</a></li>
-        </ul>
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Primary">
+        <a class="brand" href="../">Gallaghern</a>
+        <div class="site-nav-links">
+          <a class="pseudo button" href="../about/">About</a>
+          <a class="pseudo button" href="./">Blog</a>
+          <a class="pseudo button" href="../typing/">Typing Thing</a>
+        </div>
       </nav>
     </header>
 
-    <main>
+    <main class="page-prose blog-post">
       <section>
         <h2>Tomcat configuration</h2>
         <hr />
@@ -36,7 +38,7 @@
             >tomcat docs</a
           >
         </p>
-        <pre class="code-block">
+        <pre class="code-block" tabindex="0" role="region" aria-label="Code example">
 conf/
    - catalina.policy
    - catalina.properties
@@ -54,7 +56,7 @@ conf/
           brokers etc within <code>GlobalNamingResources</code>:
         </p>
 
-        <pre class="code-block"><code>conf/
+        <pre class="code-block" tabindex="0" role="region" aria-label="Code example"><code>conf/
    -<span class="ruby"> catalina.policy
 </span>   -<span class="ruby"> catalina.properties
 </span>   -<span class="ruby"> logging.properties
@@ -70,7 +72,7 @@ conf/
           brokers etc within <code>GlobalNamingResources</code>:
         </p>
         <pre
-          class="code-block"
+          class="code-block" tabindex="0" role="region" aria-label="Code example"
         ><code class="lang-xml">&lt;Server <span class="hljs-params">...</span>
   <span class="hljs-params">...</span>
   &lt;GlobalNamingResources&gt;
@@ -90,7 +92,7 @@ conf/
           <code>WEB-INF</code> dir
         </p>
         <pre
-          class="code-block"
+          class="code-block" tabindex="0" role="region" aria-label="Code example"
         ><code class="lang-xml"><span class="hljs-attribute">&lt;web-app ...
   &lt;display-name&gt;</span>my web app<span class="hljs-attribute">&lt;/display-name&gt;</span>
 
@@ -134,7 +136,7 @@ conf/
           is used to define resources specific to that application.
         </p>
         <pre
-          class="code-block"
+          class="code-block" tabindex="0" role="region" aria-label="Code example"
         ><code class="lang-xml">&lt;<span class="hljs-keyword">Context</span>&gt;
   &lt;Resouce name<span class="hljs-string">"jdbc/db"</span>
     auth=<span class="hljs-string">"Container"</span>
@@ -158,7 +160,7 @@ conf/
           <code>ResourceLink</code> element:
         </p>
         <pre
-          class="code-block"
+          class="code-block" tabindex="0" role="region" aria-label="Code example"
         ><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Context</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">ResourceLink</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"jdbc/db"</span>
                 <span class="hljs-attr">global</span>=<span class="hljs-string">"jdbdc/db"</span>
@@ -181,7 +183,7 @@ conf/
           in <code>bin</code> dir
         </p>
         <pre
-          class="code-block"
+          class="code-block" tabindex="0" role="region" aria-label="Code example"
         ><code class="lang-bash"><span class="hljs-meta">#!/bin/sh
 </span>
 <span class="hljs-built_in">export</span> JAVA_OPTS=<span class="hljs-string">"-xms512m -Xmx1024"</span>
@@ -198,7 +200,7 @@ conf/
           depending on the codebase. Some options such as JDBC connectivity or
           runtime settings might be set programatically.
         </p>
-        <button class="blog-back-button"><a href="index.html">Back</a></button>
+        <a class="button blog-back-link" href="./">Back to blog</a>
       </section>
     </main>
     <footer></footer>

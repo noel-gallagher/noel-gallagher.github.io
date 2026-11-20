@@ -1,0 +1,151 @@
+.blog-list {
+  padding: .5rem 1rem .5rem 2rem;
+}
+
+.blog-list li + li {
+  border-block-start: 1px solid var(--line);
+}
+
+.blog-list a {
+  display: flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+  padding-block: .375rem;
+  text-decoration: underline;
+  text-underline-offset: .16em;
+}
+
+.blog-search {
+  max-inline-size: 34rem;
+  margin-block: 1.5rem;
+}
+
+.blog-search label {
+  display: block;
+  margin-block-end: .35rem;
+  font-weight: 600;
+}
+
+.blog-search input {
+  min-block-size: 2.75rem;
+  background: var(--surface);
+  border-color: var(--line);
+  color: var(--text);
+}
+
+.blog-search input:focus {
+  border-color: var(--link);
+}
+
+.blog-search input::placeholder {
+  color: var(--muted);
+}
+
+.blog-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem;
+  margin-block-start: .35rem;
+}
+
+#search-status {
+  color: var(--muted);
+  margin-block: .35rem 0;
+}
+
+.blog-grid > div {
+  display: flex;
+  min-inline-size: 0;
+}
+
+.blog-card {
+  inline-size: 100%;
+  margin: 0;
+}
+
+.blog-card header h2 {
+  display: block;
+  font-size: 1.15rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.blog-card a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+  text-decoration: underline;
+  text-underline-offset: .16em;
+}
+
+.blog-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .375rem;
+  list-style: none;
+  padding: 0;
+}
+
+.blog-card .blog-tags {
+  margin: .75rem;
+}
+
+.blog-tags .label {
+  background: var(--code);
+  color: var(--text);
+}
+
+.blog-pagination {
+  justify-content: center;
+  margin-block-start: 2rem;
+}
+
+.blog-pagination[hidden] {
+  display: none;
+}
+
+.blog-post img {
+  max-inline-size: 100%;
+  block-size: auto;
+}
+
+.blog-post pre {
+  max-inline-size: 100%;
+  overflow: auto;
+  padding: 1rem;
+  white-space: pre;
+}
+
+.blog-post :is(pre, code) {
+  background: var(--code);
+  color: var(--text);
+}
+
+.blog-post pre code {
+  white-space: inherit;
+}
+
+.blog-post :not(pre) > code {
+  overflow-wrap: anywhere;
+}
+
+.post-intro > div {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  color: var(--muted);
+}
+
+.post-intro > div p {
+  margin: 0;
+}
+
+.post-cover {
+  display: block;
+  border-radius: .2rem;
+  margin-block: 1.5rem;
+}
+
+.blog-back-link {
+  margin-block-start: 1rem;
+}

@@ -5,23 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Revisiting Java - Jackson</title>
-    <link rel="stylesheet" href="../stylesheets/style.css" />
-    <link rel="stylesheet" href="../stylesheets/blog.css" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="../stylesheets/site.css" />
+    <link rel="stylesheet" href="blog.css" />
   </head>
 
   <body>
     <div class="content">
-      <header role="banner">
-        <nav>
-          <ul>
-            <li><a href="../">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="index.html" class="active">Blog</a></li>
-          </ul>
+      <header class="site-header">
+        <nav class="site-nav" aria-label="Primary">
+          <a class="brand" href="../">Gallaghern</a>
+          <div class="site-nav-links">
+            <a class="pseudo button" href="../about/">About</a>
+            <a class="pseudo button" href="./">Blog</a>
+            <a class="pseudo button" href="../typing/">Typing Thing</a>
+          </div>
         </nav>
       </header>
 
-      <main>
+      <main class="page-prose blog-post">
         <section>
           <h1>Revisiting Java - intro to Jackson</h1>
           <p>
@@ -48,7 +50,7 @@
             JSON object with several fields: name, age and email - and using
             jackson, annotate them appropriately
           </p>
-          <pre class="code-block"><code>
+          <pre class="code-block" tabindex="0" role="region" aria-label="Code example"><code>
           {
             "name": "john",
             "age": 20,
@@ -59,7 +61,7 @@
             And what we want is to convert this json into the corresponding java
             code:
           </p>
-          <pre class="code-block"><code>
+          <pre class="code-block" tabindex="0" role="region" aria-label="Code example"><code>
           @Value
           public class UserDto {
             String name;
@@ -73,7 +75,7 @@
             @JsonPropery is appropriate for a lot of use-cases, it handles both
             serialisation and deserialisation.
           </p>
-          <pre class="code-block"><code>
+          <pre class="code-block" tabindex="0" role="region" aria-label="Code example"><code>
           @Value
           public class UserDto {
             @JsonProperty("name")
@@ -89,7 +91,7 @@
             This is the actual object responsible for performing
             serialisation/deserialisation. Putting it all together, we have:
           </p>
-          <pre class="code-block"><code>
+          <pre class="code-block" tabindex="0" role="region" aria-label="Code example"><code>
            public class JsonParsingUserDtoTest {
            @Test
              void test_should_parse_valid_user_dto() {
@@ -117,7 +119,7 @@
             annotations to indicate which properties to subtypes should be
             created based on that property:
           </p>
-          <pre class="code-block">
+          <pre class="code-block" tabindex="0" role="region" aria-label="Code example">
           @JsonTypeInfo(use= JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property = "type")
           @JsonSubTypes({
             @JsonSubTypes.Type(name = "User", value = User.class),
@@ -127,10 +129,10 @@
             String type; 
           }<code></code></pre>
           <p>Followed by our actual subtype classes:</p>
-          <pre class="code-block"><code>
+          <pre class="code-block" tabindex="0" role="region" aria-label="Code example"><code>
           public class User extends UserType { // specific user fields }
           </code></pre>
-          <pre class="code-block"><code>
+          <pre class="code-block" tabindex="0" role="region" aria-label="Code example"><code>
           public class Admin extends UserType {//specific admin fields}
           </code></pre>
           <p>
@@ -138,11 +140,9 @@
             YAMLFactory:
           </p>
           <pre
-            class="code-block"
+            class="code-block" tabindex="0" role="region" aria-label="Code example"
           ><code>new ObjectMapper(new YAMLFactory())</code></pre>
-          <button class="blog-back-button">
-            <a href="index.html">Back</a>
-          </button>
+          <a class="button blog-back-link" href="./">Back to blog</a>
         </section>
       </main>
       <footer></footer>

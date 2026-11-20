@@ -5,22 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>akka notes</title>
-    <link rel="stylesheet" href="../stylesheets/style.css" />
-    <link rel="stylesheet" href="../stylesheets/blog.css" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="../stylesheets/site.css" />
+    <link rel="stylesheet" href="blog.css" />
   </head>
 
   <body>
-    <header role="banner">
-      <nav>
-        <ul>
-          <li><a href="../">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="#" class="active">Blog</a></li>
-        </ul>
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Primary">
+        <a class="brand" href="../">Gallaghern</a>
+        <div class="site-nav-links">
+          <a class="pseudo button" href="../about/">About</a>
+          <a class="pseudo button" href="./">Blog</a>
+          <a class="pseudo button" href="../typing/">Typing Thing</a>
+        </div>
       </nav>
     </header>
 
-    <main>
+    <main class="page-prose blog-post">
       <section>
         <h1>Akka notes: walkthrough of the actor model</h1>
 	<p>The actor model provides a powerful abstraction for writing concurrent programs.As discussed in my post on <a href="./concurrency.html">Concurrency</a>, actors allow you to avoid shared state entirely, eliminating race conditions by design.</p>
@@ -31,7 +33,7 @@
 	  <h1>Actors </h1>
 	  <p> Actors are uniquely identifiable via an ActorRef. They are lightweight objects which model a unit of computation. As mentioned, actors can only communicate with other actors by passing messages. Each actor possesses a mailbox (message queue) where each received message is stored. Actors processes messages from its mailbox one at a time - it emulates the behaviour of a single-threaded program, no need to worry about locking or synchronising resources.</p>
 	  <p>actors are encapsulated (you cannot access
-	  their state directly) You can only communicate via the ActorRef</p> <pre class="code-block"><code>
+	  their state directly) You can only communicate via the ActorRef</p> <pre class="code-block" tabindex="0" role="region" aria-label="Code example"><code>
           Class person(name: String) extends Actor{ 
               override def receive = { 
                   case “hi” => println(s“hi my name is, $name”) 
@@ -45,7 +47,7 @@
 	  a message to itself (using context.self) </p>
 	  <p>Actors can reply to messages</p>
 	  <p>Given actor Alice and actor Bob:</p> 
-	  <pre class="code-block"><code>
+	  <pre class="code-block" tabindex="0" role="region" aria-label="Code example"><code>
           SayHiTo(ref: ActorRef) Alice !  SayHiTo(bob) // sends “hi” to bob  
               // ...
               case “hi” => context.sender() !  “My reply is: Hello!” 
@@ -75,7 +77,7 @@
 	  <p>One of the great benefits of using an actor based system such as akka is the fault-tolerance it provides. One can easily set up parent actors which supervise child actors. In the event of a failure, the parent can determine if a new child needs to be created, one needs to be killed, or if the failure should be escalated to its own parent.</p>
 	  <p>This allows the developer to write supervised self-healing systems which can handle failure and isolate it to a sub-section of the system.</p>
         </p>
-        <button class="blog-back-button"><a href="..">Back</a></button>
+        <a class="button blog-back-link" href="./">Back to blog</a>
       </section>
     </main>
     <footer></footer>
