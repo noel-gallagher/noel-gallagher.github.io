@@ -9,6 +9,7 @@
   --muted: #536173;
   --line: #cdd6e0;
   --link: #07589c;
+  --button-hover: #06467d;
   --code: #e9eef4;
 }
 
@@ -20,6 +21,7 @@
     --muted: #b1bed0;
     --line: #4c5d70;
     --link: #9bd1ff;
+    --button-hover: #bee1ff;
     --code: #273749;
   }
 }
@@ -34,6 +36,22 @@ body {
 a {
   color: var(--link);
   overflow-wrap: anywhere;
+}
+
+:is(.button, button):where(:not(.pseudo, [disabled], :disabled)) {
+  background-color: var(--link);
+  color: var(--surface);
+  box-shadow: none;
+}
+
+:is(.button, button):where(:not(.pseudo, [disabled], :disabled)):where(:hover, :active) {
+  background-color: var(--button-hover);
+}
+
+@media (forced-colors: active) {
+  :is(.button, button):where(:not(.pseudo)) {
+    border: 1px solid ButtonText;
+  }
 }
 
 :focus-visible {
