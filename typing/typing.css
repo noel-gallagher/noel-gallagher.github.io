@@ -1,0 +1,283 @@
+#root {
+  --text-muted: var(--muted);
+  --theme-text-color: var(--text);
+  --typing-correct: #24603c;
+  --typing-error: #a22924;
+  --typing-error-bg: #fff0ed;
+  --typing-inset: clamp(1rem, 3vw, 1.5rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  #root {
+    --typing-correct: #96dcb2;
+    --typing-error: #ffb3a9;
+    --typing-error-bg: #402a2c;
+  }
+}
+
+#root :is(.back-home-btn, .glow-effect, .feature-icon, .memory-icon) {
+  display: none;
+}
+
+#root :is(h2, h3) {
+  padding: 0;
+  margin: 0;
+  line-height: 1.35;
+}
+
+#root p {
+  margin-block: .5rem 0;
+}
+
+#root button {
+  min-block-size: 2.75rem;
+  margin: 0;
+  white-space: normal;
+}
+
+.landing-container {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.language-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-self: end;
+  gap: .5rem;
+}
+
+.language-switcher select {
+  inline-size: auto;
+  min-block-size: 2.75rem;
+}
+
+.landing-content > .landing-subtitle,
+.header-title p,
+.feature-card p,
+.mode-desc,
+.text-entry-subtext {
+  color: var(--muted);
+}
+
+.features-grid,
+.mode-selector {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .75rem;
+}
+
+.features-grid {
+  margin-block: 1.5rem;
+  gap: 1rem;
+}
+
+@media (min-width: 48rem) {
+  .features-grid,
+  .mode-selector {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .dual-upload {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.feature-card,
+.glass-panel {
+  padding: var(--typing-inset);
+  border: 1px solid var(--line);
+  border-radius: .2rem;
+  background: var(--surface);
+}
+
+.feature-card h3 {
+  font-size: 1.15rem;
+}
+
+.app-container {
+  max-inline-size: 60rem;
+  margin-inline: auto;
+}
+
+.global-stats-container,
+.button-group {
+  flex-wrap: wrap;
+}
+
+.global-stats-container {
+  margin-block-start: 1rem;
+}
+
+.mode-btn,
+#root :is(.btn-secondary, .btn-reset, .text-entry-upload-btn) {
+  border: 1px solid var(--line);
+  border-radius: .2rem;
+  color: var(--link);
+  background: var(--surface);
+}
+
+.mode-btn {
+  display: grid;
+  align-content: start;
+  gap: .2rem;
+  padding: .75rem;
+  text-align: start;
+}
+
+.mode-btn.active {
+  border-color: var(--link);
+  box-shadow: inset 0 0 0 1px var(--link);
+  background: var(--code);
+}
+
+.mode-btn:hover,
+#root :is(.btn-secondary, .btn-reset, .text-entry-upload-btn):hover {
+  background: var(--code);
+}
+
+.mode-title,
+.text-entry-title,
+.failed-label {
+  font-weight: 700;
+}
+
+.mode-desc,
+.text-entry-subtext {
+  font-size: .875rem;
+}
+
+.upload-container,
+.dual-upload,
+.typing-container,
+.translation-mode-indicator,
+.text-entry-container,
+.text-entry-info {
+  display: grid;
+  gap: 1rem;
+  min-inline-size: 0;
+}
+
+.text-entry-container,
+.text-entry-info {
+  gap: .35rem;
+}
+
+.text-entry-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .5rem;
+}
+
+.text-entry-upload-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+  padding-inline: .65em;
+}
+
+.text-entry-upload-btn input {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.text-entry-upload-btn:focus-within {
+  outline: 2px solid var(--link);
+  outline-offset: 3px;
+}
+
+#root :is(textarea, select) {
+  border-color: var(--line);
+  background-color: var(--surface);
+  color: var(--text);
+}
+
+#root :is(textarea, select):focus {
+  border-color: var(--link);
+}
+
+#root textarea {
+  block-size: auto;
+  min-block-size: 9rem;
+  resize: vertical;
+}
+
+#root textarea::placeholder {
+  color: var(--muted);
+}
+
+.start-game-btn {
+  justify-self: start;
+}
+
+#root :is(.text-display, .source-text-display, .completed-sentences-container, .failed-text, .typing-input) {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
+.text-display,
+.source-text-display,
+.completed-sentences-container,
+.memory-mode-indicator,
+.failed-sentence-display,
+.error-feedback {
+  padding: .75rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: .2rem;
+  background: var(--code);
+}
+
+:is(.text-display, .source-text-display, .completed-sentences-container, .failed-text) {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.text-display,
+.source-text-display,
+.completed-sentences-container {
+  max-block-size: 17rem;
+  overflow: auto;
+}
+
+.correct,
+.completed-sentence,
+.success-message h2 {
+  color: var(--typing-correct);
+}
+
+.text-display .active {
+  color: var(--link);
+  background: var(--surface);
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+.incorrect {
+  color: var(--typing-error);
+  text-decoration: underline wavy;
+}
+
+#root .typing-input.error,
+.error-feedback,
+.failed-sentence-display {
+  border-color: var(--typing-error);
+}
+
+.error-feedback,
+.failed-sentence-display {
+  color: var(--typing-error);
+  background: var(--typing-error-bg);
+}
+
+.success-message {
+  padding-block: 1rem;
+  text-align: center;
+}
